@@ -14,6 +14,9 @@ public class Settings {
 	private float m_Osc2Freq;
 	
 	
+	public Settings(){
+		
+	}
 	
 	public void setOsc1Freq(float freq)
 	{

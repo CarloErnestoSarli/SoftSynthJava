@@ -51,15 +51,15 @@ public class GUI extends JFrame {
 		setContentPane(contentPane);
 		
 		//OSC1 slider
-		JSlider slider = new JSlider(0, 440, 1000);
-		slider.setMajorTickSpacing(100);
-		slider.setMinorTickSpacing(10);
+		JSlider slider = new JSlider(0, 1000, 440);
+		slider.setMajorTickSpacing(500);
+		slider.setMinorTickSpacing(50);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				oscillator1 = new Oscillator((float)source.getValue());
+				settings.setOsc1Freq((float)source.getValue());
 			}
 		});
 		contentPane.add(slider, BorderLayout.WEST);
