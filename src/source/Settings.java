@@ -1,3 +1,4 @@
+package source;
 import net.beadsproject.beads.*;
 
 import net.beadsproject.beads.core.AudioContext;
@@ -14,20 +15,24 @@ public class Settings {
 	
 	
 	
-	public void setOsc1Freq(float freq){
+	public void setOsc1Freq(float freq)
+	{
 		m_Osc1Freq = freq;
 	}
 	
-	public void setOsc2Freq(float freq){
+	public void setOsc2Freq(float freq)
+	{
 		m_Osc2Freq = freq;
 	}
 	
-	public float getOsc1Freq(){
+	public float getOsc1Freq()
+	{
 		
 		return m_Osc1Freq;
 	}
 	
-	public float getOsc2Freq(){
+	public float getOsc2Freq()
+	{
 		
 		return m_Osc2Freq;
 	}
