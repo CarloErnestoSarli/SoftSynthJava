@@ -50,6 +50,7 @@ public class GUI extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
+		//OSC1 slider
 		JSlider slider = new JSlider(0, 440, 1000);
 		slider.setMajorTickSpacing(100);
 		slider.setMinorTickSpacing(10);
@@ -58,7 +59,7 @@ public class GUI extends JFrame {
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				
+				oscillator1 = new Oscillator((float)source.getValue());
 			}
 		});
 		contentPane.add(slider, BorderLayout.WEST);
