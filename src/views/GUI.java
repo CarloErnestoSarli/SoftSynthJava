@@ -18,8 +18,10 @@ import source.*;
 
 public class GUI extends JFrame {
 	
-	Settings settings = new Settings();
-	Oscillator oscillator1;
+	Audio audio = Audio.getAudio();
+	Settings settings = Settings.getSettings();
+	//Settings settings = new Settings();
+	//Oscillator oscillator1;
 
 	private JPanel contentPane;
 
@@ -60,6 +62,7 @@ public class GUI extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				settings.setOsc1Freq((float)source.getValue());
+				
 			}
 		});
 		contentPane.add(slider, BorderLayout.WEST);

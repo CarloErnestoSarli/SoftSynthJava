@@ -5,17 +5,26 @@ import net.beadsproject.beads.core.AudioContext;
 import net.beadsproject.beads.core.UGen;
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.WavePlayer;
-
+//singleton
 public class Settings {
 	
-	static AudioContext ac = new AudioContext();
+	private static Settings settings = null;
 	
 	private float m_Osc1Freq;
 	private float m_Osc2Freq;
 	
 	
-	public Settings(){
+	protected Settings()
+	{
 		
+	}
+	
+	public static Settings getSettings()
+	{
+		if(settings == null){
+			settings = new Settings();
+		}
+		return settings;
 	}
 	
 	public void setOsc1Freq(float freq)

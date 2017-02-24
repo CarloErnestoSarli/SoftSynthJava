@@ -9,6 +9,7 @@ public class Audio {
 	private static Audio audio = null;
 	AudioContext ac;
 	
+	
 	protected Audio()
 	{
 		ac = new AudioContext();
@@ -26,4 +27,5 @@ public class Audio {
 	{
 		return ac;
 	}
+	
 }

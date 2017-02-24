@@ -6,7 +6,7 @@ import net.beadsproject.beads.ugens.Envelope;
 import net.beadsproject.beads.ugens.WavePlayer;
 
 public class Oscillator {
-	
+	/*
 	Settings settings = new Settings();
 	Audio audio = Audio.getAudio();
 
@@ -23,5 +23,5 @@ public class Oscillator {
 		noise = new WavePlayer(audio.getAudioContext(),freqEnv,Buffer.NOISE);
 	}
 	
-
+	*/
 }
