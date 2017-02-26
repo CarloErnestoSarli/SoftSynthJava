@@ -5,7 +5,8 @@ import net.beadsproject.beads.core.AudioContext;
 import net.beadsproject.beads.core.UGen;
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.WavePlayer;
-//singleton
+
+//singleton pattern
 public class Settings {
 	
 	private static Settings settings = null;
@@ -13,10 +14,14 @@ public class Settings {
 	private float m_Osc1Freq;
 	private float m_Osc2Freq;
 	
+	public String m_WaveSel;
+	
+	public static final float START_FREQ = 440.0f; 
+	
 	
 	protected Settings()
 	{
-		
+		m_WaveSel = "sine";
 	}
 	
 	public static Settings getSettings()
@@ -49,4 +54,13 @@ public class Settings {
 		return m_Osc2Freq;
 	}
 	
+	public void setWaveSel(String wave)
+	{
+		m_WaveSel = wave;
+	}
+	
+	public String getWaveSel()
+	{
+		return m_WaveSel;
+	}
 }

@@ -23,22 +23,33 @@ public class Main {
 		Audio audio = Audio.getAudio();
 		Settings settings = Settings.getSettings();
 		
+		Oscillator Osc1 = new Oscillator();
+		Oscillator Osc2 = new Oscillator();
 		
-		Glide glide = new Glide(audio.getAudioContext(),440.0f);
-		WavePlayer sine = new WavePlayer(audio.getAudioContext(),glide,Buffer.SINE);
-		WavePlayer square = new WavePlayer(audio.getAudioContext(),glide,Buffer.SQUARE);
+		Glide Osc1Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
+		Glide Osc2Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
+		
+		WavePlayer Osc1Wave = Osc1.SelectWave(settings.getWaveSel());
+		WavePlayer Osc2Wave = Osc2.SelectWave(settings.getWaveSel());
+		//WavePlayer square = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.SQUARE);
+		
 		Gain g = new Gain(audio.getAudioContext(), 1, 0.1f);
 		
-		//g.addInput(sine);
-		//g.addInput(square);
+		Osc1Wave.setFrequency(Osc1Glide);
+		Osc2Wave.setFrequency(Osc2Glide);
+		//square.setFrequency(Osc2Glide);
 		
-		audio.getAudioContext().out.addInput(sine);
+		g.addInput(Osc1Wave);
+		g.addInput(Osc2Wave);
+		
+		audio.getAudioContext().out.addInput(g);
 		audio.getAudioContext().start();
 		
 		while(true){
 			
 			
-			glide.setValue(settings.getOsc1Freq());
+			Osc1Glide.setValue(settings.getOsc1Freq());
+			Osc2Glide.setValue(settings.getOsc2Freq());
 			System.out.println(settings.getOsc1Freq());
 		}
 
