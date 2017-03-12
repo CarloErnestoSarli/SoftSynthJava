@@ -10,33 +10,33 @@ public class Oscillator {
 	Settings settings = new Settings();
 	Audio audio = Audio.getAudio();
 
-	WavePlayer sine,square,saw,triangle,noise;
+	Buffer sine,square,saw,triangle,noise;
 	
 	
 	
 	public Oscillator()
 	{
-		sine = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.SINE);
-		square = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.SQUARE);
-		saw = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.SAW);
-		triangle = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.TRIANGLE);
-		noise = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.NOISE);
+		sine = Buffer.SINE;
+		square = Buffer.SQUARE;
+		saw = Buffer.SAW;
+		triangle = Buffer.TRIANGLE;
+		noise = Buffer.NOISE;
 		
 		
 	}
 	
 	
-	public WavePlayer SelectWave(String wave){
+	public Buffer SelectWave(String wave){
 		
-		if(wave.equals("sine")){
+		if(wave.equals("Sine")){
 			return sine;
-		}else if(wave.equals("square")){
+		}else if(wave.equals("Square")){
 			return square;
-		}else if(wave.equals("saw")){
+		}else if(wave.equals("Saw")){
 			return saw;
-		}else if(wave.equals("triangle")){
+		}else if(wave.equals("Triangle")){
 			return triangle;
-		}else if(wave.equals("noise")){
+		}else if(wave.equals("Noise")){
 			return noise;
 		}else{
 			return sine;
@@ -44,23 +44,23 @@ public class Oscillator {
 	}
 	
 	//might not need all this
-	public WavePlayer getSine(){
+	public Buffer getSine(){
 		return sine;
 	}
 	
-	public WavePlayer getSquare(){
+	public Buffer getSquare(){
 		return square;
 	}
 	
-	public WavePlayer getSaw(){
+	public Buffer getSaw(){
 		return saw;
 	}
 	
-	public WavePlayer getTriangle(){
+	public Buffer getTriangle(){
 		return triangle;
 	}
 	
-	public WavePlayer getNoise(){
+	public Buffer getNoise(){
 		return noise;
 	}
 }

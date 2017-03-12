@@ -61,6 +61,8 @@ public class Settings {
 	
 	public String getWaveSel()
 	{
+		
 		return m_WaveSel;
+		
 	}
 }

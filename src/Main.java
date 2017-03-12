@@ -29,8 +29,11 @@ public class Main {
 		Glide Osc1Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
 		Glide Osc2Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
 		
-		WavePlayer Osc1Wave = Osc1.SelectWave(settings.getWaveSel());
-		WavePlayer Osc2Wave = Osc2.SelectWave(settings.getWaveSel());
+		 
+		
+		System.out.println(settings.getWaveSel());
+		WavePlayer Osc1Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
+		WavePlayer Osc2Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
 		//WavePlayer square = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.SQUARE);
 		
 		Gain g = new Gain(audio.getAudioContext(), 1, 0.1f);
@@ -47,7 +50,8 @@ public class Main {
 		
 		while(true){
 			
-			
+			Osc1Wave.setBuffer(Osc1.SelectWave(settings.getWaveSel()));
+			Osc2Wave.setBuffer(Osc2.SelectWave(settings.getWaveSel()));
 			Osc1Glide.setValue(settings.getOsc1Freq());
 			Osc2Glide.setValue(settings.getOsc2Freq());
 			System.out.println(settings.getOsc1Freq());

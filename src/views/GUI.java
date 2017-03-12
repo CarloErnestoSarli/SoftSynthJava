@@ -111,6 +111,13 @@ public class GUI extends JFrame {
 		Osc1WvSel.setToolTipText("");
 		
 		JComboBox Osc2WvSel = new JComboBox();
+		Osc2WvSel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox)e.getSource();
+				settings.setWaveSel(cb.getSelectedItem().toString());
+				System.out.println(cb.getSelectedItem().toString());
+			}
+		});
 		Osc2WvSel.setModel(new DefaultComboBoxModel(new String[] {"Sine", "Square", "Saw", "Triangle", "Noise"}));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
