@@ -36,11 +36,19 @@ public class Main {
 		WavePlayer Osc2Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
 		//WavePlayer square = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.SQUARE);
 		
+		WavePlayer modulator = new WavePlayer(audio.getAudioContext(), 60.0f, Buffer.SINE);
+
+		
+		
+		
 		Gain g = new Gain(audio.getAudioContext(), 1, 0.1f);
 		
 		Osc1Wave.setFrequency(Osc1Glide);
 		Osc2Wave.setFrequency(Osc2Glide);
 		//square.setFrequency(Osc2Glide);
+		
+		
+		
 		
 		g.addInput(Osc1Wave);
 		g.addInput(Osc2Wave);
@@ -52,6 +60,7 @@ public class Main {
 			
 			Osc1Wave.setBuffer(Osc1.SelectWave(settings.getWaveSel()));
 			Osc2Wave.setBuffer(Osc2.SelectWave(settings.getWaveSel()));
+			
 			Osc1Glide.setValue(settings.getOsc1Freq());
 			Osc2Glide.setValue(settings.getOsc2Freq());
 			System.out.println(settings.getOsc1Freq());
