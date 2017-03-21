@@ -32,6 +32,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class GUI extends JFrame {
 	
@@ -63,7 +64,7 @@ public class GUI extends JFrame {
 	 */
 	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1049, 546);
+		setBounds(100, 100, 1052, 579);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -103,7 +104,7 @@ public class GUI extends JFrame {
 		Osc1WvSel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox)e.getSource();
-				settings.setWaveSel(cb.getSelectedItem().toString());
+				settings.setWave1Sel(cb.getSelectedItem().toString());
 				System.out.println(cb.getSelectedItem().toString());
 			}
 		});
@@ -114,7 +115,7 @@ public class GUI extends JFrame {
 		Osc2WvSel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox)e.getSource();
-				settings.setWaveSel(cb.getSelectedItem().toString());
+				settings.setWave2Sel(cb.getSelectedItem().toString());
 				System.out.println(cb.getSelectedItem().toString());
 			}
 		});
@@ -170,6 +171,54 @@ public class GUI extends JFrame {
 		
 		JPanel panel_3 = new JPanel();
 		panel.add(panel_3);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("AddOsc1ToFilter");
+		
+		JSlider slider_2 = new JSlider();
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("AddOsc2ToFilter");
+		
+		JSlider slider = new JSlider();
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Low Pass", "High Pass", "AllPass"}));
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(40)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(rdbtnNewRadioButton)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(rdbtnNewRadioButton_1)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(slider_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addContainerGap(160, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+					.addContainerGap(375, Short.MAX_VALUE)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(14)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addComponent(slider_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(rdbtnNewRadioButton_1))
+					.addGap(36)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(41)
+							.addComponent(slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(rdbtnNewRadioButton))
+					.addGap(38))
+		);
+		panel_3.setLayout(gl_panel_3);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));

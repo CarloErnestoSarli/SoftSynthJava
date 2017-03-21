@@ -2,6 +2,7 @@ import net.beadsproject.beads.*;
 
 import net.beadsproject.beads.core.AudioContext;
 import net.beadsproject.beads.data.Buffer;
+import net.beadsproject.beads.ugens.BiquadFilter;
 import net.beadsproject.beads.ugens.Envelope;
 import net.beadsproject.beads.ugens.Gain;
 import net.beadsproject.beads.ugens.Glide;
@@ -31,14 +32,14 @@ public class Main {
 		
 		 
 		
-		System.out.println(settings.getWaveSel());
+		System.out.println(settings.getWave1Sel());
 		WavePlayer Osc1Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
 		WavePlayer Osc2Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
 		//WavePlayer square = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.SQUARE);
 		
 		WavePlayer modulator = new WavePlayer(audio.getAudioContext(), 60.0f, Buffer.SINE);
 
-		
+	    
 		
 		
 		Gain g = new Gain(audio.getAudioContext(), 1, 0.1f);
@@ -58,8 +59,8 @@ public class Main {
 		
 		while(true){
 			
-			Osc1Wave.setBuffer(Osc1.SelectWave(settings.getWaveSel()));
-			Osc2Wave.setBuffer(Osc2.SelectWave(settings.getWaveSel()));
+			Osc1Wave.setBuffer(Osc1.SelectWave(settings.getWave1Sel()));
+			Osc2Wave.setBuffer(Osc2.SelectWave(settings.getWave2Sel()));
 			
 			Osc1Glide.setValue(settings.getOsc1Freq());
 			Osc2Glide.setValue(settings.getOsc2Freq());

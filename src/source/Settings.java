@@ -14,14 +14,15 @@ public class Settings {
 	private float m_Osc1Freq;
 	private float m_Osc2Freq;
 	
-	public String m_WaveSel;
+	public String m_Wave1Sel, m_Wave2Sel;
 	
 	public static final float START_FREQ = 440.0f; 
 	
 	
 	protected Settings()
 	{
-		m_WaveSel = "sine";
+		m_Wave1Sel = "sine";
+		m_Wave2Sel = "sine";
 	}
 	
 	public static Settings getSettings()
@@ -54,15 +55,27 @@ public class Settings {
 		return m_Osc2Freq;
 	}
 	
-	public void setWaveSel(String wave)
+	public void setWave1Sel(String wave)
 	{
-		m_WaveSel = wave;
+		m_Wave1Sel = wave;
 	}
 	
-	public String getWaveSel()
+	public void setWave2Sel(String wave)
+	{
+		m_Wave2Sel = wave;
+	}
+	
+	public String getWave1Sel()
 	{
 		
-		return m_WaveSel;
+		return m_Wave1Sel;
+		
+	}
+	
+	public String getWave2Sel()
+	{
+		
+		return m_Wave2Sel;
 		
 	}
 }
