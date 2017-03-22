@@ -13,8 +13,14 @@ public class Settings {
 	
 	private float m_Osc1Freq;
 	private float m_Osc2Freq;
+	private float m_FilterFreq;
+	private float m_FilterGain;
 	
 	public String m_Wave1Sel, m_Wave2Sel;
+	public String m_FilterSel;
+	
+	public boolean m_FilterWave1;
+	public boolean m_FilterWave2;
 	
 	public static final float START_FREQ = 440.0f; 
 	
@@ -23,6 +29,7 @@ public class Settings {
 	{
 		m_Wave1Sel = "sine";
 		m_Wave2Sel = "sine";
+		m_FilterSel = "lpf";
 	}
 	
 	public static Settings getSettings()
@@ -43,6 +50,41 @@ public class Settings {
 		m_Osc2Freq = freq;
 	}
 	
+	public void setFilterFreq(float freq)
+	{
+		m_FilterFreq = freq;
+	}
+	
+	public void setFilterGain(float gain)
+	{
+		m_FilterGain = gain;
+	}
+	
+	public void setWave1Sel(String wave)
+	{
+		m_Wave1Sel = wave;
+	}
+	
+	public void setWave2Sel(String wave)
+	{
+		m_Wave2Sel = wave;
+	}
+
+	public void setFilterSel(String filter)
+	{
+		m_FilterSel = filter;
+	}
+	
+	public void setFilterWave1(boolean on)
+	{
+		m_FilterWave1 = on;
+	}
+	
+	public void setFilterWave2(boolean on)
+	{
+		m_FilterWave2 = on;
+	}
+	
 	public float getOsc1Freq()
 	{
 		
@@ -55,14 +97,16 @@ public class Settings {
 		return m_Osc2Freq;
 	}
 	
-	public void setWave1Sel(String wave)
+	public float getFilterFreq()
 	{
-		m_Wave1Sel = wave;
+		
+		return m_FilterFreq;
 	}
 	
-	public void setWave2Sel(String wave)
+	public float getFilterGain()
 	{
-		m_Wave2Sel = wave;
+		
+		return m_FilterGain;
 	}
 	
 	public String getWave1Sel()
@@ -77,5 +121,22 @@ public class Settings {
 		
 		return m_Wave2Sel;
 		
+	}
+	
+	public String getFilterSel()
+	{
+		
+		return m_FilterSel;
+		
+	}
+	
+	public boolean getFilterWave1()
+	{
+		return m_FilterWave1;
+	}
+	
+	public boolean getFilterWave2()
+	{
+		return m_FilterWave2;
 	}
 }
