@@ -14,7 +14,10 @@ public class ADSR {
 	private float m_ReleaseTime;
 
 	protected ADSR() {
-
+		m_AttackTime = 100.0f;
+		m_DecayTime = 100.0f;
+		m_SustainTime = 100.0f;
+		m_ReleaseTime = 100.0f;
 	}
 
 	public static ADSR getADSR() {

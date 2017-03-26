@@ -104,14 +104,18 @@ public class Synthesizer {
 		    gainEnvelope.addSegment(0.0f, adsr.getReleaseTime());
 
 			
-			if(settings.getFilterWave1()){
+			if(settings.getFilterWave1() && !f.containsInput(Osc1Wave)){
 				f.addInput(Osc1Wave);
+			}else if(settings.getFilterWave1()&& f.containsInput(Osc1Wave)){
+				//do nothing
 			}else{
 				f.removeAllConnections(Osc1Wave);
 			}
 			
-			if(settings.getFilterWave2()){
+			if(settings.getFilterWave2()&& !f.containsInput(Osc2Wave)){
 				f.addInput(Osc2Wave);
+			}else if(settings.getFilterWave2()&& f.containsInput(Osc2Wave)){
+				//do nothing
 			}else{
 				f.removeAllConnections(Osc2Wave);
 			}

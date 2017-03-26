@@ -35,6 +35,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import java.awt.Font;
 import javax.swing.JSeparator;
+import javax.swing.border.MatteBorder;
+import java.awt.Color;
 
 public class GUI extends JFrame {
 	
@@ -74,6 +76,7 @@ public class GUI extends JFrame {
 		panel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JPanel OscPanel = new JPanel();
+		OscPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel.add(OscPanel);
 		
 		//OSC1 slider
@@ -174,6 +177,7 @@ public class GUI extends JFrame {
 		});
 		
 		JPanel FilterPanel = new JPanel();
+		FilterPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel.add(FilterPanel);
 		
 		JRadioButton AddOsc1ToFilter = new JRadioButton("AddOsc1ToFilter");
@@ -270,6 +274,7 @@ public class GUI extends JFrame {
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel LFOPanel = new JPanel();
+		LFOPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel_1.add(LFOPanel);
 		GroupLayout gl_LFOPanel = new GroupLayout(LFOPanel);
 		gl_LFOPanel.setHorizontalGroup(
@@ -283,6 +288,7 @@ public class GUI extends JFrame {
 		LFOPanel.setLayout(gl_LFOPanel);
 		
 		JPanel ADSRPanel = new JPanel();
+		ADSRPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel_1.add(ADSRPanel);
 		
 		JSlider AttackSlider = new JSlider(0, 1000, 500);
