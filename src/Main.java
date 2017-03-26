@@ -14,8 +14,6 @@ import source.*;
 
 public class Main {
 	
-	
-
 	public static void main(String[] args) {
 		
 		Synthesizer synth = new Synthesizer();
@@ -23,8 +21,7 @@ public class Main {
 		synth.initSynth();
 		
 		synth.Synthesize();
-		
-		
+				
 	}
 	
 }

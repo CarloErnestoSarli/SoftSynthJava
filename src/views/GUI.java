@@ -33,13 +33,14 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
+import java.awt.Font;
+import javax.swing.JSeparator;
 
 public class GUI extends JFrame {
 	
 	Audio audio = Audio.getAudio();
 	Settings settings = Settings.getSettings();
-	//Settings settings = new Settings();
-	//Oscillator oscillator1;
+	ADSR adsr = ADSR.getADSR();
 
 	private JPanel contentPane;
 
@@ -87,6 +88,9 @@ public class GUI extends JFrame {
 		JSlider slider_1 = new JSlider();
 		
 		JSlider Osc2FreqSlider = new JSlider(SwingConstants.HORIZONTAL,0, 1000, 440);
+		Osc2FreqSlider.setMinorTickSpacing(50);
+		Osc2FreqSlider.setMajorTickSpacing(500);
+		Osc2FreqSlider.setPaintLabels(true);
 		Osc1FreqSlider.setMajorTickSpacing(500);
 		Osc1FreqSlider.setMinorTickSpacing(50);
 		Osc1FreqSlider.setPaintLabels(true);
@@ -184,7 +188,7 @@ public class GUI extends JFrame {
 			}
 		});
 		
-		JSlider FilterFreqSlider = new JSlider();
+		JSlider FilterFreqSlider = new JSlider(0, 1000, 440);
 		FilterFreqSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
@@ -205,12 +209,12 @@ public class GUI extends JFrame {
 			}
 		});
 		
-		JSlider FilterGainSlider = new JSlider();
+		JSlider FilterGainSlider = new JSlider(0, 10, 3);
 		FilterGainSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				//set filter gain
-				settings.setFilterGain((float)source.getValue());
+				settings.setFilterGain(((float)source.getValue())/10.0f);
 			}
 		});
 		
@@ -265,11 +269,127 @@ public class GUI extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel_4 = new JPanel();
-		panel_1.add(panel_4);
+		JPanel LFOPanel = new JPanel();
+		panel_1.add(LFOPanel);
+		GroupLayout gl_LFOPanel = new GroupLayout(LFOPanel);
+		gl_LFOPanel.setHorizontalGroup(
+			gl_LFOPanel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 511, Short.MAX_VALUE)
+		);
+		gl_LFOPanel.setVerticalGroup(
+			gl_LFOPanel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 165, Short.MAX_VALUE)
+		);
+		LFOPanel.setLayout(gl_LFOPanel);
 		
-		JPanel panel_5 = new JPanel();
-		panel_1.add(panel_5);
+		JPanel ADSRPanel = new JPanel();
+		panel_1.add(ADSRPanel);
+		
+		JSlider AttackSlider = new JSlider(0, 1000, 500);
+		AttackSlider.setToolTipText("");
+		AttackSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				//set attack time
+				adsr.setAttackTime((float)source.getValue());
+			}
+		});
+		
+		JSlider ReleaseSlider = new JSlider(0, 1000, 500);
+		ReleaseSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				//set release time
+
+				adsr.setReleaseTime((float)source.getValue());
+			}
+		});
+		
+		JSlider SustainSlider = new JSlider(0, 1000, 500);
+		SustainSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				//set sustain time
+
+				adsr.setSustainTime((float)source.getValue());
+			}
+		});
+		
+		JSlider DecaySlider = new JSlider(0, 1000, 500);
+		DecaySlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				//set decay time
+
+				adsr.setDecayTime((float)source.getValue());
+			}
+		});
+		
+		JLabel lblAttack = new JLabel("A");
+		lblAttack.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAttack.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lblDecay = new JLabel("D");
+		lblDecay.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDecay.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lblSustain = new JLabel("S");
+		lblSustain.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JLabel lblRelease = new JLabel("R");
+		lblRelease.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRelease.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		GroupLayout gl_ADSRPanel = new GroupLayout(ADSRPanel);
+		gl_ADSRPanel.setHorizontalGroup(
+			gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_ADSRPanel.createSequentialGroup()
+					.addGap(33)
+					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_ADSRPanel.createSequentialGroup()
+							.addComponent(SustainSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+							.addComponent(ReleaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_ADSRPanel.createSequentialGroup()
+							.addComponent(AttackSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+							.addComponent(DecaySlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(26))
+				.addGroup(gl_ADSRPanel.createSequentialGroup()
+					.addGap(127)
+					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblAttack)
+						.addComponent(lblSustain))
+					.addPreferredGap(ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
+					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblDecay)
+						.addComponent(lblRelease))
+					.addGap(122))
+		);
+		gl_ADSRPanel.setVerticalGroup(
+			gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_ADSRPanel.createSequentialGroup()
+					.addGap(16)
+					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(AttackSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(DecaySlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(Alignment.LEADING, gl_ADSRPanel.createSequentialGroup()
+							.addComponent(lblAttack)
+							.addGap(35)
+							.addComponent(lblSustain)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(SustainSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_ADSRPanel.createSequentialGroup()
+							.addComponent(lblDecay)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblRelease)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(ReleaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(13, Short.MAX_VALUE))
+		);
+		ADSRPanel.setLayout(gl_ADSRPanel);
 		
 		JPanel MasterPanel = new JPanel();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

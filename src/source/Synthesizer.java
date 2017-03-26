@@ -2,6 +2,7 @@ package source;
 
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.BiquadFilter;
+import net.beadsproject.beads.ugens.Envelope;
 import net.beadsproject.beads.ugens.Gain;
 import net.beadsproject.beads.ugens.Glide;
 import net.beadsproject.beads.ugens.WavePlayer;
@@ -20,6 +21,8 @@ public class Synthesizer {
 	
 	Filter filter;
 	
+	ADSR adsr;
+	
 	Glide Osc1Glide;
 	Glide Osc2Glide;
 	
@@ -27,6 +30,8 @@ public class Synthesizer {
 	WavePlayer Osc2Wave;
 	
 	BiquadFilter f;
+	
+	Envelope gainEnvelope;
 	
 	WavePlayer modulator;
 
@@ -45,6 +50,8 @@ public class Synthesizer {
 		
 		filter = new Filter();
 		
+		adsr = adsr.getADSR();
+		
 		Osc1Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
 		Osc2Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
 		
@@ -53,9 +60,11 @@ public class Synthesizer {
 		
 		f = new BiquadFilter(audio.getAudioContext(), 2);
 		//WavePlayer square = new WavePlayer(audio.getAudioContext(),settings.START_FREQ,Buffer.SQUARE);
+		gainEnvelope = new Envelope(audio.getAudioContext(),adsr.START_TIME );
+				
 		modulator = new WavePlayer(audio.getAudioContext(), 60.0f, Buffer.SINE);
 		
-		g = new Gain(audio.getAudioContext(), 1, 0.1f);
+		g = new Gain(audio.getAudioContext(), 1, gainEnvelope);
 		
 		Osc1Wave.setFrequency(Osc1Glide);
 		Osc2Wave.setFrequency(Osc2Glide);
@@ -82,6 +91,19 @@ public class Synthesizer {
 			Osc2Glide.setValue(settings.getOsc2Freq());
 			System.out.println(settings.getOsc1Freq());
 			
+			
+			// ramp the gain to 0.9f over 500 ms
+			//change 0.9 to master volume + something
+		    gainEnvelope.addSegment(0.9f, adsr.getAttackTime());
+		    // ramp the gain to 0.0f over 500 ms
+		    //change 0.0 to master volume 
+		    gainEnvelope.addSegment(0.7f, adsr.getDecayTime());
+		    //change 0.0 to master volume 
+		    gainEnvelope.addSegment(0.7f, adsr.getSustainTime());
+		    
+		    gainEnvelope.addSegment(0.0f, adsr.getReleaseTime());
+
+			
 			if(settings.getFilterWave1()){
 				f.addInput(Osc1Wave);
 			}else{
@@ -96,8 +118,18 @@ public class Synthesizer {
 			
 			f.setFrequency(settings.getFilterFreq());
 			System.out.println(f.getFrequency());
+			System.out.println(f.getGain());
 			f.setGain(settings.getFilterGain());
 			System.out.println(f.getGain());
+			
+			try {
+				Thread.sleep((long) (adsr.getAttackTime()+adsr.getDecayTime()+adsr.getReleaseTime()+adsr.getSustainTime()));
+				gainEnvelope.clear();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 	}

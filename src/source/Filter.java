@@ -24,8 +24,8 @@ public class Filter {
 	public Filter(){
 		
 		 lprf = new LPRezFilter(audio.getAudioContext(), filterFrequencyGlide, 0.95f);
-		 hpf =  BiquadFilter.HP;
-		 lpf =  BiquadFilter.LP;
+		 hpf =  BiquadFilter.BUTTERWORTH_HP;
+		 lpf =  BiquadFilter.BUTTERWORTH_LP;
 		 apf =  BiquadFilter.AP;
 	
 	}
