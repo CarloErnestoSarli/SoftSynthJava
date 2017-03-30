@@ -1,3 +1,7 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 import net.beadsproject.beads.*;
 
 import net.beadsproject.beads.core.AudioContext;
@@ -12,8 +16,17 @@ import views.*;
 import source.*;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Main.
+ */
 public class Main {
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 		Synthesizer synth = new Synthesizer();

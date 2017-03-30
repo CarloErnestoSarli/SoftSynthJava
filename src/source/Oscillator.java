@@ -22,7 +22,6 @@ public class Oscillator {
 		triangle = Buffer.TRIANGLE;
 		noise = Buffer.NOISE;
 		
-		
 	}
 	
 	
