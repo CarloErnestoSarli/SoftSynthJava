@@ -111,6 +111,7 @@ public class Synthesizer {
 		*/
 		audio.getAudioContext().out.addInput(panner);
 		audio.getAudioContext().start();
+		
 	}
 	
 	public void Synthesize(){
@@ -161,6 +162,8 @@ public class Synthesizer {
 			filter1.setFrequency(settings.getFilter1Freq());
 			filter2.setFrequency(settings.getFilter2Freq());
 			
+			
+		
 			try {
 				Thread.sleep((long) (adsr.getAttackTime()+adsr.getDecayTime()+adsr.getReleaseTime()+adsr.getSustainTime()));
 				gainEnvelope.clear();
@@ -169,6 +172,9 @@ public class Synthesizer {
 				e.printStackTrace();
 			}
 			
+			gui.volumeBars(master.getMasterVolume(), master.getPannerPosition());
+			//gui.volumeBarsReset();
+			
 			osc1Gain.setGain(master.getOsc1Gain());
 			osc2Gain.setGain(master.getOsc2Gain());
 			oscMix.setGain(master.getOscMix());
@@ -176,6 +182,7 @@ public class Synthesizer {
 			fil2Gain.setGain(master.getFil2Gain());
 			filMix.setGain(master.getFilMix());
 			panner.setPos(master.getPannerPosition());
+			
 			
 		}
 

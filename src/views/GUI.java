@@ -55,6 +55,8 @@ public class GUI extends JFrame {
 	
 	private JPanel contentPane;
 	private JComboBox Filter1Combo;
+	private JProgressBar VolumeLeftBar;
+	private JProgressBar VolumeRightBar;
 
 	/**
 	 * Launch the application.
@@ -474,8 +476,9 @@ public class GUI extends JFrame {
 			}
 		});
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setOrientation(SwingConstants.VERTICAL);
+		VolumeRightBar = new JProgressBar();
+		VolumeRightBar.setStringPainted(true);
+		VolumeRightBar.setOrientation(SwingConstants.VERTICAL);
 		
 		JSlider FilterGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
 		FilterGainSlider.addChangeListener(new ChangeListener() {
@@ -486,8 +489,9 @@ public class GUI extends JFrame {
 		});
 		FilterGainSlider.setOrientation(SwingConstants.VERTICAL);
 		
-		JProgressBar progressBar_1 = new JProgressBar();
-		progressBar_1.setOrientation(SwingConstants.VERTICAL);
+		VolumeLeftBar = new JProgressBar();
+		VolumeLeftBar.setStringPainted(true);
+		VolumeLeftBar.setOrientation(SwingConstants.VERTICAL);
 		
 		JSlider MasterVolumeSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
 		MasterVolumeSlider.addChangeListener(new ChangeListener() {
@@ -513,9 +517,9 @@ public class GUI extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(PanningSlider, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-					.addComponent(progressBar_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addComponent(VolumeLeftBar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addComponent(VolumeRightBar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 					.addGap(8))
 		);
 		gl_MasterPanel.setVerticalGroup(
@@ -530,11 +534,36 @@ public class GUI extends JFrame {
 							.addComponent(FilterMixSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
 							.addComponent(MasterVolumeSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
 							.addComponent(PanningSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-							.addComponent(progressBar_1, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
-						.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
+							.addComponent(VolumeLeftBar, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+						.addComponent(VolumeRightBar, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		MasterPanel.setLayout(gl_MasterPanel);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public void volumeBars(float v, float pan){
+		float volume = v*100.0f;
+		System.out.println("volume: " + volume);
+		System.out.println("pan: " + pan);
+		if(pan == 0){
+			VolumeLeftBar.setValue((int)volume/2);
+			VolumeRightBar.setValue((int)volume/2);
+		}else if(pan < 0){
+			int leftVolume = (int)(Math.abs(pan * volume)+volume/2);
+			int rightVolume = (int) (volume/2 - (leftVolume - volume));
+			VolumeLeftBar.setValue(leftVolume);
+			//VolumeRightBar.setValue(rightVolume);
+		}else if (pan > 0){
+			int rightVolume = (int)((pan * volume)+volume/2);
+			int leftVolume = (int) (volume/2-(rightVolume - volume));
+			//VolumeLeftBar.setValue(leftVolume);
+			VolumeRightBar.setValue(rightVolume);
+		}
+	}
+	
+	public void volumeBarsReset(){
+		VolumeLeftBar.setValue(MIN_VOLUME);
+		VolumeRightBar.setValue(MIN_VOLUME);
 	}
 }
