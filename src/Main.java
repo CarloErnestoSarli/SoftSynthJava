@@ -2,6 +2,8 @@
  * @author Carlo Sarli 
  * 
  */
+import javax.swing.UIManager;
+
 import net.beadsproject.beads.*;
 
 import net.beadsproject.beads.core.AudioContext;
@@ -28,6 +30,12 @@ public class Main {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
+		
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		
 		Synthesizer synth = new Synthesizer();
 		

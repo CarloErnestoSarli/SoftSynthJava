@@ -52,6 +52,8 @@ public class Settings {
 	
 	/** The m filter wave 2. */
 	private boolean m_FilterWave2;
+	
+	private float m_delayIn1Time ,m_delayIn2Time, m_delayOutTime;
 
 	/** The Constant START_FREQ. */
 	public static final float START_FREQ = 0.0f;
@@ -125,6 +127,18 @@ public class Settings {
 
 	public void setWave2Phase(float phase) {
 		m_Wave2Phase = phase;
+	}
+	
+	public void setDelayIn1Time(float time){
+		m_delayIn1Time = time;
+	}
+	
+	public void setDelayIn2Time(float time){
+		m_delayIn2Time = time;
+	}
+	
+	public void setDelayOutTime(float time){
+		m_delayOutTime = time;
 	}
 
 	// -----FILTER-----
@@ -213,6 +227,18 @@ public class Settings {
 	public float getOsc2Freq() {
 
 		return m_Osc2Freq;
+	}
+	
+	public float getDelayIn1Time(){
+		return m_delayIn1Time;
+	}
+	
+	public float getDelayIn2Time(){
+		return m_delayIn2Time;
+	}
+	
+	public float getDelayOutTime(){
+		return m_delayOutTime;
 	}
 
 	/**

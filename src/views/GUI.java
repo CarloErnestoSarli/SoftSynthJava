@@ -19,6 +19,7 @@ import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -45,7 +46,10 @@ public class GUI extends JFrame {
 	Settings settings = Settings.getSettings();
 	ADSR adsr = ADSR.getADSR();
 	Master master = Master.getMaster();
+	LFO lfo = LFO.getLfo();
 	
+	private final int LFO_MIN_FREQ = 2;
+	private final int LFO_MAX_FREQ = 2000;
 	private final int MIN_VOLUME = 0;
 	private final int MAX_VOLUME = 100;
 	private final int LEFT = -10;
@@ -62,6 +66,13 @@ public class GUI extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -97,11 +108,11 @@ public class GUI extends JFrame {
 		Osc1FreqSlider.setMinorTickSpacing(50);
 		Osc1FreqSlider.setPaintLabels(true);
 		
-		JSlider Osc1PhaseSlider = new JSlider();
+		JSlider Osc1PhaseSlider = new JSlider(0,300,150);
 		Osc1PhaseSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				settings.setWave1Phase((float)source.getValue());
+				settings.setDelayIn2Time((float)source.getValue());
 			}
 		});
 		
@@ -120,11 +131,11 @@ public class GUI extends JFrame {
 		});
 		
 		
-		JSlider Osc2PhaseSlider = new JSlider();
+		JSlider Osc2PhaseSlider = new JSlider(0,300,150);
 		Osc2PhaseSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				settings.setWave2Phase((float)source.getValue());
+				settings.setDelayIn2Time((float)source.getValue());
 			}
 		});
 		
@@ -298,14 +309,57 @@ public class GUI extends JFrame {
 		JPanel LFOPanel = new JPanel();
 		LFOPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		panel_1.add(LFOPanel);
+		
+		JComboBox LfoWaveCombo = new JComboBox();
+		LfoWaveCombo.setModel(new DefaultComboBoxModel(new String[] {"Sine", "Square", "Saw", "Triangle"}));
+		LfoWaveCombo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox)e.getSource();
+				lfo.setLfoWaveSel(cb.getSelectedItem().toString());
+			}
+		});
+		
+		JComboBox ApplyLfoCombo = new JComboBox();
+		ApplyLfoCombo.setModel(new DefaultComboBoxModel(new String[] {"Oscillator1 Frequency", "Oscillator1 Phase", "Oscillator2 Frequency", "Oscillator2 Phase", "Filter1 Frequency", "Filter2 Frequency", "MasterVolume"}));
+		
+		JSlider LfoFrequencySlider = new JSlider(LFO_MIN_FREQ, LFO_MAX_FREQ);
+		LfoFrequencySlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				//set lfo frequency
+				lfo.setLfoFreq((float)(source.getValue())/100);
+			}
+		});
+		
+		JSlider LfoAmplitudeSlider = new JSlider();
 		GroupLayout gl_LFOPanel = new GroupLayout(LFOPanel);
 		gl_LFOPanel.setHorizontalGroup(
 			gl_LFOPanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 511, Short.MAX_VALUE)
+				.addGroup(gl_LFOPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_LFOPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(LfoAmplitudeSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(LfoFrequencySlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+					.addGroup(gl_LFOPanel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(LfoWaveCombo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(ApplyLfoCombo, 0, 134, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_LFOPanel.setVerticalGroup(
 			gl_LFOPanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 165, Short.MAX_VALUE)
+				.addGroup(gl_LFOPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_LFOPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_LFOPanel.createSequentialGroup()
+							.addComponent(LfoFrequencySlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+							.addComponent(LfoAmplitudeSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_LFOPanel.createSequentialGroup()
+							.addComponent(LfoWaveCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+							.addComponent(ApplyLfoCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		LFOPanel.setLayout(gl_LFOPanel);
 		
@@ -543,6 +597,7 @@ public class GUI extends JFrame {
 	}
 	
 	public void volumeBars(float v, float pan){
+	
 		float volume = v*100.0f;
 		System.out.println("volume: " + volume);
 		System.out.println("pan: " + pan);
@@ -550,14 +605,14 @@ public class GUI extends JFrame {
 			VolumeLeftBar.setValue((int)volume/2);
 			VolumeRightBar.setValue((int)volume/2);
 		}else if(pan < 0){
-			int leftVolume = (int)(Math.abs(pan * volume)+volume/2);
-			int rightVolume = (int) (volume/2 - (leftVolume - volume));
+			int leftVolume = (int)Math.abs((pan * volume)+volume/2);
+			int rightVolume = (int) (volume/2 - leftVolume);
 			VolumeLeftBar.setValue(leftVolume);
-			//VolumeRightBar.setValue(rightVolume);
+			VolumeRightBar.setValue(rightVolume);
 		}else if (pan > 0){
 			int rightVolume = (int)((pan * volume)+volume/2);
-			int leftVolume = (int) (volume/2-(rightVolume - volume));
-			//VolumeLeftBar.setValue(leftVolume);
+			int leftVolume = (int) (volume - rightVolume);
+			VolumeLeftBar.setValue(leftVolume);
 			VolumeRightBar.setValue(rightVolume);
 		}
 	}

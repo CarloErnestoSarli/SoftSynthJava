@@ -3,6 +3,8 @@ import org.jaudiolibs.jnajack.examples.SineAudioSource;
 
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.Envelope;
+import net.beadsproject.beads.ugens.TapIn;
+import net.beadsproject.beads.ugens.TapOut;
 import net.beadsproject.beads.ugens.WavePlayer;
 
 public class Oscillator {
@@ -13,7 +15,6 @@ public class Oscillator {
 	Buffer sine,square,saw,triangle,noise;
 	
 	
-	
 	public Oscillator()
 	{
 		sine = Buffer.SINE;
@@ -21,7 +22,6 @@ public class Oscillator {
 		saw = Buffer.SAW;
 		triangle = Buffer.TRIANGLE;
 		noise = Buffer.NOISE;
-		
 	}
 	
 	
@@ -62,4 +62,6 @@ public class Oscillator {
 	public Buffer getNoise(){
 		return noise;
 	}
+	
+	     
 }
