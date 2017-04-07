@@ -6,6 +6,7 @@ import net.beadsproject.beads.ugens.AllpassFilter;
 import net.beadsproject.beads.ugens.BiquadFilter;
 import net.beadsproject.beads.ugens.Glide;
 import net.beadsproject.beads.ugens.LPRezFilter;
+import net.beadsproject.beads.ugens.WavePlayer;
 
 public class Filter {
 	
@@ -41,6 +42,28 @@ public class Filter {
 			return apf;
 		}else{
 			return lpf;
+		}
+	}
+	
+	public void addToFilter1(boolean filterWave1, boolean containsWave, BiquadFilter filter1, WavePlayer osc1Wave){
+		
+		if(filterWave1 && !containsWave){
+			filter1.addInput(osc1Wave);
+		}else if(filterWave1 && containsWave){
+			//do nothing
+		}else{
+			filter1.removeAllConnections(osc1Wave);
+		}
+	}
+	
+	public void addToFilter2(boolean filterWave2, boolean containsWave, BiquadFilter filter2, WavePlayer osc2Wave){
+		
+		if(filterWave2 && !containsWave){
+			filter2.addInput(osc2Wave);
+		}else if(filterWave2 && containsWave){
+			//do nothing
+		}else{
+			filter2.removeAllConnections(osc2Wave);
 		}
 	}
 	

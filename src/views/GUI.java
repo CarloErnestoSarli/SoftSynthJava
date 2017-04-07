@@ -39,6 +39,16 @@ import javax.swing.JSeparator;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.JProgressBar;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.ComponentOrientation;
+import com.jgoodies.forms.layout.FormSpecs;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Component;
+import javax.swing.border.TitledBorder;
 
 public class GUI extends JFrame {
 	
@@ -57,7 +67,7 @@ public class GUI extends JFrame {
 	private  final int START_VOLUME = 50;
 	private final int START_POSITION = 0;
 	
-	private JPanel contentPane;
+	private JPanel SynthPane;
 	private JComboBox Filter1Combo;
 	private JProgressBar VolumeLeftBar;
 	private JProgressBar VolumeRightBar;
@@ -89,18 +99,27 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		setTitle("Marbles");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1052, 579);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		setBounds(100, 100, 1300, 643);
+		getContentPane().setLayout(new BorderLayout());
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		JMenuBar SynthMenuBar = new JMenuBar();
+		setJMenuBar(SynthMenuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		SynthMenuBar.add(mnFile);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mnFile.add(mntmExit);
+		SynthPane = new JPanel();
+		SynthPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(SynthPane);
+		
+		JPanel TopPanel = new JPanel();
 		
 		JPanel OscPanel = new JPanel();
-		OscPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel.add(OscPanel);
+		OscPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Oscillator 1&2", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
 		//OSC1 slider
 		JSlider Osc1FreqSlider = new JSlider(SwingConstants.HORIZONTAL,0, 1000, 440);
@@ -165,32 +184,47 @@ public class GUI extends JFrame {
 				.addGroup(gl_OscPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(Osc2FreqSlider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(Osc1FreqSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(Osc2FreqSlider, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+						.addGroup(gl_OscPanel.createSequentialGroup()
+							.addComponent(Osc1FreqSlider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(2)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(Osc1PhaseSlider, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+						.addComponent(Osc1PhaseSlider, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
 						.addComponent(Osc2PhaseSlider, 0, 0, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_OscPanel.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(Osc2WvSel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(Osc1WvSel, 0, 77, Short.MAX_VALUE))
+					.addGroup(gl_OscPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(Osc2WvSel, 0, 78, Short.MAX_VALUE)
+						.addComponent(Osc1WvSel, 0, 78, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_OscPanel.setVerticalGroup(
-			gl_OscPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_OscPanel.createSequentialGroup()
+			gl_OscPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_OscPanel.createSequentialGroup()
 					.addGap(7)
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(Osc1PhaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Osc1FreqSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Osc1WvSel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+						.addGroup(gl_OscPanel.createSequentialGroup()
+							.addComponent(Osc1PhaseSlider, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
+						.addComponent(Osc1FreqSlider, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_OscPanel.createSequentialGroup()
+							.addComponent(Osc1WvSel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)))
+					.addGap(103)
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(Osc2PhaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Osc2FreqSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Osc2WvSel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+						.addGroup(gl_OscPanel.createSequentialGroup()
+							.addGap(0, 0, Short.MAX_VALUE)
+							.addComponent(Osc2PhaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(17))
+						.addGroup(gl_OscPanel.createSequentialGroup()
+							.addGap(0, 0, Short.MAX_VALUE)
+							.addComponent(Osc2FreqSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(3))
+						.addGroup(gl_OscPanel.createSequentialGroup()
+							.addGap(0, 3, Short.MAX_VALUE)
+							.addComponent(Osc2WvSel, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+							.addGap(17)))
+					.addGap(5))
 		);
 		OscPanel.setLayout(gl_OscPanel);
 		Osc1FreqSlider.addChangeListener(new ChangeListener() {
@@ -202,8 +236,7 @@ public class GUI extends JFrame {
 		});
 		
 		JPanel FilterPanel = new JPanel();
-		FilterPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel.add(FilterPanel);
+		FilterPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Filters", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
 		JRadioButton AddOsc1ToFilter = new JRadioButton("AddOsc1ToFilter");
 		AddOsc1ToFilter.addChangeListener(new ChangeListener() {
@@ -274,15 +307,21 @@ public class GUI extends JFrame {
 				.addGroup(gl_FilterPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_FilterPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(AddOsc1ToFilter)
-						.addComponent(AddOsc2ToFilter))
+						.addComponent(AddOsc1ToFilter, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+						.addGroup(gl_FilterPanel.createSequentialGroup()
+							.addComponent(AddOsc2ToFilter, GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+							.addGap(2)))
 					.addGap(18)
 					.addGroup(gl_FilterPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(Filter2FreqSlider, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Filter1FreqSlider, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_FilterPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(Filter1Combo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(gl_FilterPanel.createSequentialGroup()
+							.addComponent(Filter2FreqSlider, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+							.addGap(8))
+						.addGroup(gl_FilterPanel.createSequentialGroup()
+							.addComponent(Filter1FreqSlider, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+							.addGap(4)))
+					.addGap(2)
+					.addGroup(gl_FilterPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(Filter1Combo, 0, 112, Short.MAX_VALUE)
 						.addComponent(Filter2Combo, 0, 112, Short.MAX_VALUE))
 					.addGap(24))
 		);
@@ -291,24 +330,30 @@ public class GUI extends JFrame {
 				.addGroup(gl_FilterPanel.createSequentialGroup()
 					.addGap(14)
 					.addGroup(gl_FilterPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(AddOsc1ToFilter)
+						.addGroup(gl_FilterPanel.createSequentialGroup()
+							.addComponent(AddOsc1ToFilter)
+							.addPreferredGap(ComponentPlacement.RELATED, 3, Short.MAX_VALUE))
 						.addComponent(Filter1FreqSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Filter1Combo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_FilterPanel.createSequentialGroup()
+							.addComponent(Filter1Combo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 6, Short.MAX_VALUE)))
 					.addGap(97)
 					.addGroup(gl_FilterPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(AddOsc2ToFilter)
+						.addGroup(gl_FilterPanel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
+							.addComponent(AddOsc2ToFilter))
 						.addComponent(Filter2FreqSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Filter2Combo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_FilterPanel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+							.addComponent(Filter2Combo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addGap(38))
 		);
 		FilterPanel.setLayout(gl_FilterPanel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+		JPanel BottomPanel = new JPanel();
 		
 		JPanel LFOPanel = new JPanel();
-		LFOPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel_1.add(LFOPanel);
+		LFOPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "LFO", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		JComboBox LfoWaveCombo = new JComboBox();
 		LfoWaveCombo.setModel(new DefaultComboBoxModel(new String[] {"Sine", "Square", "Saw", "Triangle"}));
@@ -338,11 +383,14 @@ public class GUI extends JFrame {
 				.addGroup(gl_LFOPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_LFOPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(LfoAmplitudeSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(LfoFrequencySlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-					.addGroup(gl_LFOPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(LfoWaveCombo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(gl_LFOPanel.createSequentialGroup()
+							.addComponent(LfoFrequencySlider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(155))
+						.addGroup(gl_LFOPanel.createSequentialGroup()
+							.addComponent(LfoAmplitudeSlider, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+							.addGap(155)))
+					.addGroup(gl_LFOPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(LfoWaveCombo, 0, 134, Short.MAX_VALUE)
 						.addComponent(ApplyLfoCombo, 0, 134, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -350,22 +398,21 @@ public class GUI extends JFrame {
 			gl_LFOPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_LFOPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_LFOPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_LFOPanel.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_LFOPanel.createSequentialGroup()
 							.addComponent(LfoFrequencySlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(LfoAmplitudeSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl_LFOPanel.createSequentialGroup()
+						.addGroup(gl_LFOPanel.createSequentialGroup()
 							.addComponent(LfoWaveCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+							.addGap(112)
 							.addComponent(ApplyLfoCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		LFOPanel.setLayout(gl_LFOPanel);
 		
 		JPanel ADSRPanel = new JPanel();
-		ADSRPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel_1.add(ADSRPanel);
+		ADSRPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "ADSR Envelope", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		JSlider AttackSlider = new JSlider(0, 1000, 500);
 		AttackSlider.setToolTipText("");
@@ -416,37 +463,29 @@ public class GUI extends JFrame {
 		lblDecay.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblSustain = new JLabel("S");
+		lblSustain.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSustain.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JLabel lblRelease = new JLabel("R");
 		lblRelease.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblRelease.setHorizontalAlignment(SwingConstants.CENTER);
-		
 		GroupLayout gl_ADSRPanel = new GroupLayout(ADSRPanel);
 		gl_ADSRPanel.setHorizontalGroup(
-			gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
+			gl_ADSRPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_ADSRPanel.createSequentialGroup()
-					.addGap(33)
+					.addContainerGap()
 					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_ADSRPanel.createSequentialGroup()
-							.addComponent(SustainSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-							.addComponent(ReleaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_ADSRPanel.createSequentialGroup()
-							.addComponent(AttackSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-							.addComponent(DecaySlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(26))
-				.addGroup(gl_ADSRPanel.createSequentialGroup()
-					.addGap(127)
+						.addComponent(SustainSlider, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+						.addComponent(lblSustain, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+						.addComponent(AttackSlider, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+						.addComponent(lblAttack, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+					.addGap(27)
 					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblAttack)
-						.addComponent(lblSustain))
-					.addPreferredGap(ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
-					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblDecay)
-						.addComponent(lblRelease))
-					.addGap(122))
+						.addComponent(DecaySlider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblDecay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblRelease, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(ReleaseSlider, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_ADSRPanel.setVerticalGroup(
 			gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
@@ -456,40 +495,242 @@ public class GUI extends JFrame {
 						.addComponent(AttackSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(DecaySlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(Alignment.LEADING, gl_ADSRPanel.createSequentialGroup()
-							.addComponent(lblAttack)
-							.addGap(35)
-							.addComponent(lblSustain)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(SustainSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_ADSRPanel.createSequentialGroup()
-							.addComponent(lblDecay)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(lblRelease)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(ReleaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(13, Short.MAX_VALUE))
+					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblAttack)
+						.addComponent(lblDecay))
+					.addGap(30)
+					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSustain)
+						.addComponent(lblRelease))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_ADSRPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(SustainSlider, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+						.addComponent(ReleaseSlider, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+					.addGap(16))
 		);
 		ADSRPanel.setLayout(gl_ADSRPanel);
 		
 		JPanel MasterPanel = new JPanel();
-		MasterPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.PREFERRED_SIZE, 1023, GroupLayout.PREFERRED_SIZE)
-				.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 1023, GroupLayout.PREFERRED_SIZE)
-				.addComponent(MasterPanel, GroupLayout.PREFERRED_SIZE, 1023, GroupLayout.PREFERRED_SIZE)
+		MasterPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Master Controls", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		
+		JPanel EqPanel = new JPanel();
+		EqPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Eq", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		JLabel lblHigh = new JLabel("High");
+		lblHigh.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JSlider EqHighSlider = new JSlider();
+		
+		JLabel lblMid = new JLabel("Gain");
+		lblMid.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JSlider EqMidSlider = new JSlider();
+		
+		JLabel lblLow = new JLabel("Low ");
+		lblLow.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel PannerPanel = new JPanel();
+		PannerPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Panner", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		JPanel VolumeBarsPanel = new JPanel();
+		VolumeBarsPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Volume", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		GroupLayout gl_SynthPane = new GroupLayout(SynthPane);
+		gl_SynthPane.setHorizontalGroup(
+			gl_SynthPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_SynthPane.createSequentialGroup()
+					.addGroup(gl_SynthPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_SynthPane.createSequentialGroup()
+							.addComponent(TopPanel, GroupLayout.PREFERRED_SIZE, 1026, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_SynthPane.createSequentialGroup()
+							.addGroup(gl_SynthPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(MasterPanel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 1142, GroupLayout.PREFERRED_SIZE)
+								.addComponent(BottomPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(6)))
+					.addGroup(gl_SynthPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_SynthPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(EqPanel, GroupLayout.PREFERRED_SIZE, 124, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_SynthPane.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(VolumeBarsPanel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+							.addComponent(PannerPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addGap(62))
 		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+		gl_SynthPane.setVerticalGroup(
+			gl_SynthPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_SynthPane.createSequentialGroup()
 					.addGap(1)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-					.addComponent(MasterPanel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_SynthPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_SynthPane.createSequentialGroup()
+							.addComponent(TopPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(8))
+						.addGroup(gl_SynthPane.createSequentialGroup()
+							.addComponent(EqPanel, GroupLayout.PREFERRED_SIZE, 203, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(gl_SynthPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(PannerPanel, GroupLayout.PREFERRED_SIZE, 176, Short.MAX_VALUE)
+						.addComponent(BottomPanel, GroupLayout.PREFERRED_SIZE, 176, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_SynthPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(VolumeBarsPanel, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+						.addComponent(MasterPanel, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
 		);
+		GroupLayout gl_BottomPanel = new GroupLayout(BottomPanel);
+		gl_BottomPanel.setHorizontalGroup(
+			gl_BottomPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_BottomPanel.createSequentialGroup()
+					.addComponent(LFOPanel, GroupLayout.PREFERRED_SIZE, 566, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+					.addComponent(ADSRPanel, GroupLayout.PREFERRED_SIZE, 551, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_BottomPanel.setVerticalGroup(
+			gl_BottomPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_BottomPanel.createSequentialGroup()
+					.addGroup(gl_BottomPanel.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(LFOPanel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+						.addComponent(ADSRPanel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 184, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		BottomPanel.setLayout(gl_BottomPanel);
+		
+		JLabel lblNewLabel = new JLabel("Gain");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JSlider slider = new JSlider();
+		
+		JSlider slider_1 = new JSlider();
+		GroupLayout gl_EqPanel = new GroupLayout(EqPanel);
+		gl_EqPanel.setHorizontalGroup(
+			gl_EqPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_EqPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_EqPanel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_EqPanel.createSequentialGroup()
+							.addComponent(lblMid, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+							.addGap(8))
+						.addGroup(gl_EqPanel.createSequentialGroup()
+							.addComponent(EqMidSlider, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+							.addGap(8))
+						.addGroup(gl_EqPanel.createSequentialGroup()
+							.addComponent(lblLow, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+							.addGap(8))
+						.addGroup(gl_EqPanel.createSequentialGroup()
+							.addComponent(slider, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_EqPanel.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_EqPanel.createSequentialGroup()
+							.addComponent(slider_1, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_EqPanel.createSequentialGroup()
+							.addGroup(gl_EqPanel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(EqHighSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+								.addGroup(gl_EqPanel.createSequentialGroup()
+									.addGap(0, 0, Short.MAX_VALUE)
+									.addComponent(lblHigh, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)))
+							.addGap(70))))
+		);
+		gl_EqPanel.setVerticalGroup(
+			gl_EqPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_EqPanel.createSequentialGroup()
+					.addComponent(lblHigh, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+					.addGap(4)
+					.addComponent(EqHighSlider, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblMid, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(EqMidSlider, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblLow, GroupLayout.PREFERRED_SIZE, 16, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(slider, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+					.addGap(7)
+					.addComponent(slider_1, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		EqPanel.setLayout(gl_EqPanel);
+		
+		VolumeRightBar = new JProgressBar();
+		VolumeRightBar.setStringPainted(true);
+		VolumeRightBar.setOrientation(SwingConstants.VERTICAL);
+		
+		VolumeLeftBar = new JProgressBar();
+		VolumeLeftBar.setStringPainted(true);
+		VolumeLeftBar.setOrientation(SwingConstants.VERTICAL);
+		GroupLayout gl_VolumeBarsPanel = new GroupLayout(VolumeBarsPanel);
+		gl_VolumeBarsPanel.setHorizontalGroup(
+			gl_VolumeBarsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_VolumeBarsPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(VolumeRightBar, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(VolumeLeftBar, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_VolumeBarsPanel.setVerticalGroup(
+			gl_VolumeBarsPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_VolumeBarsPanel.createSequentialGroup()
+					.addGap(7)
+					.addGroup(gl_VolumeBarsPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(VolumeLeftBar, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+						.addComponent(VolumeRightBar, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		VolumeBarsPanel.setLayout(gl_VolumeBarsPanel);
+		
+		JSlider PanningSlider = new JSlider(LEFT, RIGHT, START_POSITION);
+		
+		JLabel lblL = new JLabel("L");
+		lblL.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		JLabel lblR = new JLabel("R");
+		lblR.setHorizontalAlignment(SwingConstants.RIGHT);
+		GroupLayout gl_PannerPanel = new GroupLayout(PannerPanel);
+		gl_PannerPanel.setHorizontalGroup(
+			gl_PannerPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_PannerPanel.createSequentialGroup()
+					.addGap(7)
+					.addComponent(lblL, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lblR, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+					.addGap(7))
+				.addGroup(gl_PannerPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(PanningSlider, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_PannerPanel.setVerticalGroup(
+			gl_PannerPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_PannerPanel.createSequentialGroup()
+					.addGap(65)
+					.addComponent(PanningSlider, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+					.addGap(4)
+					.addGroup(gl_PannerPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblL)
+						.addComponent(lblR))
+					.addGap(56))
+		);
+		PannerPanel.setLayout(gl_PannerPanel);
+		PanningSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				master.setPannerPosition((float)source.getValue()/10.0f);
+			}
+		});
+		
+		JSlider FilterMixSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
+		FilterMixSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				float value = (float)source.getValue();
+				master.setFil1Gain(value/100.0f);
+				master.setFil2Gain(((float)MAX_VOLUME - value)/100.0f);
+			}
+		});
 		
 		JSlider OscMixSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
 		OscMixSlider.addChangeListener(new ChangeListener() {
@@ -510,29 +751,15 @@ public class GUI extends JFrame {
 			}
 		});
 		OscGainSlider.setOrientation(SwingConstants.VERTICAL);
-		
-		JSlider FilterMixSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
-		FilterMixSlider.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				JSlider source = (JSlider) e.getSource();
-				float value = (float)source.getValue();
-				master.setFil1Gain(value/100.0f);
-				master.setFil2Gain(((float)MAX_VOLUME - value)/100.0f);
-			}
-		});
 		FilterMixSlider.setOrientation(SwingConstants.VERTICAL);
 		
-		JSlider PanningSlider = new JSlider(LEFT, RIGHT, START_POSITION);
-		PanningSlider.addChangeListener(new ChangeListener() {
+		JSlider MasterVolumeSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
+		MasterVolumeSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				master.setPannerPosition((float)source.getValue()/10.0f);
+				master.setMasterVolume((float)source.getValue()/100.0f);
 			}
 		});
-		
-		VolumeRightBar = new JProgressBar();
-		VolumeRightBar.setStringPainted(true);
-		VolumeRightBar.setOrientation(SwingConstants.VERTICAL);
 		
 		JSlider FilterGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
 		FilterGainSlider.addChangeListener(new ChangeListener() {
@@ -542,58 +769,79 @@ public class GUI extends JFrame {
 			}
 		});
 		FilterGainSlider.setOrientation(SwingConstants.VERTICAL);
-		
-		VolumeLeftBar = new JProgressBar();
-		VolumeLeftBar.setStringPainted(true);
-		VolumeLeftBar.setOrientation(SwingConstants.VERTICAL);
-		
-		JSlider MasterVolumeSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
-		MasterVolumeSlider.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				JSlider source = (JSlider) e.getSource();
-				master.setMasterVolume((float)source.getValue()/100.0f);
-			}
-		});
 		MasterVolumeSlider.setOrientation(SwingConstants.VERTICAL);
+		
+		JLabel lblFilterMix = new JLabel("Filter Mix");
+		
+		JLabel lblOscVolume = new JLabel("Osc Volume");
+		
+		JLabel OscMixLabel = new JLabel("Osc Mix");
+		
+		JLabel lblFilterVolume = new JLabel("Filter Volume");
+		
+		JLabel lblMasterVolume = new JLabel("Master Volume");
 		GroupLayout gl_MasterPanel = new GroupLayout(MasterPanel);
 		gl_MasterPanel.setHorizontalGroup(
 			gl_MasterPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_MasterPanel.createSequentialGroup()
-					.addComponent(OscMixSlider, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
+				.addGroup(Alignment.TRAILING, gl_MasterPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(OscMixLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(OscMixSlider, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblOscVolume, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(OscGainSlider, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblFilterMix, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(FilterMixSlider, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblFilterVolume, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(FilterGainSlider, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+					.addComponent(lblMasterVolume, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(OscGainSlider, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(FilterMixSlider, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(FilterGainSlider, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(MasterVolumeSlider, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(PanningSlider, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-					.addComponent(VolumeLeftBar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(VolumeRightBar, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addGap(8))
+					.addComponent(MasterVolumeSlider, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_MasterPanel.setVerticalGroup(
-			gl_MasterPanel.createParallelGroup(Alignment.LEADING)
+			gl_MasterPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_MasterPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_MasterPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_MasterPanel.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(OscGainSlider, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-							.addComponent(OscMixSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-							.addComponent(FilterGainSlider, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-							.addComponent(FilterMixSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-							.addComponent(MasterVolumeSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-							.addComponent(PanningSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-							.addComponent(VolumeLeftBar, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
-						.addComponent(VolumeRightBar, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGroup(gl_MasterPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(FilterGainSlider, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(lblFilterVolume, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(FilterMixSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(lblFilterMix, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(OscGainSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(lblOscVolume, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(OscMixSlider, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(OscMixLabel, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(lblMasterVolume, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addComponent(MasterVolumeSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		MasterPanel.setLayout(gl_MasterPanel);
-		contentPane.setLayout(gl_contentPane);
+		GroupLayout gl_TopPanel = new GroupLayout(TopPanel);
+		gl_TopPanel.setHorizontalGroup(
+			gl_TopPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_TopPanel.createSequentialGroup()
+					.addGap(2)
+					.addComponent(OscPanel, GroupLayout.PREFERRED_SIZE, 577, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(FilterPanel, GroupLayout.PREFERRED_SIZE, 556, GroupLayout.PREFERRED_SIZE)
+					.addGap(12))
+		);
+		gl_TopPanel.setVerticalGroup(
+			gl_TopPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_TopPanel.createParallelGroup(Alignment.BASELINE)
+					.addComponent(OscPanel, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)
+					.addComponent(FilterPanel, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
+		);
+		TopPanel.setLayout(gl_TopPanel);
+		SynthPane.setLayout(gl_SynthPane);
 	}
 	
 	public void volumeBars(float v, float pan){
