@@ -22,6 +22,7 @@ public class Synthesizer {
 	Filter filter;
 	ADSR adsr;
 	LFO lfo;
+	EQ eq;
 	
 	Oscillator Osc1;
 	Oscillator Osc2;
@@ -38,6 +39,9 @@ public class Synthesizer {
 	
 	BiquadFilter filter1;
 	BiquadFilter filter2;
+	
+	BiquadFilter low;
+	BiquadFilter high;
 	
 	Envelope gainEnvelope;
 	
@@ -58,6 +62,7 @@ public class Synthesizer {
 	Gain fil2Gain;
 	Gain delayGain1;
 	Gain delayGain2;
+	Gain eqGain;
 	
 	public void initSynth(){
 		
@@ -68,6 +73,7 @@ public class Synthesizer {
 		settings = Settings.getSettings();
 		master= Master.getMaster();
 		lfo = LFO.getLfo();
+		eq = EQ.getEQ();
 		
 		Osc1 = new Oscillator();
 		Osc2 = new Oscillator();
@@ -89,6 +95,9 @@ public class Synthesizer {
 		filter1 = new BiquadFilter(audio.getAudioContext(), 2);
 		filter2 = new BiquadFilter(audio.getAudioContext(), 2);
 		
+		low = new BiquadFilter(audio.getAudioContext(), 2);
+		high = new BiquadFilter(audio.getAudioContext(), 2);
+		
 		gainEnvelope = new Envelope(audio.getAudioContext(),adsr.START_TIME );
 				
 	    delayIn1 = new TapIn(audio.getAudioContext(), 500.0f);
@@ -106,7 +115,7 @@ public class Synthesizer {
 		filMix = new Gain(audio.getAudioContext(), 1);
 		fil1Gain = new Gain(audio.getAudioContext(), 1);
 		fil2Gain = new Gain(audio.getAudioContext(), 1);
-		
+		eqGain = new Gain(audio.getAudioContext(), 1);
 		
 		panner = new Panner(audio.getAudioContext());
 		
@@ -127,7 +136,9 @@ public class Synthesizer {
 		filMix.addInput(fil2Gain);
 		masterGain.addInput(oscMix);
 		masterGain.addInput(filMix);
-		panner.addInput(masterGain);
+		eqGain.addInput(low);
+		eqGain.addInput(high);
+		panner.addInput(eqGain);
 		
 		oscMix.addInput(delayGain1);
 		oscMix.addInput(delayGain2);
@@ -139,7 +150,10 @@ public class Synthesizer {
 		delayGain2.addInput(delayOut2);
 	    delayIn1.addInput(delayGain1);
 	    delayIn2.addInput(delayGain2);
-	  
+	    
+	    low.addInput(masterGain);
+	    high.addInput(masterGain);
+	    
 		audio.getAudioContext().out.addInput(panner);
 		audio.getAudioContext().start();
 		
@@ -156,6 +170,9 @@ public class Synthesizer {
 			
 			filter1.setType(filter.SelectFilter(settings.getFilter1Sel()));
 			filter2.setType(filter.SelectFilter(settings.getFilter2Sel()));
+			
+			high.setType(eq.getHigh());
+			low.setType(eq.getLow());
 			
 			Osc1Glide.setValue(settings.getOsc1Freq());
 			Osc2Glide.setValue(settings.getOsc2Freq());
@@ -180,25 +197,13 @@ public class Synthesizer {
 		    filter.addToFilter1(settings.getFilterWave1(), filter1.containsInput(Osc1Wave), filter1, Osc1Wave);
 		    filter.addToFilter2(settings.getFilterWave2(), filter2.containsInput(Osc2Wave), filter2, Osc2Wave);
 		    
-		    /*
-			if(settings.getFilterWave1() && !filter1.containsInput(Osc1Wave)){
-				filter1.addInput(Osc1Wave);
-			}else if(settings.getFilterWave1()&& filter1.containsInput(Osc1Wave)){
-				//do nothing
-			}else{
-				filter1.removeAllConnections(Osc1Wave);
-			}
-			
-			if(settings.getFilterWave2()&& !filter2.containsInput(Osc2Wave)){
-				filter2.addInput(Osc2Wave);
-			}else if(settings.getFilterWave2()&& filter2.containsInput(Osc2Wave)){
-				//do nothing
-			}else{
-				filter2.removeAllConnections(Osc2Wave);
-			}
-			*/
 			filter1.setFrequency(settings.getFilter1Freq());
 			filter2.setFrequency(settings.getFilter2Freq());
+			
+			high.setFrequency(eq.getHighFreq());
+			low.setFrequency(eq.getLowFreq());
+			high.setGain(eq.getHighGain());
+			low.setGain(eq.getLowGain());
 			/*
 			//0.02HZ to 20HZ
 			lfoWave.setFrequency(arg0);
