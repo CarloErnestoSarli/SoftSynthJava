@@ -220,11 +220,8 @@ public class Synthesizer {
 				e.printStackTrace();
 			}
 			
-			System.out.println(Osc1Wave.getFrequency());
-			System.out.println(lfoWave.getFrequency());
-			System.out.println(lfoWave.getPhase());
-			System.out.println(lfoGlide.getValue());
-			lfo.changeFrequency(lfo.getLfoFrq(), settings.getOsc1Freq());
+			//lfo.controlElement(Osc1Glide, lfoWave);
+			
 			
 			gui.volumeBars(master.getMasterVolume(), master.getPannerPosition());
 			//gui.volumeBarsReset();

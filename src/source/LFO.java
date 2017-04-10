@@ -1,5 +1,6 @@
 package source;
 
+import net.beadsproject.beads.core.UGen;
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.Glide;
 import net.beadsproject.beads.ugens.WavePlayer;
@@ -16,6 +17,7 @@ public class LFO {
 	private Buffer lfoSine, lfoSquare, lfoTriangle, lfoSaw;
 	private float m_lfoFrequency;
 	private String m_lfoWaveSel;
+	private boolean isBusy;
 
 	Glide lfoGlide;
 
@@ -58,11 +60,17 @@ public class LFO {
 		}
 	}
 	
-	public void changeFrequency(float l, float freq){
-		
-		float addFreq = l;
-		System.out.println("lfo freq" + addFreq);
-		float newFreq = addFreq + freq;
+	public void controlElement(UGen gen, WavePlayer lfo){
+		if(isBusy == true){
+			removeElement(gen, lfo);
+		}
+		gen.addInput(lfo);
+		isBusy = true;
+	}
+	
+	public void removeElement(UGen gen, WavePlayer lfo){
+		gen.removeAllConnections(lfo);
+		isBusy = false;
 	}
 
 	public WavePlayer getLfoWave() {
@@ -91,5 +99,9 @@ public class LFO {
 	
 	public Buffer getLfoSine(){
 		return lfoSine;
+	}
+	
+	public boolean getIsBusy(){
+		return isBusy;
 	}
 }

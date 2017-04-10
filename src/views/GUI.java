@@ -59,6 +59,9 @@ public class GUI extends JFrame {
 	LFO lfo = LFO.getLfo();
 	EQ eq = EQ.getEQ();
 	
+	private final int MIN_OSC_FREQ = 1635;
+	private final int MAX_OSC_FREQ = 100000;
+	private final int NOTE_A_FREQ = 44000;
 	private final int LFO_MIN_FREQ = 2;
 	private final int LFO_MAX_FREQ = 2000;
 	private final int MIN_VOLUME = 0;
@@ -123,10 +126,9 @@ public class GUI extends JFrame {
 		OscPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Oscillator 1&2", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
 		//OSC1 slider
-		JSlider Osc1FreqSlider = new JSlider(SwingConstants.HORIZONTAL,0, 1000, 440);
-		Osc1FreqSlider.setMajorTickSpacing(500);
+		JSlider Osc1FreqSlider = new JSlider(SwingConstants.HORIZONTAL, MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
+		Osc1FreqSlider.setMajorTickSpacing(50000);
 		Osc1FreqSlider.setMinorTickSpacing(50);
-		Osc1FreqSlider.setPaintLabels(true);
 		
 		JSlider Osc1PhaseSlider = new JSlider(0,300,150);
 		Osc1PhaseSlider.addChangeListener(new ChangeListener() {
@@ -136,17 +138,15 @@ public class GUI extends JFrame {
 			}
 		});
 		
-		JSlider Osc2FreqSlider = new JSlider(SwingConstants.HORIZONTAL,0, 1000, 440);
+		JSlider Osc2FreqSlider = new JSlider(SwingConstants.HORIZONTAL,MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
 		Osc2FreqSlider.setMinorTickSpacing(50);
-		Osc2FreqSlider.setMajorTickSpacing(500);
-		Osc2FreqSlider.setPaintLabels(true);
+		Osc2FreqSlider.setMajorTickSpacing(50000);
 		Osc1FreqSlider.setMajorTickSpacing(500);
 		Osc1FreqSlider.setMinorTickSpacing(50);
-		Osc1FreqSlider.setPaintLabels(true);
 		Osc2FreqSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				settings.setOsc2Freq((float)source.getValue());
+				settings.setOsc2Freq((float)source.getValue()/100);
 			}
 		});
 		
@@ -185,53 +185,45 @@ public class GUI extends JFrame {
 				.addGroup(gl_OscPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(Osc2FreqSlider, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-						.addGroup(gl_OscPanel.createSequentialGroup()
-							.addComponent(Osc1FreqSlider, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(2)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(Osc1FreqSlider, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+						.addComponent(Osc2FreqSlider, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(Osc1PhaseSlider, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+						.addComponent(Osc1PhaseSlider, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
 						.addComponent(Osc2PhaseSlider, 0, 0, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(Osc2WvSel, 0, 78, Short.MAX_VALUE)
-						.addComponent(Osc1WvSel, 0, 78, Short.MAX_VALUE))
+						.addComponent(Osc2WvSel, 0, 99, Short.MAX_VALUE)
+						.addComponent(Osc1WvSel, 0, 99, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_OscPanel.setVerticalGroup(
 			gl_OscPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_OscPanel.createSequentialGroup()
-					.addGap(7)
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_OscPanel.createSequentialGroup()
-							.addComponent(Osc1PhaseSlider, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
-						.addComponent(Osc1FreqSlider, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_OscPanel.createSequentialGroup()
-							.addComponent(Osc1WvSel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)))
-					.addGap(103)
+							.addGap(7)
+							.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(Osc1PhaseSlider, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+								.addComponent(Osc1WvSel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(Osc1FreqSlider, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
+					.addGap(110)
 					.addGroup(gl_OscPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_OscPanel.createSequentialGroup()
-							.addGap(0, 0, Short.MAX_VALUE)
-							.addComponent(Osc2PhaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(17))
-						.addGroup(gl_OscPanel.createSequentialGroup()
-							.addGap(0, 0, Short.MAX_VALUE)
-							.addComponent(Osc2FreqSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(3))
-						.addGroup(gl_OscPanel.createSequentialGroup()
-							.addGap(0, 3, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, gl_OscPanel.createSequentialGroup()
 							.addComponent(Osc2WvSel, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+							.addGap(17))
+						.addGroup(Alignment.TRAILING, gl_OscPanel.createSequentialGroup()
+							.addGroup(gl_OscPanel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(Osc2FreqSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(Osc2PhaseSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(17)))
-					.addGap(5))
+					.addGap(22))
 		);
 		OscPanel.setLayout(gl_OscPanel);
 		Osc1FreqSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				settings.setOsc1Freq((float)source.getValue());
+				settings.setOsc1Freq((float)source.getValue()/100);
 				
 			}
 		});
@@ -251,12 +243,12 @@ public class GUI extends JFrame {
 			}
 		});
 		
-		JSlider Filter1FreqSlider = new JSlider(0, 1000, 440);
+		JSlider Filter1FreqSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
 		Filter1FreqSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				//set filter frequency
-				settings.setFilter1Freq((float)source.getValue());
+				settings.setFilter1Freq((float)source.getValue()/100);
 			}
 		});
 		
@@ -272,12 +264,12 @@ public class GUI extends JFrame {
 			}
 		});
 		
-		JSlider Filter2FreqSlider = new JSlider(0, 10, 3);
+		JSlider Filter2FreqSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
 		Filter2FreqSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				//set filter gain
-				settings.setFilter2Freq((float)source.getValue());
+				settings.setFilter2Freq((float)source.getValue()/100);
 			}
 		});
 		
@@ -366,7 +358,13 @@ public class GUI extends JFrame {
 		});
 		
 		JComboBox ApplyLfoCombo = new JComboBox();
-		ApplyLfoCombo.setModel(new DefaultComboBoxModel(new String[] {"Oscillator1 Frequency", "Oscillator1 Phase", "Oscillator2 Frequency", "Oscillator2 Phase", "Filter1 Frequency", "Filter2 Frequency", "MasterVolume"}));
+		ApplyLfoCombo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox)e.getSource();
+				lfo.setLfoWaveSel(cb.getSelectedItem().toString());
+			}
+		});
+		ApplyLfoCombo.setModel(new DefaultComboBoxModel(new String[] {"Oscillator1Frequency", "Oscillator1Phase", "Oscillator2Frequency", "Oscillator2Phase", "Filter1Frequency", "Filter2Frequency", "MasterVolume"}));
 		
 		JSlider LfoFrequencySlider = new JSlider(LFO_MIN_FREQ, LFO_MAX_FREQ);
 		LfoFrequencySlider.addChangeListener(new ChangeListener() {
@@ -520,22 +518,22 @@ public class GUI extends JFrame {
 		JLabel lblHigh = new JLabel("High");
 		lblHigh.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JSlider EqHighSlider = new JSlider();
+		JSlider EqHighSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
 		EqHighSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();	
-				eq.setHighFreq((float)source.getValue());
+				eq.setHighFreq((float)source.getValue()/100);
 			}
 		});
 		
 		JLabel lblMid = new JLabel("Gain");
 		lblMid.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JSlider EqHighGainSlider = new JSlider();
+		JSlider EqHighGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
 		EqHighGainSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();	
-				eq.setHighGain((float)source.getValue());
+				eq.setHighGain((float)source.getValue()/10);
 			}
 		});
 		
@@ -606,19 +604,19 @@ public class GUI extends JFrame {
 		JLabel lblNewLabel = new JLabel("Gain");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JSlider EqLowSlider = new JSlider();
+		JSlider EqLowSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
 		EqLowSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();	
-				eq.setLowFreq((float)source.getValue());
+				eq.setLowFreq((float)source.getValue()/100);
 			}
 		});
 		
-		JSlider EqLowGainSlider = new JSlider();
+		JSlider EqLowGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
 		EqLowGainSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();	
-				eq.setLowGain((float)source.getValue());
+				eq.setLowGain((float)source.getValue()/10);
 			}
 		});
 		GroupLayout gl_EqPanel = new GroupLayout(EqPanel);
