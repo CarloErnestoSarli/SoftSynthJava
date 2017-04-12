@@ -13,6 +13,10 @@ public class EQ {
 	protected EQ(){	
 		high = BiquadFilter.Type.HIGH_SHELF;
 		low = BiquadFilter.Type.LOW_SHELF;
+		m_lowFreq = 0.33f; 
+		m_highFreq = 0.33f;
+		m_lowGain = 0.5f;
+		m_highGain = 0.5f;
 	}
 	
 	public static EQ getEQ(){

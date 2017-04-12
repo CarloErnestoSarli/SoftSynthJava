@@ -1,5 +1,7 @@
 package source;
 
+
+import net.beadsproject.beads.ugens.Function;
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.BiquadFilter;
 import net.beadsproject.beads.ugens.Envelope;
@@ -64,6 +66,7 @@ public class Synthesizer {
 	Gain delayGain2;
 	Gain eqGain;
 	
+	
 	public void initSynth(){
 		
 		gui = new GUI();
@@ -86,11 +89,10 @@ public class Synthesizer {
 		Osc2Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
 		
 		lfoGlide = new Glide(audio.getAudioContext(), lfo.MIN_FREQ);
+		lfoWave = new WavePlayer(audio.getAudioContext(), lfo.MIN_FREQ, lfo.getLfoSine());
 		
 		Osc1Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
 		Osc2Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
-		
-		lfoWave = new WavePlayer(audio.getAudioContext(), lfo.MIN_FREQ, lfo.getLfoSine());
 		
 		filter1 = new BiquadFilter(audio.getAudioContext(), 2);
 		filter2 = new BiquadFilter(audio.getAudioContext(), 2);
@@ -155,6 +157,7 @@ public class Synthesizer {
 	    high.addInput(masterGain);
 	    
 		audio.getAudioContext().out.addInput(panner);
+		audio.getAudioContext().out.addDependent(filterEnvelope);
 		audio.getAudioContext().start();
 		
 	}
@@ -204,6 +207,9 @@ public class Synthesizer {
 			low.setFrequency(eq.getLowFreq());
 			high.setGain(eq.getHighGain());
 			low.setGain(eq.getLowGain());
+			
+	
+			
 			/*
 			//0.02HZ to 20HZ
 			lfoWave.setFrequency(arg0);
@@ -219,9 +225,7 @@ public class Synthesizer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			//lfo.controlElement(Osc1Glide, lfoWave);
-			
+
 			
 			gui.volumeBars(master.getMasterVolume(), master.getPannerPosition());
 			//gui.volumeBarsReset();
@@ -233,7 +237,6 @@ public class Synthesizer {
 			fil2Gain.setGain(master.getFil2Gain());
 			filMix.setGain(master.getFilMix());
 			panner.setPos(master.getPannerPosition());
-			
 			
 			
 		}
