@@ -88,8 +88,8 @@ public class Synthesizer {
 		Osc1Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
 		Osc2Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
 		
-		lfoGlide = new Glide(audio.getAudioContext(), lfo.MIN_FREQ);
-		lfoWave = new WavePlayer(audio.getAudioContext(), lfo.MIN_FREQ, lfo.getLfoSine());
+		lfoGlide = lfo.getLfoGlide();
+		lfoWave = lfo.getLfoWave();
 		
 		Osc1Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
 		Osc2Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
@@ -157,7 +157,6 @@ public class Synthesizer {
 	    high.addInput(masterGain);
 	    
 		audio.getAudioContext().out.addInput(panner);
-		audio.getAudioContext().out.addDependent(filterEnvelope);
 		audio.getAudioContext().start();
 		
 	}
@@ -238,6 +237,7 @@ public class Synthesizer {
 			filMix.setGain(master.getFilMix());
 			panner.setPos(master.getPannerPosition());
 			
+			//lfo.controlElement(panner);
 			
 		}
 

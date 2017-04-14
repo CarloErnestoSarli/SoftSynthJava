@@ -10,6 +10,8 @@ import net.beadsproject.beads.core.AudioContext;
 import net.beadsproject.beads.core.UGen;
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.WavePlayer;
+import views.Components;
+import views.GUI;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -20,6 +22,7 @@ public class Settings {
 
 	/** The settings. */
 	private static Settings settings = null;
+	
 
 	/** The m osc 1 freq. */
 	private float m_Osc1Freq;
@@ -91,6 +94,7 @@ public class Settings {
 	 */
 	public void setOsc1Freq(float freq) {
 		m_Osc1Freq = freq;
+		
 	}
 
 	/**
@@ -215,8 +219,9 @@ public class Settings {
 	 * @return the osc 1 freq
 	 */
 	public float getOsc1Freq() {
-
+		
 		return m_Osc1Freq;
+		
 	}
 
 	/**

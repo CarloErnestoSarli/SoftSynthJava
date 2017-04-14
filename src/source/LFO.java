@@ -6,6 +6,7 @@ import net.beadsproject.beads.ugens.BiquadFilter;
 import net.beadsproject.beads.ugens.Function;
 import net.beadsproject.beads.ugens.Gain;
 import net.beadsproject.beads.ugens.Glide;
+import net.beadsproject.beads.ugens.Panner;
 import net.beadsproject.beads.ugens.WavePlayer;
 import java.util.HashMap;
 
@@ -20,6 +21,7 @@ public class LFO {
 
 	private Buffer lfoSine, lfoSquare, lfoTriangle, lfoSaw;
 	private float m_lfoFrequency;
+	private float m_lfoAmplitude;
 	private String m_lfoWaveSel;
 	private boolean isBusy;
 	
@@ -27,7 +29,7 @@ public class LFO {
 
 	Glide lfoGlide;
 
-	WavePlayer lfoWave;
+	WavePlayer lfoWave  = new WavePlayer(audio.getAudioContext(), m_lfoFrequency, lfoSine);;
 
 	protected LFO() {
 		
@@ -89,23 +91,28 @@ public class LFO {
 		 }
 	};
 	
+	Function pannerPosLfo = new Function(lfoWave) { 
+
+		 public float calculate() { // set the filter cutoff to oscillate between 1500Hz // and 2500Hz 
+			 return (x[0] * 1.0f) + (-1.0f);
+		 }
+	};
+	
 	public void controlElement(UGen gen) {
-		if (lfoControlled.get(gen)) {
-			removeElement(gen, lfoWave);
-		}
+		//if (lfoControlled.get(gen)) {
+			//removeElement(gen, lfoWave);
+		//}
 		if(gen instanceof WavePlayer){
-			((WavePlayer) gen).setFrequency(oscFrequencyLfo);
-			isBusy = true;
-			lfoControlled.put(gen, isBusy);
+			((WavePlayer) gen).setFrequency(oscFrequencyLfo);		
 		}else if(gen instanceof BiquadFilter){
 			((BiquadFilter) gen).setFrequency(filterFrequencyLfo);
-			isBusy = true;
-			lfoControlled.put(gen, isBusy);
 		}else if(gen instanceof Gain){
 			((Gain) gen).setGain(volumeGainLfo);
-			isBusy = true;
-			lfoControlled.put(gen, isBusy);
-		}	
+		}else if (gen instanceof Panner){
+			((Panner) gen).setPos(lfoWave);
+		}
+		//isBusy = true;
+		//lfoControlled.put(gen, isBusy);
 	}
 
 	public void removeElement(UGen gen, WavePlayer lfo) {
@@ -128,6 +135,9 @@ public class LFO {
 
 	public void setLfoWaveSel(String wave) {
 		m_lfoWaveSel = wave;
+	}
+	public void setLfoAmplitude(float ampl){
+		m_lfoAmplitude = ampl;
 	}
 
 	public float getLfoFrq() {
@@ -155,5 +165,10 @@ public class LFO {
 		}
 	};
 	*/
+
+	public float getLfoAmplitude() {
+		// TODO Auto-generated method stub
+		return m_lfoAmplitude;
+	}
 	 
 }
