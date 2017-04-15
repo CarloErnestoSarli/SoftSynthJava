@@ -12,10 +12,12 @@ import net.beadsproject.beads.ugens.TapIn;
 import net.beadsproject.beads.ugens.TapOut;
 import net.beadsproject.beads.ugens.WavePlayer;
 import views.GUI;
+import views.VirtualKeyboard;
 
 public class Synthesizer {
 	
 	GUI gui;
+	VirtualKeyboard key;
 	
 	
 	Audio audio;
@@ -71,6 +73,9 @@ public class Synthesizer {
 		
 		gui = new GUI();
 		gui.setVisible(true);
+		
+		key = new VirtualKeyboard();
+		key.setVisible(true);
 		
 		audio = Audio.getAudio();
 		settings = Settings.getSettings();
@@ -243,15 +248,6 @@ public class Synthesizer {
 
 	}
 	
-	private float pitchToFrequency(int midiPitch)
-	{
-		/*
-		 *  MIDI pitch number to frequency conversion equation from
-		 *  http://newt.phys.unsw.edu.au/jw/notes.html
-		 *  fn  =  2^(n/12)*440 Hz.
-		 */
-		double exponent = (midiPitch - 69.0) / 12.0;
-		return (float)(Math.pow(2, exponent) * 440.0f);
-	}
+	
 
 }

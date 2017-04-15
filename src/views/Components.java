@@ -13,7 +13,7 @@ import source.Settings;
 
 public class Components {
 
-	private static Components comp = null;
+	//private static Components comp = null;
 
 	Settings settings = Settings.getSettings();
 	LFO lfo = LFO.getLfo();
@@ -65,7 +65,7 @@ public class Components {
 	private JSlider EqLowSlider;
 	private JSlider EqLowGainSlider;
 
-	protected Components() {
+	public Components() {
 
 		Osc1FreqSlider = new JSlider(SwingConstants.HORIZONTAL, MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
 		Osc1PhaseSlider = new JSlider(0, 300, 150);
@@ -102,7 +102,7 @@ public class Components {
 	public void updateComponents(){
 		
 		Osc1WvSel.setSelectedItem(settings.getWave1Sel());
-		Osc2WvSel.setSelectedItem(settings.getWave1Sel());
+		Osc2WvSel.setSelectedItem(settings.getWave2Sel());
 		Osc1PhaseSlider.setValue((int) settings.getDelayIn1Time()); 
 		Osc2PhaseSlider.setValue((int) settings.getDelayIn2Time()); 
 		AddOsc1ToFilter.setSelected(settings.getFilterWave1());
@@ -134,14 +134,14 @@ public class Components {
 		  EqLowGainSlider;
 		*/
 	}
-
+	/*
 	public static Components getComp() {
 		if (comp == null) {
 			comp = new Components();
 		}
 		return comp;
 	}
-
+	*/
 	public JRadioButton getAddOsc1ToFilter() {
 		return AddOsc1ToFilter;
 	}

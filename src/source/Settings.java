@@ -94,7 +94,7 @@ public class Settings {
 	 */
 	public void setOsc1Freq(float freq) {
 		m_Osc1Freq = freq;
-		
+		System.out.println(freq);
 	}
 
 	/**
