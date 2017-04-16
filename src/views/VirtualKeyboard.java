@@ -21,6 +21,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VirtualKeyboard extends JFrame {
 	
@@ -55,7 +57,7 @@ public class VirtualKeyboard extends JFrame {
 	public VirtualKeyboard() {
 		setTitle("Keyboard");
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1300, 230);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -143,11 +145,22 @@ public class VirtualKeyboard extends JFrame {
 		contentPane.add(AsKey);
 		
 		JButton CKey = new JButton("");
-		CKey.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		CKey.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
 				int assignedNote = 0 + (12* selectRightOctave());
 				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				settings.setPlay(true);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				settings.setPlay(false);
+			}
+		});
+		CKey.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		CKey.setContentAreaFilled(false);

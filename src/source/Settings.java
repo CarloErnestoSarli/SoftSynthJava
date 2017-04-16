@@ -60,6 +60,8 @@ public class Settings {
 
 	/** The Constant START_FREQ. */
 	public static final float START_FREQ = 0.0f;
+	
+	private boolean m_play;
 
 	/**
 	 * Instantiates a new settings.
@@ -348,6 +350,14 @@ public class Settings {
 	public float getWave2Phase() {
 		
 		return m_Wave2Phase;
+	}
+
+	public boolean getPlay() {
+		return m_play;
+	}
+
+	public void setPlay(boolean m_play) {
+		this.m_play = m_play;
 	}
 
 	

@@ -4,10 +4,12 @@ package source;
 import net.beadsproject.beads.ugens.Function;
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.BiquadFilter;
+import net.beadsproject.beads.ugens.Compressor;
 import net.beadsproject.beads.ugens.Envelope;
 import net.beadsproject.beads.ugens.Gain;
 import net.beadsproject.beads.ugens.Glide;
 import net.beadsproject.beads.ugens.Panner;
+import net.beadsproject.beads.ugens.Reverb;
 import net.beadsproject.beads.ugens.TapIn;
 import net.beadsproject.beads.ugens.TapOut;
 import net.beadsproject.beads.ugens.WavePlayer;
@@ -17,8 +19,6 @@ import views.VirtualKeyboard;
 public class Synthesizer {
 	
 	GUI gui;
-	VirtualKeyboard key;
-	
 	
 	Audio audio;
 	Settings settings;
@@ -27,6 +27,8 @@ public class Synthesizer {
 	ADSR adsr;
 	LFO lfo;
 	EQ eq;
+	ReverbComponent rev;
+	CompressorComponent comp;
 	
 	Oscillator Osc1;
 	Oscillator Osc2;
@@ -55,6 +57,10 @@ public class Synthesizer {
     private TapOut delayOut1, delayOut2;
 	
 	Panner panner;
+	
+	Reverb reverb;
+	
+	Compressor compressor;
 
 	Gain masterGain;
 	
@@ -67,6 +73,8 @@ public class Synthesizer {
 	Gain delayGain1;
 	Gain delayGain2;
 	Gain eqGain;
+	Gain reverbGain;
+	Gain compressorGain;
 	
 	
 	public void initSynth(){
@@ -74,14 +82,13 @@ public class Synthesizer {
 		gui = new GUI();
 		gui.setVisible(true);
 		
-		key = new VirtualKeyboard();
-		key.setVisible(true);
-		
 		audio = Audio.getAudio();
 		settings = Settings.getSettings();
 		master= Master.getMaster();
 		lfo = LFO.getLfo();
 		eq = EQ.getEQ();
+		rev = ReverbComponent.getReverbComponent();
+		comp = CompressorComponent.getCompressorComponent();
 		
 		Osc1 = new Oscillator();
 		Osc2 = new Oscillator();
@@ -123,8 +130,13 @@ public class Synthesizer {
 		fil1Gain = new Gain(audio.getAudioContext(), 1);
 		fil2Gain = new Gain(audio.getAudioContext(), 1);
 		eqGain = new Gain(audio.getAudioContext(), 1);
+		reverbGain = new Gain(audio.getAudioContext(), 1);
+		compressorGain = new Gain(audio.getAudioContext(), 1);
 		
 		panner = new Panner(audio.getAudioContext());
+		
+		reverb = rev.getReverb();
+		compressor = comp.getCompressor();
 		
 		masterGain = new Gain(audio.getAudioContext(), 1, gainEnvelope);
 		
@@ -145,7 +157,10 @@ public class Synthesizer {
 		masterGain.addInput(filMix);
 		eqGain.addInput(low);
 		eqGain.addInput(high);
-		panner.addInput(eqGain);
+		reverbGain.addInput(reverb);
+		compressorGain.addInput(compressor);
+		
+		panner.addInput(compressorGain);
 		
 		oscMix.addInput(delayGain1);
 		oscMix.addInput(delayGain2);
@@ -160,6 +175,10 @@ public class Synthesizer {
 	    
 	    low.addInput(masterGain);
 	    high.addInput(masterGain);
+	    
+	    reverb.addInput(eqGain);
+	    compressor.addInput(reverbGain);
+	    
 	    
 		audio.getAudioContext().out.addInput(panner);
 		audio.getAudioContext().start();
@@ -241,6 +260,16 @@ public class Synthesizer {
 			fil2Gain.setGain(master.getFil2Gain());
 			filMix.setGain(master.getFilMix());
 			panner.setPos(master.getPannerPosition());
+			
+			reverb.setDamping(rev.getDamping());
+			reverb.setSize(rev.getSize());
+			reverb.setEarlyReflectionsLevel(rev.getEarlyReflection()/10);
+			reverb.setLateReverbLevel(rev.getLateReflection()/10);
+			
+			compressor.setThreshold(comp.getThreshold());
+			compressor.setRatio(comp.getRatio());
+			compressor.setAttack(comp.getAttack());
+			compressor.setDecay(comp.getDecay());
 			
 			//lfo.controlElement(panner);
 			

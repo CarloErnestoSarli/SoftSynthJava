@@ -7,18 +7,20 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
 import source.ADSR;
+import source.EQ;
 import source.LFO;
 import source.Master;
 import source.Settings;
 
 public class Components {
 
-	//private static Components comp = null;
+	// private static Components comp = null;
 
 	Settings settings = Settings.getSettings();
 	LFO lfo = LFO.getLfo();
 	ADSR adsr = ADSR.getADSR();
 	Master master = Master.getMaster();
+	EQ eq = EQ.getEQ();
 
 	private final int MIN_OSC_FREQ = 1635;
 	private final int MAX_OSC_FREQ = 100000;
@@ -99,49 +101,43 @@ public class Components {
 		EqLowGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
 	}
 
-	public void updateComponents(){
-		
+	public void updateComponents() {
+
 		Osc1WvSel.setSelectedItem(settings.getWave1Sel());
 		Osc2WvSel.setSelectedItem(settings.getWave2Sel());
-		Osc1PhaseSlider.setValue((int) settings.getDelayIn1Time()); 
-		Osc2PhaseSlider.setValue((int) settings.getDelayIn2Time()); 
+		Osc1PhaseSlider.setValue((int) settings.getDelayIn1Time());
+		Osc2PhaseSlider.setValue((int) settings.getDelayIn2Time());
 		AddOsc1ToFilter.setSelected(settings.getFilterWave1());
 		AddOsc2ToFilter.setSelected(settings.getFilterWave2());
 		Filter1Combo.setSelectedItem(settings.getFilter1Sel());
 		Filter2Combo.setSelectedItem(settings.getFilter2Sel());
 		LfoWaveCombo.setSelectedItem(lfo.getLfoWaveSel());
-		//ApplyLfoCombo.setSelectedItem(lfo.get);;
-		  
-		  
-		 /*
-		  Filter1FreqSlider;
-		  Filter2FreqSlider;
-		  LfoFrequencySlider;
-		  LfoAmplitudeSlider;
-		  PanningSlider;
-		  FilterMixSlider;
-		  OscMixSlider;
-		  OscGainSlider;
-		  MasterVolumeSlider;
-		  FilterGainSlider;
-		  AttackSlider;
-		  ReleaseSlider;
-		  SustainSlider;
-		  DecaySlider;
-		  EqHighSlider;
-		  EqHighGainSlider;
-		  EqLowSlider;
-		  EqLowGainSlider;
-		*/
+		// ApplyLfoCombo.setSelectedItem(lfo.get);;
+		Filter1FreqSlider.setValue((int) settings.getFilter1Freq());
+		Filter2FreqSlider.setValue((int) settings.getFilter2Freq());
+		LfoFrequencySlider.setValue((int) lfo.getLfoFrq());
+		LfoAmplitudeSlider.setValue((int) lfo.getLfoAmplitude());
+		PanningSlider.setValue((int) master.getPannerPosition());
+		FilterMixSlider.setValue((int) master.getFil1Gain());
+		OscMixSlider.setValue((int) master.getOsc1Gain());
+		OscGainSlider.setValue((int) master.getOscMix());
+		MasterVolumeSlider.setValue((int) master.getMasterVolume());
+		FilterGainSlider.setValue((int) master.getFilMix());
+		AttackSlider.setValue((int) adsr.getAttackTime());
+		ReleaseSlider.setValue((int) adsr.getReleaseTime());
+		SustainSlider.setValue((int) adsr.getSustainTime());
+		DecaySlider.setValue((int) adsr.getDecayTime());
+		EqHighSlider.setValue((int) eq.getHighFreq());
+		EqHighGainSlider.setValue((int) eq.getHighGain());
+		EqLowSlider.setValue((int) eq.getLowFreq());
+		EqLowGainSlider.setValue((int) eq.getLowGain());
+
 	}
+
 	/*
-	public static Components getComp() {
-		if (comp == null) {
-			comp = new Components();
-		}
-		return comp;
-	}
-	*/
+	 * public static Components getComp() { if (comp == null) { comp = new
+	 * Components(); } return comp; }
+	 */
 	public JRadioButton getAddOsc1ToFilter() {
 		return AddOsc1ToFilter;
 	}
