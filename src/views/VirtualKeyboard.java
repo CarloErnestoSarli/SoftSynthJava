@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
+import source.FilterSettings;
 import source.Keyboard;
+import source.OscillatorSettings;
 import source.Settings;
 
 import javax.swing.JButton;
@@ -28,6 +30,8 @@ public class VirtualKeyboard extends JFrame {
 	
 	Keyboard keyboard = new Keyboard();
 	Settings settings = Settings.getSettings();
+	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
+	
 	private JPanel contentPane;
 	
 	
@@ -68,8 +72,8 @@ public class VirtualKeyboard extends JFrame {
 		CsKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int assignedNote = 1 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		CsKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -84,8 +88,8 @@ public class VirtualKeyboard extends JFrame {
 		DsKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 3 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		DsKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -100,8 +104,8 @@ public class VirtualKeyboard extends JFrame {
 		FsKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 6 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		FsKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -116,8 +120,8 @@ public class VirtualKeyboard extends JFrame {
 		GsKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 8 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		GsKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -132,8 +136,8 @@ public class VirtualKeyboard extends JFrame {
 		AsKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 10 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		AsKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -149,8 +153,8 @@ public class VirtualKeyboard extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				int assignedNote = 0 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 				settings.setPlay(true);
 			}
 			@Override
@@ -176,8 +180,8 @@ public class VirtualKeyboard extends JFrame {
 		Cs1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 13 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		Cs1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -192,8 +196,8 @@ public class VirtualKeyboard extends JFrame {
 		Ds1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 15 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		Ds1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -208,8 +212,8 @@ public class VirtualKeyboard extends JFrame {
 		Fs1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 18 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		Fs1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -224,8 +228,8 @@ public class VirtualKeyboard extends JFrame {
 		Gs1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 20 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		Gs1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -240,8 +244,8 @@ public class VirtualKeyboard extends JFrame {
 		As1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 22 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		As1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -256,8 +260,8 @@ public class VirtualKeyboard extends JFrame {
 		Cs2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 25 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		Cs2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -272,8 +276,8 @@ public class VirtualKeyboard extends JFrame {
 		Ds2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 27 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		Ds2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -288,8 +292,8 @@ public class VirtualKeyboard extends JFrame {
 		Fs2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 30 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		Fs2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -304,8 +308,8 @@ public class VirtualKeyboard extends JFrame {
 		Gs2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 32 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		Gs2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -320,8 +324,8 @@ public class VirtualKeyboard extends JFrame {
 		As2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 34 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		As2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/BlackKey.jpg")));
@@ -336,8 +340,8 @@ public class VirtualKeyboard extends JFrame {
 		DKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 2 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		DKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -351,8 +355,8 @@ public class VirtualKeyboard extends JFrame {
 		FKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 5 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		FKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -366,8 +370,8 @@ public class VirtualKeyboard extends JFrame {
 		EKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 4 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		EKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -381,8 +385,8 @@ public class VirtualKeyboard extends JFrame {
 		AKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 9 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		AKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -396,8 +400,8 @@ public class VirtualKeyboard extends JFrame {
 		GKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 7 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		GKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -411,8 +415,8 @@ public class VirtualKeyboard extends JFrame {
 		C1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 12 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		C1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -426,8 +430,8 @@ public class VirtualKeyboard extends JFrame {
 		BKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 11 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		BKey.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -441,8 +445,8 @@ public class VirtualKeyboard extends JFrame {
 		E1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 16 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		E1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -456,8 +460,8 @@ public class VirtualKeyboard extends JFrame {
 		D1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 14 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		D1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -471,8 +475,8 @@ public class VirtualKeyboard extends JFrame {
 		G1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 19 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		G1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -486,8 +490,8 @@ public class VirtualKeyboard extends JFrame {
 		F1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 17 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		F1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -501,8 +505,8 @@ public class VirtualKeyboard extends JFrame {
 		B1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 23 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		B1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -516,8 +520,8 @@ public class VirtualKeyboard extends JFrame {
 		A1Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 21 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		A1Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -531,8 +535,8 @@ public class VirtualKeyboard extends JFrame {
 		D2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 26 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		D2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -546,8 +550,8 @@ public class VirtualKeyboard extends JFrame {
 		C2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 24 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		C2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -561,8 +565,8 @@ public class VirtualKeyboard extends JFrame {
 		F2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 29 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		F2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -576,8 +580,8 @@ public class VirtualKeyboard extends JFrame {
 		E2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 28 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		E2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -591,8 +595,8 @@ public class VirtualKeyboard extends JFrame {
 		A2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 33 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		A2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -606,8 +610,8 @@ public class VirtualKeyboard extends JFrame {
 		G2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int assignedNote = 31 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		G2Key.setIcon(new ImageIcon(VirtualKeyboard.class.getResource("/Pics/WhiteKey.jpg")));
@@ -624,8 +628,8 @@ public class VirtualKeyboard extends JFrame {
 		B2Key.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int assignedNote = 35 + (12* selectRightOctave());
-				settings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
-				settings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc1Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
+				oscSettings.setOsc2Freq(keyboard.pitchToFrequency(keyboard.getMidifromNote(keyboard.getNote(assignedNote))));
 			}
 		});
 		B2Key.setBackground(Color.BLACK);

@@ -29,11 +29,9 @@ public class LFO {
 
 	Glide lfoGlide;
 
-	WavePlayer lfoWave  = new WavePlayer(audio.getAudioContext(), m_lfoFrequency, lfoSine);;
+	WavePlayer lfoWave; // = new WavePlayer(audio.getAudioContext(), MIN_FREQ, lfoSine);;
 
 	protected LFO() {
-		
-		lfoWave = new WavePlayer(audio.getAudioContext(), m_lfoFrequency, lfoSine);
 		
 		lfoSine = Buffer.SINE;
 		lfoSquare = Buffer.SQUARE;
@@ -41,10 +39,12 @@ public class LFO {
 		lfoTriangle = Buffer.TRIANGLE;
 
 		m_lfoWaveSel = "sine";
-		// m_lfoFrequency = MIN_FREQ;
+		m_lfoFrequency = MIN_FREQ;
 
 		lfoGlide = new Glide(audio.getAudioContext(), m_lfoFrequency);
 		// lfoWave = new WavePlayer(audio.getAudioContext(), MIN_FREQ, lfoSine);
+		
+		lfoWave = new WavePlayer(audio.getAudioContext(), m_lfoFrequency, lfoSine);
 
 	}
 
@@ -69,7 +69,7 @@ public class LFO {
 			return lfoSine;
 		}
 	}
-	
+	/*
 	Function oscFrequencyLfo = new Function(lfoWave) { 
 		
 		 public float calculate() { // set the filter cutoff to oscillate between 1500Hz // and 2500Hz 
@@ -97,7 +97,7 @@ public class LFO {
 			 return (x[0] * 1.0f) + (-1.0f);
 		 }
 	};
-	
+	*/
 	public void controlElement(UGen gen) {
 		//if (lfoControlled.get(gen)) {
 			//removeElement(gen, lfoWave);

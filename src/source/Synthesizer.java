@@ -29,23 +29,23 @@ public class Synthesizer {
 	EQ eq;
 	ReverbComponent rev;
 	CompressorComponent comp;
-	
-	Oscillator Osc1;
-	Oscillator Osc2;
+	Oscillator osc;
+	Reverb reverb;
+	Compressor compressor;
+	OscillatorSettings oscSettings;
+	FilterSettings filSettings;
 	
 	Glide Osc1Glide;
 	Glide Osc2Glide;
-	
 	Glide lfoGlide;
 		
 	WavePlayer Osc1Wave;
 	WavePlayer Osc2Wave;
-	
 	WavePlayer lfoWave;
 	
 	BiquadFilter filter1;
 	BiquadFilter filter2;
-	
+
 	BiquadFilter low;
 	BiquadFilter high;
 	
@@ -53,17 +53,10 @@ public class Synthesizer {
 	
 	WavePlayer modulator;
 	
- 	private TapIn delayIn1, delayIn2;
-    private TapOut delayOut1, delayOut2;
-	
-	Panner panner;
-	
-	Reverb reverb;
-	
-	Compressor compressor;
+ 	TapIn delayIn1, delayIn2;
+    TapOut delayOut1, delayOut2;
 
 	Gain masterGain;
-	
 	Gain oscMix;
 	Gain osc1Gain;
 	Gain osc2Gain;
@@ -75,6 +68,7 @@ public class Synthesizer {
 	Gain eqGain;
 	Gain reverbGain;
 	Gain compressorGain;
+	Panner panner;
 	
 	
 	public void initSynth(){
@@ -89,40 +83,46 @@ public class Synthesizer {
 		eq = EQ.getEQ();
 		rev = ReverbComponent.getReverbComponent();
 		comp = CompressorComponent.getCompressorComponent();
-		
-		Osc1 = new Oscillator();
-		Osc2 = new Oscillator();
-		
-		filter = new Filter();
-		
+		osc = new Oscillator();
+		filter = new Filter();	
 		adsr = ADSR.getADSR();
+		oscSettings = OscillatorSettings.getOscillatorSettings();
+		filSettings = FilterSettings.getFilterSettings();
+		 
 		
-		Osc1Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
-		Osc2Glide = new Glide(audio.getAudioContext(),settings.START_FREQ);
+		//--------------------------------------------OSC-------------------------------------
+		Osc1Glide = osc.getOsc1Glide();
+		Osc2Glide = osc.getOsc2Glide();
+		Osc1Wave = osc.getOsc1Wave();
+		Osc2Wave = osc.getOsc2Wave();
+		delayIn1 = osc.getDelayIn1();
+	    delayIn2 = osc.getDelayIn2();  
+	    delayOut1 = osc.getDelayOut1();
+	    delayOut2 = osc.getDelayOut2();
+	    Osc1Wave.setFrequency(Osc1Glide);
+		Osc2Wave.setFrequency(Osc2Glide);
 		
-		lfoGlide = lfo.getLfoGlide();
-		lfoWave = lfo.getLfoWave();
-		
-		Osc1Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
-		Osc2Wave = new WavePlayer(audio.getAudioContext(),settings.START_FREQ, Osc1.getSine());
-		
+		//--------------------------------------------FIL-------------------------------------
 		filter1 = new BiquadFilter(audio.getAudioContext(), 2);
 		filter2 = new BiquadFilter(audio.getAudioContext(), 2);
-		
 		low = new BiquadFilter(audio.getAudioContext(), 2);
 		high = new BiquadFilter(audio.getAudioContext(), 2);
 		
 		gainEnvelope = new Envelope(audio.getAudioContext(),adsr.START_TIME );
 				
-	    delayIn1 = new TapIn(audio.getAudioContext(), 500.0f);
-	    delayIn2 = new TapIn(audio.getAudioContext(), 500.0f);
 	    
-	    delayOut1 = new TapOut(audio.getAudioContext(), delayIn1, 125.0f);
-	    delayOut2 = new TapOut(audio.getAudioContext(), delayIn2, 125.0f);
-	    delayGain1 = new Gain(audio.getAudioContext(), 1, master.getOsc1Gain());
-	    delayGain2 = new Gain(audio.getAudioContext(), 1, master.getOsc2Gain());
-	    
+		//--------------------------------------------LFO-------------------------------------
+	    lfoGlide = lfo.getLfoGlide();
+		lfoWave = lfo.getLfoWave();
+		lfoWave.setFrequency(lfoGlide);
 		
+		//--------------------------------------------REV-------------------------------------
+		reverb = rev.getReverb();
+		
+		//--------------------------------------------COM-------------------------------------
+		compressor = comp.getCompressor();
+	    
+		//--------------------------------------------GAIN------------------------------------
 		oscMix = new Gain(audio.getAudioContext(), 1);
 		osc1Gain = new Gain(audio.getAudioContext(), 1);
 		osc2Gain = new Gain(audio.getAudioContext(), 1);
@@ -132,19 +132,16 @@ public class Synthesizer {
 		eqGain = new Gain(audio.getAudioContext(), 1);
 		reverbGain = new Gain(audio.getAudioContext(), 1);
 		compressorGain = new Gain(audio.getAudioContext(), 1);
+		masterGain = new Gain(audio.getAudioContext(), 1, gainEnvelope);
+		delayGain1 = new Gain(audio.getAudioContext(), 1, master.getOsc1Gain());
+	    delayGain2 = new Gain(audio.getAudioContext(), 1, master.getOsc2Gain());
 		
+		//--------------------------------------------PAN-------------------------------------
 		panner = new Panner(audio.getAudioContext());
 		
-		reverb = rev.getReverb();
-		compressor = comp.getCompressor();
 		
-		masterGain = new Gain(audio.getAudioContext(), 1, gainEnvelope);
 		
-		Osc1Wave.setFrequency(Osc1Glide);
-		Osc2Wave.setFrequency(Osc2Glide);
-		
-		lfoWave.setFrequency(lfoGlide);
-		
+		//--------------------------------------------I/O-------------------------------------
 		osc1Gain.addInput(Osc1Wave);
 		osc2Gain.addInput(Osc2Wave);
 		oscMix.addInput(osc1Gain);
@@ -179,7 +176,7 @@ public class Synthesizer {
 	    reverb.addInput(eqGain);
 	    compressor.addInput(reverbGain);
 	    
-	    
+	  //--------------------------------------------AC--------------------------------------
 		audio.getAudioContext().out.addInput(panner);
 		audio.getAudioContext().start();
 		
@@ -189,24 +186,24 @@ public class Synthesizer {
 		
 		while(true){
 			
-			Osc1Wave.setBuffer(Osc1.SelectWave(settings.getWave1Sel()));
-			Osc2Wave.setBuffer(Osc2.SelectWave(settings.getWave2Sel()));
+			Osc1Wave.setBuffer(osc.SelectWave(oscSettings.getWave1Sel()));
+			Osc2Wave.setBuffer(osc.SelectWave(oscSettings.getWave2Sel()));
 			
 			lfoWave.setBuffer(lfo.SelectLfoWave(lfo.getLfoWaveSel()));
 			
-			filter1.setType(filter.SelectFilter(settings.getFilter1Sel()));
-			filter2.setType(filter.SelectFilter(settings.getFilter2Sel()));
+			filter1.setType(filter.SelectFilter(filSettings.getFilter1Sel()));
+			filter2.setType(filter.SelectFilter(filSettings.getFilter2Sel()));
 			
 			high.setType(eq.getHigh());
 			low.setType(eq.getLow());
 			
-			Osc1Glide.setValue(settings.getOsc1Freq());
-			Osc2Glide.setValue(settings.getOsc2Freq());
+			Osc1Glide.setValue(oscSettings.getOsc1Freq());
+			Osc2Glide.setValue(oscSettings.getOsc2Freq());
 			
 			lfoGlide.setValue(lfo.getLfoFrq());
 			
-			delayOut1.setDelay(settings.getDelayIn1Time());
-			delayOut2.setDelay(settings.getDelayIn2Time());
+			delayOut1.setDelay(oscSettings.getDelayIn1Time());
+			delayOut2.setDelay(oscSettings.getDelayIn2Time());
 			
 			
 			// ramp the gain to 0.9f over 500 ms
@@ -220,11 +217,11 @@ public class Synthesizer {
 		    
 		    gainEnvelope.addSegment(0.0f, adsr.getReleaseTime());
 		    
-		    filter.addToFilter1(settings.getFilterWave1(), filter1.containsInput(Osc1Wave), filter1, Osc1Wave);
-		    filter.addToFilter2(settings.getFilterWave2(), filter2.containsInput(Osc2Wave), filter2, Osc2Wave);
+		    filter.addToFilter1(filSettings.getFilterWave1(), filter1.containsInput(Osc1Wave), filter1, Osc1Wave);
+		    filter.addToFilter2(filSettings.getFilterWave2(), filter2.containsInput(Osc2Wave), filter2, Osc2Wave);
 		    
-			filter1.setFrequency(settings.getFilter1Freq());
-			filter2.setFrequency(settings.getFilter2Freq());
+			filter1.setFrequency(filSettings.getFilter1Freq());
+			filter2.setFrequency(filSettings.getFilter2Freq());
 			
 			high.setFrequency(eq.getHighFreq());
 			low.setFrequency(eq.getLowFreq());

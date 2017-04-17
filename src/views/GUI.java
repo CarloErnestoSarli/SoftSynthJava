@@ -62,6 +62,8 @@ public class GUI extends JFrame {
 
 	Audio audio = Audio.getAudio();
 	Settings settings = Settings.getSettings();
+	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
+	FilterSettings filSettings = FilterSettings.getFilterSettings();
 	ADSR adsr = ADSR.getADSR();
 	Master master = Master.getMaster();
 	LFO lfo = LFO.getLfo();
@@ -334,7 +336,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				settings.setDelayIn1Time(source.getValue());
+				oscSettings.setDelayIn1Time(source.getValue());
 			}
 		});
 
@@ -347,7 +349,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				settings.setOsc2Freq((float) source.getValue() / 100);
+				oscSettings.setOsc2Freq((float) source.getValue() / 100);
 			}
 		});
 
@@ -356,7 +358,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				settings.setDelayIn2Time(source.getValue());
+				oscSettings.setDelayIn2Time(source.getValue());
 			}
 		});
 
@@ -365,7 +367,7 @@ public class GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
-				settings.setWave1Sel(cb.getSelectedItem().toString());
+				oscSettings.setWave1Sel(cb.getSelectedItem().toString());
 				System.out.println(cb.getSelectedItem().toString());
 			}
 		});
@@ -378,7 +380,7 @@ public class GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
-				settings.setWave2Sel(cb.getSelectedItem().toString());
+				oscSettings.setWave2Sel(cb.getSelectedItem().toString());
 				System.out.println(cb.getSelectedItem().toString());
 			}
 		});
@@ -389,7 +391,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				settings.setOsc1Freq((float) source.getValue() / 100);
+				oscSettings.setOsc1Freq((float) source.getValue() / 100);
 
 			}
 		});
@@ -400,9 +402,9 @@ public class GUI extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JRadioButton source = (JRadioButton) e.getSource();
 				if (source.isSelected()) {
-					settings.setFilterWave1(true);
+					filSettings.setFilterWave1(true);
 				} else {
-					settings.setFilterWave1(false);
+					filSettings.setFilterWave1(false);
 				}
 			}
 		});
@@ -413,7 +415,7 @@ public class GUI extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				// set filter frequency
-				settings.setFilter1Freq((float) source.getValue() / 100);
+				filSettings.setFilter1Freq((float) source.getValue() / 100);
 			}
 		});
 
@@ -423,9 +425,9 @@ public class GUI extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JRadioButton source = (JRadioButton) e.getSource();
 				if (source.isSelected()) {
-					settings.setFilterWave2(true);
+					filSettings.setFilterWave2(true);
 				} else {
-					settings.setFilterWave2(false);
+					filSettings.setFilterWave2(false);
 				}
 			}
 		});
@@ -436,7 +438,7 @@ public class GUI extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				// set filter gain
-				settings.setFilter2Freq((float) source.getValue() / 100);
+				filSettings.setFilter2Freq((float) source.getValue() / 100);
 			}
 		});
 
@@ -446,7 +448,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
 				// set filter type
-				settings.setFilter1Sel(cb.getSelectedItem().toString());
+				filSettings.setFilter1Sel(cb.getSelectedItem().toString());
 				// System.out.println(cb.getSelectedItem().toString());
 			}
 		});
@@ -459,7 +461,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
 				// set filter type
-				settings.setFilter2Sel(cb.getSelectedItem().toString());
+				filSettings.setFilter2Sel(cb.getSelectedItem().toString());
 				// System.out.println(cb.getSelectedItem().toString());
 			}
 		});

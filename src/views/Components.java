@@ -8,8 +8,10 @@ import javax.swing.SwingConstants;
 
 import source.ADSR;
 import source.EQ;
+import source.FilterSettings;
 import source.LFO;
 import source.Master;
+import source.OscillatorSettings;
 import source.Settings;
 
 public class Components {
@@ -21,6 +23,8 @@ public class Components {
 	ADSR adsr = ADSR.getADSR();
 	Master master = Master.getMaster();
 	EQ eq = EQ.getEQ();
+	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
+	FilterSettings filSettings = FilterSettings.getFilterSettings();
 
 	private final int MIN_OSC_FREQ = 1635;
 	private final int MAX_OSC_FREQ = 100000;
@@ -103,18 +107,18 @@ public class Components {
 
 	public void updateComponents() {
 
-		Osc1WvSel.setSelectedItem(settings.getWave1Sel());
-		Osc2WvSel.setSelectedItem(settings.getWave2Sel());
-		Osc1PhaseSlider.setValue((int) settings.getDelayIn1Time());
-		Osc2PhaseSlider.setValue((int) settings.getDelayIn2Time());
-		AddOsc1ToFilter.setSelected(settings.getFilterWave1());
-		AddOsc2ToFilter.setSelected(settings.getFilterWave2());
-		Filter1Combo.setSelectedItem(settings.getFilter1Sel());
-		Filter2Combo.setSelectedItem(settings.getFilter2Sel());
+		Osc1WvSel.setSelectedItem(oscSettings.getWave1Sel());
+		Osc2WvSel.setSelectedItem(oscSettings.getWave2Sel());
+		Osc1PhaseSlider.setValue((int) oscSettings.getDelayIn1Time());
+		Osc2PhaseSlider.setValue((int) oscSettings.getDelayIn2Time());
+		AddOsc1ToFilter.setSelected(filSettings.getFilterWave1());
+		AddOsc2ToFilter.setSelected(filSettings.getFilterWave2());
+		Filter1Combo.setSelectedItem(filSettings.getFilter1Sel());
+		Filter2Combo.setSelectedItem(filSettings.getFilter2Sel());
 		LfoWaveCombo.setSelectedItem(lfo.getLfoWaveSel());
 		// ApplyLfoCombo.setSelectedItem(lfo.get);;
-		Filter1FreqSlider.setValue((int) settings.getFilter1Freq());
-		Filter2FreqSlider.setValue((int) settings.getFilter2Freq());
+		Filter1FreqSlider.setValue((int) filSettings.getFilter1Freq());
+		Filter2FreqSlider.setValue((int) filSettings.getFilter2Freq());
 		LfoFrequencySlider.setValue((int) lfo.getLfoFrq());
 		LfoAmplitudeSlider.setValue((int) lfo.getLfoAmplitude());
 		PanningSlider.setValue((int) master.getPannerPosition());

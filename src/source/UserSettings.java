@@ -10,6 +10,8 @@ public class UserSettings {
 	ADSR adsr = ADSR.getADSR();
 	LFO lfo = LFO.getLfo();
 	EQ eq = EQ.getEQ();
+	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
+	FilterSettings filSettings = FilterSettings.getFilterSettings();
 
 	// ---------OSC
 	private final String OSC_1_WAVE = "OSC_1_WAVE";
@@ -57,17 +59,17 @@ public class UserSettings {
 	public void saveSettings() {
 
 		// ---------OSC
-		userSettings.put(OSC_1_WAVE, settings.getWave1Sel());
-		userSettings.put(OSC_2_WAVE, settings.getWave2Sel());
-		userSettings.putFloat(OSC_1_PHASE, settings.getDelayIn1Time());
-		userSettings.putFloat(OSC_2_PHASE, settings.getDelayIn2Time());
+		userSettings.put(OSC_1_WAVE, oscSettings.getWave1Sel());
+		userSettings.put(OSC_2_WAVE, oscSettings.getWave2Sel());
+		userSettings.putFloat(OSC_1_PHASE, oscSettings.getDelayIn1Time());
+		userSettings.putFloat(OSC_2_PHASE, oscSettings.getDelayIn2Time());
 		// ---------FILTER
-		userSettings.putBoolean(ADD_FILTER_1, settings.getFilterWave1());
-		userSettings.putBoolean(ADD_FILTER_2, settings.getFilterWave2());
-		userSettings.putFloat(FILTER_1_FREQ, settings.getFilter1Freq());
-		userSettings.putFloat(FILTER_2_FREQ, settings.getFilter2Freq());
-		userSettings.put(FILTER_1_TYPE, settings.getFilter1Sel());
-		userSettings.put(FILTER_2_TYPE, settings.getFilter2Sel());
+		userSettings.putBoolean(ADD_FILTER_1, filSettings.getFilterWave1());
+		userSettings.putBoolean(ADD_FILTER_2, filSettings.getFilterWave2());
+		userSettings.putFloat(FILTER_1_FREQ, filSettings.getFilter1Freq());
+		userSettings.putFloat(FILTER_2_FREQ, filSettings.getFilter2Freq());
+		userSettings.put(FILTER_1_TYPE, filSettings.getFilter1Sel());
+		userSettings.put(FILTER_2_TYPE, filSettings.getFilter2Sel());
 		// ---------LFO
 		userSettings.putFloat(LFO_FREQ, lfo.getLfoFrq());
 		userSettings.putFloat(LFO_AMPL, lfo.getLfoAmplitude());
@@ -98,40 +100,40 @@ public class UserSettings {
 	public void loadSettings() {
 
 		// ---------OSC
-		settings.setWave1Sel(userSettings.get(OSC_1_WAVE, settings.getWave1Sel()));
-		settings.setWave2Sel(userSettings.get(OSC_2_WAVE, settings.getWave2Sel()));
-		settings.setDelayIn1Time(userSettings.getFloat(OSC_1_PHASE, settings.getDelayIn1Time()));
-		settings.setDelayIn2Time(userSettings.getFloat(OSC_2_PHASE, settings.getDelayIn2Time()));
+		oscSettings.setWave1Sel(userSettings.get(OSC_1_WAVE, oscSettings.getWave1Sel()));
+		oscSettings.setWave2Sel(userSettings.get(OSC_2_WAVE, oscSettings.getWave2Sel()));
+		oscSettings.setDelayIn1Time(userSettings.getFloat(OSC_1_PHASE, oscSettings.getDelayIn1Time()));
+		oscSettings.setDelayIn2Time(userSettings.getFloat(OSC_2_PHASE, oscSettings.getDelayIn2Time()));
 		// ---------FILTER
-		userSettings.getBoolean(ADD_FILTER_1, settings.getFilterWave1());
-		userSettings.getBoolean(ADD_FILTER_2, settings.getFilterWave2());
-		userSettings.getFloat(FILTER_1_FREQ, settings.getFilter1Freq());
-		userSettings.getFloat(FILTER_2_FREQ, settings.getFilter2Freq());
-		userSettings.get(FILTER_1_TYPE, settings.getFilter1Sel());
-		userSettings.get(FILTER_2_TYPE, settings.getFilter2Sel());
+		filSettings.setFilterWave1(userSettings.getBoolean(ADD_FILTER_1, filSettings.getFilterWave1()));
+		filSettings.setFilterWave2(userSettings.getBoolean(ADD_FILTER_2, filSettings.getFilterWave2()));
+		filSettings.setFilter1Freq(userSettings.getFloat(FILTER_1_FREQ, filSettings.getFilter1Freq()));
+		filSettings.setFilter2Freq(userSettings.getFloat(FILTER_2_FREQ, filSettings.getFilter2Freq()));
+		filSettings.setFilter1Sel(userSettings.get(FILTER_1_TYPE, filSettings.getFilter1Sel()));
+		filSettings.setFilter2Sel(userSettings.get(FILTER_2_TYPE, filSettings.getFilter2Sel()));
 		// ---------LFO
-		userSettings.getFloat(LFO_FREQ, lfo.getLfoFrq());
-		userSettings.getFloat(LFO_AMPL, lfo.getLfoAmplitude());
-		userSettings.get(LFO_WAVE, lfo.getLfoWaveSel());
+		lfo.setLfoFreq(userSettings.getFloat(LFO_FREQ, lfo.getLfoFrq()));
+		lfo.setLfoAmplitude(userSettings.getFloat(LFO_AMPL, lfo.getLfoAmplitude()));
+		lfo.setLfoWaveSel(userSettings.get(LFO_WAVE, lfo.getLfoWaveSel()));
 		// ---------ADSR
-		userSettings.getFloat(A_TIME, adsr.getAttackTime());
-		userSettings.getFloat(D_TIME, adsr.getDecayTime());
-		userSettings.getFloat(S_TIME, adsr.getSustainTime());
-		userSettings.getFloat(R_TIME, adsr.getReleaseTime());
+		adsr.setAttackTime(userSettings.getFloat(A_TIME, adsr.getAttackTime()));
+		adsr.setDecayTime(userSettings.getFloat(D_TIME, adsr.getDecayTime()));
+		adsr.setSustainTime(userSettings.getFloat(S_TIME, adsr.getSustainTime()));
+		adsr.setReleaseTime(userSettings.getFloat(R_TIME, adsr.getReleaseTime()));
 		// ---------EQ
-		userSettings.getFloat(HIGH_FREQ, eq.getHighFreq());
-		userSettings.getFloat(HIGH_GAIN, eq.getHighGain());
-		userSettings.getFloat(LOW_FREQ, eq.getLowFreq());
-		userSettings.getFloat(LOW_GAIN, eq.getLowGain());
+		eq.setHighFreq(userSettings.getFloat(HIGH_FREQ, eq.getHighFreq()));
+		eq.setHighGain(userSettings.getFloat(HIGH_GAIN, eq.getHighGain()));
+		eq.setLowFreq(userSettings.getFloat(LOW_FREQ, eq.getLowFreq()));
+		eq.setLowGain(userSettings.getFloat(LOW_GAIN, eq.getLowGain()));
 		// ---------MASTER
-		userSettings.getFloat(OSC_MIX_VOLUME, master.getOscMix());
-		userSettings.getFloat(OSC_1_VOLUME, master.getOsc1Gain());
-		userSettings.getFloat(OSC_2_VOLUME, master.getOsc2Gain());
-		userSettings.getFloat(FILTER_MIX_VOLUME, master.getFilMix());
-		userSettings.getFloat(FILTER_1_VOLUME, master.getFil1Gain());
-		userSettings.getFloat(FILTER_2_VOLUME, master.getFil2Gain());
-		userSettings.getFloat(MASTER_VOLUME, master.getMasterVolume());
+		master.setOscMix(userSettings.getFloat(OSC_MIX_VOLUME, master.getOscMix()));
+		master.setOsc1Gain(userSettings.getFloat(OSC_1_VOLUME, master.getOsc1Gain()));
+		master.setOsc2Gain(userSettings.getFloat(OSC_2_VOLUME, master.getOsc2Gain()));
+		master.setFilMix(userSettings.getFloat(FILTER_MIX_VOLUME, master.getFilMix()));
+		master.setFil1Gain(userSettings.getFloat(FILTER_1_VOLUME, master.getFil1Gain()));
+		master.setFil2Gain(userSettings.getFloat(FILTER_2_VOLUME, master.getFil2Gain()));
+		master.setMasterVolume(userSettings.getFloat(MASTER_VOLUME, master.getMasterVolume()));
 		// ---------PANNER
-		userSettings.getFloat(PANNER_POS, master.getPannerPosition());
+		master.setPannerPosition(userSettings.getFloat(PANNER_POS, master.getPannerPosition()));
 	}
 }
