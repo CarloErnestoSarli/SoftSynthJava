@@ -1,6 +1,8 @@
 package source;
 
 import net.beadsproject.beads.ugens.Compressor;
+import net.beadsproject.beads.ugens.Gain;
+import net.beadsproject.beads.ugens.Panner;
 import net.beadsproject.beads.ugens.Reverb;
 
 public class CompressorComponent {
@@ -35,6 +37,8 @@ public class CompressorComponent {
 		}
 		return comp;
 	}
+	
+	
 
 	public Compressor getCompressor() {
 		return compressor;

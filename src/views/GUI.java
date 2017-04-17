@@ -1176,6 +1176,19 @@ public class GUI extends JFrame {
 		JLabel lblEarlyReflection = new JLabel("Early Refl");
 		
 		JLabel lblLateRefl = new JLabel("Late Refl");
+		
+		JRadioButton rdbtnReverbOn = new JRadioButton("ON");
+		rdbtnReverbOn.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JRadioButton source = (JRadioButton) e.getSource();
+				if (source.isSelected()) {
+					settings.setReverbOn(true);
+				} else {
+					settings.setReverbOn(false);
+				}
+			}
+		});
+		rdbtnReverbOn.setOpaque(false);
 		GroupLayout gl_ReverbPanel = new GroupLayout(ReverbPanel);
 		gl_ReverbPanel.setHorizontalGroup(
 			gl_ReverbPanel.createParallelGroup(Alignment.LEADING)
@@ -1201,11 +1214,16 @@ public class GUI extends JFrame {
 						.addComponent(lblLateRefl)
 						.addComponent(lblRoomSize))
 					.addGap(33))
+				.addGroup(gl_ReverbPanel.createSequentialGroup()
+					.addGap(88)
+					.addComponent(rdbtnReverbOn)
+					.addContainerGap(93, Short.MAX_VALUE))
 		);
 		gl_ReverbPanel.setVerticalGroup(
 			gl_ReverbPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_ReverbPanel.createSequentialGroup()
-					.addContainerGap()
+					.addComponent(rdbtnReverbOn)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_ReverbPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(DampSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(RoomSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -1213,7 +1231,7 @@ public class GUI extends JFrame {
 					.addGroup(gl_ReverbPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblDamping)
 						.addComponent(lblRoomSize))
-					.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
 					.addGroup(gl_ReverbPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblEarlyReflection)
 						.addComponent(lblLateRefl))
@@ -1278,35 +1296,54 @@ public class GUI extends JFrame {
 		});
 		CompDecaySlider.setOpaque(false);
 		
+		JRadioButton radioCompressorOn = new JRadioButton("ON");
+		radioCompressorOn.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JRadioButton source = (JRadioButton) e.getSource();
+				if (source.isSelected()) {
+					settings.setCompressorOn(true);
+				} else {
+					settings.setCompressorOn(false);
+				}
+			}
+		});
+		radioCompressorOn.setOpaque(false);
+		
 		GroupLayout gl_CompressorPanel = new GroupLayout(CompressorPanel);
 		gl_CompressorPanel.setHorizontalGroup(
 			gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_CompressorPanel.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_CompressorPanel.createSequentialGroup()
-							.addComponent(ThresholdSlider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(RatioSlider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_CompressorPanel.createSequentialGroup()
-							.addComponent(CompAttackSlider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(CompDecaySlider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_CompressorPanel.createSequentialGroup()
-							.addGap(27)
+							.addContainerGap()
 							.addGroup(gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblThreshold)
-								.addComponent(lblAttackComp))
-							.addGap(56)
-							.addGroup(gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblDecayComp, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblRatio, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addGroup(gl_CompressorPanel.createSequentialGroup()
+									.addComponent(ThresholdSlider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(RatioSlider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_CompressorPanel.createSequentialGroup()
+									.addComponent(CompAttackSlider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(CompDecaySlider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_CompressorPanel.createSequentialGroup()
+									.addGap(27)
+									.addGroup(gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblThreshold)
+										.addComponent(lblAttackComp))
+									.addGap(56)
+									.addGroup(gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblDecayComp, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblRatio, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))))
+						.addGroup(gl_CompressorPanel.createSequentialGroup()
+							.addGap(91)
+							.addComponent(radioCompressorOn, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		gl_CompressorPanel.setVerticalGroup(
 			gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_CompressorPanel.createSequentialGroup()
-					.addContainerGap(18, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_CompressorPanel.createSequentialGroup()
+					.addComponent(radioCompressorOn)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(ThresholdSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(RatioSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))

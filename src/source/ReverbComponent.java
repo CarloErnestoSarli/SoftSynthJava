@@ -1,5 +1,7 @@
 package source;
 
+import net.beadsproject.beads.ugens.Gain;
+import net.beadsproject.beads.ugens.Panner;
 import net.beadsproject.beads.ugens.Reverb;
 
 public class ReverbComponent {
@@ -34,6 +36,7 @@ public class ReverbComponent {
 		}
 		return rev;
 	}
+	
 	
 	public Reverb getReverb(){
 		return reverb;

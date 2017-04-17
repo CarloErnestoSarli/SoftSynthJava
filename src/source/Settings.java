@@ -9,6 +9,10 @@ import net.beadsproject.beads.*;
 import net.beadsproject.beads.core.AudioContext;
 import net.beadsproject.beads.core.UGen;
 import net.beadsproject.beads.data.Buffer;
+import net.beadsproject.beads.ugens.Compressor;
+import net.beadsproject.beads.ugens.Gain;
+import net.beadsproject.beads.ugens.Panner;
+import net.beadsproject.beads.ugens.Reverb;
 import net.beadsproject.beads.ugens.WavePlayer;
 import views.Components;
 import views.GUI;
@@ -17,7 +21,7 @@ import views.GUI;
 /**
  * The Class Settings.
  */
-//singleton pattern
+// singleton pattern
 public class Settings {
 
 	private static Settings settings = null;
@@ -33,9 +37,9 @@ public class Settings {
 	private final int MAX_VOLUME = 100;
 	private final int LEFT = -10;
 	private final int RIGHT = 10;
-	//private final int START_VOLUME = 50;
+	// private final int START_VOLUME = 50;
 	private final int START_POSITION = 0;
-	//private final float START_VOLUME = 0.5f;
+	// private final float START_VOLUME = 0.5f;
 	private final float START_PANNER_POSITION = 0.0f;
 	/** The Constant START_TIME. */
 	public static final float START_TIME = 500.0f;
@@ -51,14 +55,16 @@ public class Settings {
 	private final float START_LATE = 1.0f;
 	private final int TEN_FACTOR = 10;
 	private final int HUNDRED_FACTOR = 100;
-	
+
 	private boolean m_play;
+	private boolean m_ReverbOn;
+	private boolean m_CompressorOn;
 
 	/**
 	 * Instantiates a new settings.
 	 */
 	protected Settings() {
-	
+
 	}
 
 	/**
@@ -73,20 +79,76 @@ public class Settings {
 		return settings;
 	}
 
+	public void switchReverbOn(Reverb reverb, Gain gain, Panner pan) {
+		if(!reverb.containsInput(gain) &&  isReverbOn()){
+			if (pan.containsInput(gain)) {
+				pan.removeAllConnections(gain);
+				reverb.addInput(gain);
+				//pan.addInput(reverb);
+			}else if(!pan.containsInput(gain) ){
+				reverb.addInput(gain);
+				//pan.addInput(reverb);	
+			}
+		}else if(!isReverbOn()){
+			switchReverbOff(reverb, gain, pan);
+		}
+	}
+
+	public void switchReverbOff(Reverb reverb, Gain gain, Panner pan) {
+		reverb.removeAllConnections(gain);
+		if (!pan.containsInput(gain)) {
+			pan.addInput(gain);
+		}
+	}
+
+	public void switchCompressorOn(Compressor compressor, Gain gain, Panner pan) {
+		if(!compressor.containsInput(gain) &&  isCompressorOn()){
+			if (pan.containsInput(gain)) {
+				pan.removeAllConnections(gain);
+				compressor.addInput(gain);
+				//pan.addInput(reverb);
+			}else if(!pan.containsInput(gain) ){
+				compressor.addInput(gain);
+				//pan.addInput(reverb);	
+			}
+		}else if(!isCompressorOn()){
+			switchCompressorOff(compressor, gain, pan);
+		}
+	}
+
+	public void switchCompressorOff(Compressor compressor, Gain gain, Panner pan) {
+		compressor.removeAllConnections(gain);
+		if (!pan.containsInput(gain)) {
+			pan.addInput(gain);
+		}
+	}
+
 	// ----------------------------------------------------SETTERS-----------------------------------------------------
 
 	public void setPlay(boolean m_play) {
 		this.m_play = m_play;
 	}
-	
+
 	// -------------------------------------------------GETTERS----------------------------------------------
 
 	public boolean getPlay() {
 		return m_play;
 	}
 
-	
+	public boolean isReverbOn() {
+		return m_ReverbOn;
+	}
 
-	
+	public void setReverbOn(boolean m_ReverbOn) {
+		this.m_ReverbOn = m_ReverbOn;
+	}
+
+	public boolean isCompressorOn() {
+		return m_CompressorOn;
+	}
+
+	public void setCompressorOn(boolean m_CompressorOn) {
+		this.m_CompressorOn = m_CompressorOn;
+	}
 
 }
