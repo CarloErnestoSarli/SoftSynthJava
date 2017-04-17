@@ -79,26 +79,17 @@ public class Settings {
 		return settings;
 	}
 
-	public void switchReverbOn(Reverb reverb, Gain gain, Panner pan) {
+	public void switchReverbOn(Reverb reverb, Gain gain) {
 		if(!reverb.containsInput(gain) &&  isReverbOn()){
-			if (pan.containsInput(gain)) {
-				pan.removeAllConnections(gain);
 				reverb.addInput(gain);
 				//pan.addInput(reverb);
-			}else if(!pan.containsInput(gain) ){
-				reverb.addInput(gain);
-				//pan.addInput(reverb);	
-			}
 		}else if(!isReverbOn()){
-			switchReverbOff(reverb, gain, pan);
+			switchReverbOff(reverb, gain);
 		}
 	}
 
-	public void switchReverbOff(Reverb reverb, Gain gain, Panner pan) {
+	public void switchReverbOff(Reverb reverb, Gain gain) {
 		reverb.removeAllConnections(gain);
-		if (!pan.containsInput(gain)) {
-			pan.addInput(gain);
-		}
 	}
 
 	public void switchCompressorOn(Compressor compressor, Gain gain, Panner pan) {

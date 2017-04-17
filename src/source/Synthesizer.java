@@ -66,8 +66,6 @@ public class Synthesizer {
 	Gain delayGain1;
 	Gain delayGain2;
 	Gain eqGain;
-	Gain reverbGain;
-	Gain compressorGain;
 	Panner panner;
 	
 	
@@ -130,8 +128,6 @@ public class Synthesizer {
 		fil1Gain = new Gain(audio.getAudioContext(), 1);
 		fil2Gain = new Gain(audio.getAudioContext(), 1);
 		eqGain = new Gain(audio.getAudioContext(), 1);
-		reverbGain = new Gain(audio.getAudioContext(), 1, 1.0f);
-		compressorGain = new Gain(audio.getAudioContext(), 1, 1.0f);
 		masterGain = new Gain(audio.getAudioContext(), 1, gainEnvelope);
 		delayGain1 = new Gain(audio.getAudioContext(), 1, master.getOsc1Gain());
 	    delayGain2 = new Gain(audio.getAudioContext(), 1, master.getOsc2Gain());
@@ -154,13 +150,11 @@ public class Synthesizer {
 		masterGain.addInput(filMix);
 		eqGain.addInput(low);
 		eqGain.addInput(high);
-		reverbGain.addInput(reverb);
-		compressorGain.addInput(compressor);
 		
 		panner.addInput(eqGain);
 		
-		panner.addInput(reverbGain);
-		panner.addInput(compressorGain);
+		//panner.addInput(reverbGain);
+		panner.addInput(compressor);
 		
 		oscMix.addInput(delayGain1);
 		oscMix.addInput(delayGain2);
@@ -181,6 +175,7 @@ public class Synthesizer {
 	    
 	    //--------------------------------------------AC--------------------------------------
 		audio.getAudioContext().out.addInput(panner);
+		audio.getAudioContext().out.addInput(reverb);
 		audio.getAudioContext().start();
 		
 	}
@@ -271,7 +266,7 @@ public class Synthesizer {
 			compressor.setAttack(comp.getAttack());
 			compressor.setDecay(comp.getDecay());
 			
-			settings.switchReverbOn(reverb, eqGain, panner);
+			settings.switchReverbOn(reverb, eqGain);
 			settings.switchCompressorOn(compressor, eqGain, panner);
 			//lfo.controlElement(panner);
 			

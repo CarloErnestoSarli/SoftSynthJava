@@ -119,6 +119,7 @@ public class GUI extends JFrame {
 	private JSlider EqHighGainSlider;
 	private JSlider EqLowSlider;
 	private JSlider EqLowGainSlider;
+	private JLabel lblBackground;
 
 	/**
 	 * Launch the application.
@@ -200,6 +201,21 @@ public class GUI extends JFrame {
 			}
 		});
 		mnWindow.add(mntmOpenVirtualKeyboard);
+		
+		JMenu mnOptions = new JMenu("Options");
+		SynthMenuBar.add(mnOptions);
+		
+		JMenuItem mntmSwitchBackgroundOff = new JMenuItem("Switch background off");
+		mntmSwitchBackgroundOff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(!lblBackground.isEnabled()){
+					lblBackground.setEnabled(true);
+				}else if(lblBackground.isEnabled()){
+					lblBackground.setEnabled(false);
+				}
+			}
+		});
+		mnOptions.add(mntmSwitchBackgroundOff);
 
 		// ---------------------------------\MENU----------------------
 
@@ -215,13 +231,11 @@ public class GUI extends JFrame {
 
 		JPanel OscPanel = new JPanel();
 		OscPanel.setOpaque(false);
-		OscPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)), "Oscillator 1&2",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		OscPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Oscillator 1&2", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		JPanel FilterPanel = new JPanel();
 		FilterPanel.setOpaque(false);
-		FilterPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)), "Filters",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		FilterPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Filters", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 
 		JPanel BottomPanel = new JPanel();
 		BottomPanel.setBounds(5, 233, 1142, 178);
@@ -229,37 +243,32 @@ public class GUI extends JFrame {
 
 		JPanel LFOPanel = new JPanel();
 		LFOPanel.setOpaque(false);
-		LFOPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)), "LFO",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		LFOPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "LFO", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		JPanel ADSRPanel = new JPanel();
+		ADSRPanel.setForeground(Color.BLACK);
 		ADSRPanel.setOpaque(false);
-		ADSRPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)), "ADSR Envelope",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		ADSRPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "ADSR Envelope", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
 
 		JPanel MasterPanel = new JPanel();
 		MasterPanel.setBounds(5, 417, 673, 161);
 		MasterPanel.setOpaque(false);
-		MasterPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)), "Master Controls",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		MasterPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Master Controls", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
 
 		JPanel EqPanel = new JPanel();
 		EqPanel.setBounds(1153, 6, 126, 221);
 		EqPanel.setOpaque(false);
-		EqPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)), "Eq", TitledBorder.LEADING,
-				TitledBorder.TOP, null, new Color(0, 0, 0)));
+		EqPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Eq", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		JPanel PannerPanel = new JPanel();
 		PannerPanel.setBounds(1153, 233, 126, 178);
 		PannerPanel.setOpaque(false);
-		PannerPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)), "Panner",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		PannerPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Panner", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		JPanel VolumeBarsPanel = new JPanel();
 		VolumeBarsPanel.setBounds(1153, 417, 126, 161);
 		VolumeBarsPanel.setOpaque(false);
-		VolumeBarsPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)), "Volume",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		VolumeBarsPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Volume", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		// -----------------------------------\PANELS--------------------
 
 		// ------------------------------------COMPONENTS-----------------
@@ -305,7 +314,9 @@ public class GUI extends JFrame {
 		Osc2WvSel = new JComboBox();
 		Filter1FreqSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
 		AddOsc2ToFilter = new JRadioButton("AddOsc2ToFilter");
+		AddOsc2ToFilter.setFont(new Font("Tahoma", Font.BOLD, 12));
 		AddOsc1ToFilter = new JRadioButton("AddOsc1ToFilter");
+		AddOsc1ToFilter.setFont(new Font("Tahoma", Font.BOLD, 12));
 		Filter2FreqSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
 		Filter1Combo = new JComboBox();
 		Filter2Combo = new JComboBox();
@@ -505,9 +516,11 @@ public class GUI extends JFrame {
 		PanningSlider.setOpaque(false);
 
 		JLabel lblL = new JLabel("L");
+		lblL.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblL.setHorizontalAlignment(SwingConstants.LEFT);
 
 		JLabel lblR = new JLabel("R");
+		lblR.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblR.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		PanningSlider.addChangeListener(new ChangeListener() {
@@ -576,15 +589,20 @@ public class GUI extends JFrame {
 		MasterVolumeSlider.setOrientation(SwingConstants.VERTICAL);
 
 		JLabel lblFilterMix = new JLabel("Filter Mix");
+		lblFilterMix.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		JLabel lblOscVolume = new JLabel("Osc Volume");
+		lblOscVolume.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		JLabel OscMixLabel = new JLabel("Osc Mix");
+		OscMixLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		OscMixLabel.setLabelFor(SynthPane);
 
 		JLabel lblFilterVolume = new JLabel("Filter Volume");
+		lblFilterVolume.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		JLabel lblMasterVolume = new JLabel("Master Volume");
+		lblMasterVolume.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		AttackSlider.setOpaque(false);
 		AttackSlider.setToolTipText("");
@@ -631,22 +649,25 @@ public class GUI extends JFrame {
 		});
 
 		JLabel lblAttack = new JLabel("A");
-		lblAttack.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAttack.setForeground(Color.WHITE);
+		lblAttack.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAttack.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel lblDecay = new JLabel("D");
-		lblDecay.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDecay.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblDecay.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel lblSustain = new JLabel("S");
+		lblSustain.setForeground(Color.WHITE);
 		lblSustain.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSustain.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblSustain.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		JLabel lblRelease = new JLabel("R");
-		lblRelease.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRelease.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblRelease.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel lblHigh = new JLabel("High");
+		lblHigh.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblHigh.setHorizontalAlignment(SwingConstants.CENTER);
 
 		EqHighSlider.setOpaque(false);
@@ -659,6 +680,7 @@ public class GUI extends JFrame {
 		});
 
 		JLabel lblMid = new JLabel("Gain");
+		lblMid.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblMid.setHorizontalAlignment(SwingConstants.CENTER);
 
 		EqHighGainSlider.setOpaque(false);
@@ -671,9 +693,11 @@ public class GUI extends JFrame {
 		});
 
 		JLabel lblLow = new JLabel("Low ");
+		lblLow.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblLow.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel lblNewLabel = new JLabel("Gain");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		EqLowSlider.setOpaque(false);
@@ -713,12 +737,16 @@ public class GUI extends JFrame {
 		slider_1.setMajorTickSpacing(50000);
 		
 		JLabel lblWaveShape_1 = new JLabel("Wave Shape");
+		lblWaveShape_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblPhase = new JLabel("Phase");
+		lblPhase.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblFineTuning = new JLabel("Fine Tuning");
+		lblFineTuning.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblTranspose = new JLabel("Transpose");
+		lblTranspose.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		// -----------------------------------\COMPONENTS---------------
 
@@ -779,8 +807,8 @@ public class GUI extends JFrame {
 
 		GroupLayout gl_MasterPanel = new GroupLayout(MasterPanel);
 		gl_MasterPanel.setHorizontalGroup(
-			gl_MasterPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_MasterPanel.createSequentialGroup()
+			gl_MasterPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_MasterPanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(OscMixLabel)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -790,34 +818,34 @@ public class GUI extends JFrame {
 					.addGap(18)
 					.addComponent(OscGainSlider, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(lblFilterMix, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addComponent(lblFilterMix, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(FilterMixSlider, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblFilterVolume, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblFilterVolume, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(FilterGainSlider, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblMasterVolume, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblMasterVolume, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(MasterVolumeSlider, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(474, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_MasterPanel.setVerticalGroup(
-			gl_MasterPanel.createParallelGroup(Alignment.LEADING)
+			gl_MasterPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_MasterPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_MasterPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(MasterVolumeSlider, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(lblMasterVolume, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(FilterGainSlider, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(lblFilterVolume, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(FilterMixSlider, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(lblFilterMix, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(OscGainSlider, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(lblOscVolume, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(OscMixSlider, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-						.addComponent(OscMixLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+					.addGroup(gl_MasterPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblFilterVolume, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(lblMasterVolume, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(lblFilterMix, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(MasterVolumeSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(FilterGainSlider, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(FilterMixSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(OscGainSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(lblOscVolume, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(OscMixSlider, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(OscMixLabel, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 
@@ -924,12 +952,17 @@ public class GUI extends JFrame {
 								.addContainerGap()));
 		
 		JLabel lblFrequency = new JLabel("Frequency");
+		lblFrequency.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblAmplitude = new JLabel("Amplitude");
+		lblAmplitude.setForeground(Color.WHITE);
+		lblAmplitude.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblWaveShape = new JLabel("Wave Shape");
+		lblWaveShape.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblApplyLfoTo = new JLabel("Apply LFO to");
+		lblApplyLfoTo.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		GroupLayout gl_LFOPanel = new GroupLayout(LFOPanel);
 		gl_LFOPanel.setHorizontalGroup(
@@ -1129,7 +1162,7 @@ public class GUI extends JFrame {
 		
 		JPanel ReverbPanel = new JPanel();
 		ReverbPanel.setOpaque(false);
-		ReverbPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Reverb", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		ReverbPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Reverb", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
 		ReverbPanel.setBounds(688, 417, 225, 161);
 		SynthPane.add(ReverbPanel);
 		
@@ -1170,14 +1203,19 @@ public class GUI extends JFrame {
 		});
 		
 		JLabel lblDamping = new JLabel("Damping");
+		lblDamping.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblRoomSize = new JLabel("Room Size");
+		lblRoomSize.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblEarlyReflection = new JLabel("Early Refl");
+		lblEarlyReflection.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblLateRefl = new JLabel("Late Refl");
+		lblLateRefl.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JRadioButton rdbtnReverbOn = new JRadioButton("ON");
+		rdbtnReverbOn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		rdbtnReverbOn.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JRadioButton source = (JRadioButton) e.getSource();
@@ -1245,7 +1283,7 @@ public class GUI extends JFrame {
 		
 		JPanel CompressorPanel = new JPanel();
 		CompressorPanel.setOpaque(false);
-		CompressorPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Compressor", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		CompressorPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Compressor", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		CompressorPanel.setBounds(923, 417, 224, 161);
 		SynthPane.add(CompressorPanel);
 		
@@ -1271,12 +1309,16 @@ public class GUI extends JFrame {
 		RatioSlider.setOpaque(false);
 		
 		JLabel lblThreshold = new JLabel("Threshold");
+		lblThreshold.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblRatio = new JLabel("Ratio");
+		lblRatio.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblAttackComp = new JLabel("Attack");
+		lblAttackComp.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblDecayComp = new JLabel("Decay");
+		lblDecayComp.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JSlider CompAttackSlider = new JSlider(0, 1000, 500);
 		CompAttackSlider.addChangeListener(new ChangeListener() {
@@ -1297,6 +1339,7 @@ public class GUI extends JFrame {
 		CompDecaySlider.setOpaque(false);
 		
 		JRadioButton radioCompressorOn = new JRadioButton("ON");
+		radioCompressorOn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		radioCompressorOn.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JRadioButton source = (JRadioButton) e.getSource();
@@ -1336,12 +1379,12 @@ public class GUI extends JFrame {
 										.addComponent(lblRatio, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))))
 						.addGroup(gl_CompressorPanel.createSequentialGroup()
 							.addGap(91)
-							.addComponent(radioCompressorOn, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(radioCompressorOn)))
 					.addContainerGap())
 		);
 		gl_CompressorPanel.setVerticalGroup(
-			gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_CompressorPanel.createSequentialGroup()
+			gl_CompressorPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_CompressorPanel.createSequentialGroup()
 					.addComponent(radioCompressorOn)
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_CompressorPanel.createParallelGroup(Alignment.LEADING)
@@ -1362,11 +1405,15 @@ public class GUI extends JFrame {
 					.addContainerGap())
 		);
 		CompressorPanel.setLayout(gl_CompressorPanel);
+		lblBackground = new JLabel("Background");
 		
-		JLabel lblBackground = new JLabel("Background");
+		
+		lblBackground.setEnabled(true);
 		lblBackground.setBounds(0, 0, 1294, 593);
 		lblBackground.setIcon(new ImageIcon(new ImageIcon (GUI.class.getResource("/Pics/background.jpg")).getImage().getScaledInstance(lblBackground.getWidth(), lblBackground.getHeight(), Image.SCALE_DEFAULT)));
 		SynthPane.add(lblBackground);
+		
+		
 
 		
 		// ----------------------------------\LAYOUT---------------------
@@ -1383,12 +1430,12 @@ public class GUI extends JFrame {
 			VolumeRightBar.setValue((int) volume / 2);
 		} else if (pan < 0) {
 			int leftVolume = (int) Math.abs((pan * volume) + volume / 2);
-			int rightVolume = (int) (volume / 2 - leftVolume);
+			int rightVolume = (int) (volume / 2 -  Math.abs((pan * volume)));
 			VolumeLeftBar.setValue(leftVolume);
 			VolumeRightBar.setValue(rightVolume);
 		} else if (pan > 0) {
 			int rightVolume = (int) ((pan * volume) + volume / 2);
-			int leftVolume = (int) (volume - rightVolume);
+			int leftVolume = (int) ((volume / 2) - (pan * volume));
 			VolumeLeftBar.setValue(leftVolume);
 			VolumeRightBar.setValue(rightVolume);
 		}
