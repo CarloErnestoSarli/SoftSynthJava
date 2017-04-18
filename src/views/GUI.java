@@ -1,3 +1,7 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 package views;
 
 import java.awt.BorderLayout;
@@ -58,71 +62,157 @@ import java.beans.PropertyChangeEvent;
 import java.awt.Rectangle;
 import javax.swing.JLayeredPane;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GUI.
+ */
 public class GUI extends JFrame {
 
+	/** The audio. */
 	Audio audio = Audio.getAudio();
+	
+	/** The settings. */
 	Settings settings = Settings.getSettings();
+	
+	/** The osc settings. */
 	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
+	
+	/** The fil settings. */
 	FilterSettings filSettings = FilterSettings.getFilterSettings();
+	
+	/** The adsr. */
 	ADSR adsr = ADSR.getADSR();
+	
+	/** The master. */
 	Master master = Master.getMaster();
+	
+	/** The lfo. */
 	LFO lfo = LFO.getLfo();
+	
+	/** The eq. */
 	EQ eq = EQ.getEQ();
+	
+	/** The user settings. */
 	UserSettings userSettings = new UserSettings();
+	
+	/** The comp. */
 	Components comp = new Components();
+	
+	/** The key. */
 	VirtualKeyboard key;
+	
+	/** The rev. */
 	ReverbComponent rev = ReverbComponent.getReverbComponent();
+	
+	/** The compressor. */
 	CompressorComponent compressor = CompressorComponent.getCompressorComponent();
 
-	private final int MIN_OSC_FREQ = 1635;
-	private final int MAX_OSC_FREQ = 100000;
-	private final int NOTE_A_FREQ = 44000;
-	private final int LFO_MIN_FREQ = 2;
-	private final int LFO_MAX_FREQ = 2000;
-	private final int MIN_VOLUME = 0;
-	private final int MAX_VOLUME = 100;
-	private final int LEFT = -10;
-	private final int RIGHT = 10;
-	private final int START_VOLUME = 50;
-	private final int START_POSITION = 0;
-
+	/** The Synth pane. */
 	private JPanel SynthPane;
+	
+	/** The Add osc 1 to filter. */
 	private JRadioButton AddOsc1ToFilter;
+	
+	/** The Add osc 2 to filter. */
 	private JRadioButton AddOsc2ToFilter;
+	
+	/** The Osc 1 wv sel. */
 	private JComboBox Osc1WvSel;
+	
+	/** The Osc 2 wv sel. */
 	private JComboBox Osc2WvSel;
+	
+	/** The Filter 2 combo. */
 	private JComboBox Filter2Combo;
+	
+	/** The Lfo wave combo. */
 	private JComboBox LfoWaveCombo;
+	
+	/** The Apply lfo combo. */
 	private JComboBox ApplyLfoCombo;
+	
+	/** The Filter 1 combo. */
 	private JComboBox Filter1Combo;
+	
+	/** The Volume left bar. */
 	private JProgressBar VolumeLeftBar;
+	
+	/** The Volume right bar. */
 	private JProgressBar VolumeRightBar;
+	
+	/** The Osc 1 freq slider. */
 	private JSlider Osc1FreqSlider;
+	
+	/** The Osc 1 phase slider. */
 	private JSlider Osc1PhaseSlider;
+	
+	/** The Osc 2 freq slider. */
 	private JSlider Osc2FreqSlider;
+	
+	/** The Osc 2 phase slider. */
 	private JSlider Osc2PhaseSlider;
+	
+	/** The Filter 1 freq slider. */
 	private JSlider Filter1FreqSlider;
+	
+	/** The Filter 2 freq slider. */
 	private JSlider Filter2FreqSlider;
+	
+	/** The Lfo frequency slider. */
 	private JSlider LfoFrequencySlider;
+	
+	/** The Lfo amplitude slider. */
 	private JSlider LfoAmplitudeSlider;
+	
+	/** The Panning slider. */
 	private JSlider PanningSlider;
+	
+	/** The Filter mix slider. */
 	private JSlider FilterMixSlider;
+	
+	/** The Osc mix slider. */
 	private JSlider OscMixSlider;
+	
+	/** The Osc gain slider. */
 	private JSlider OscGainSlider;
+	
+	/** The Master volume slider. */
 	private JSlider MasterVolumeSlider;
+	
+	/** The Filter gain slider. */
 	private JSlider FilterGainSlider;
+	
+	/** The Attack slider. */
 	private JSlider AttackSlider;
+	
+	/** The Release slider. */
 	private JSlider ReleaseSlider;
+	
+	/** The Sustain slider. */
 	private JSlider SustainSlider;
+	
+	/** The Decay slider. */
 	private JSlider DecaySlider;
+	
+	/** The Eq high slider. */
 	private JSlider EqHighSlider;
+	
+	/** The Eq high gain slider. */
 	private JSlider EqHighGainSlider;
+	
+	/** The Eq low slider. */
 	private JSlider EqLowSlider;
+	
+	/** The Eq low gain slider. */
 	private JSlider EqLowGainSlider;
+	
+	/** The lbl background. */
 	private JLabel lblBackground;
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 
@@ -306,38 +396,38 @@ public class GUI extends JFrame {
 		EqLowSlider = comp.getEqLowSlider();
 		EqLowGainSlider = comp.getEqLowGainSlider();
 		*/
-		Osc1FreqSlider = new JSlider(SwingConstants.HORIZONTAL, MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
-		Osc1PhaseSlider = new JSlider(0, 300, 150);
-		Osc2FreqSlider = new JSlider(SwingConstants.HORIZONTAL, MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
-		Osc2PhaseSlider = new JSlider(0, 300, 150);
+		Osc1FreqSlider = new JSlider(SwingConstants.HORIZONTAL, settings.MIN_TRANSPOSE, settings.MAX_TRANSPOSE, settings.TRANSPOSE_START);
+		Osc1PhaseSlider = new JSlider(settings.MIN_PHASE_SHIFT,settings.MAX_PHASE_SHIFT,settings.PHASE_START_SHIFT);
+		Osc2FreqSlider = new JSlider(SwingConstants.HORIZONTAL, settings.MIN_TRANSPOSE, settings.MAX_TRANSPOSE, settings.TRANSPOSE_START);
+		Osc2PhaseSlider = new JSlider(settings.MIN_PHASE_SHIFT,settings.MAX_PHASE_SHIFT,settings.PHASE_START_SHIFT);
 		Osc1WvSel = new JComboBox();
 		Osc2WvSel = new JComboBox();
-		Filter1FreqSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
+		Filter1FreqSlider = new JSlider(settings.MIN_FIL_FREQ, settings.MAX_FIL_FREQ, settings.FIL_START_FREQ);
 		AddOsc2ToFilter = new JRadioButton("AddOsc2ToFilter");
 		AddOsc2ToFilter.setFont(new Font("Tahoma", Font.BOLD, 12));
 		AddOsc1ToFilter = new JRadioButton("AddOsc1ToFilter");
 		AddOsc1ToFilter.setFont(new Font("Tahoma", Font.BOLD, 12));
-		Filter2FreqSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
+		Filter2FreqSlider = new JSlider(settings.MIN_FIL_FREQ, settings.MAX_FIL_FREQ, settings.FIL_START_FREQ);
 		Filter1Combo = new JComboBox();
 		Filter2Combo = new JComboBox();
 		LfoWaveCombo = new JComboBox();
 		ApplyLfoCombo = new JComboBox();
-		LfoFrequencySlider = new JSlider(LFO_MIN_FREQ, LFO_MAX_FREQ);
-		LfoAmplitudeSlider = new JSlider();
-		PanningSlider = new JSlider(LEFT, RIGHT, START_POSITION);
-		FilterMixSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
-		OscMixSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
-		OscGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
-		MasterVolumeSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
-		FilterGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
-		AttackSlider = new JSlider(0, 1000, 500);
-		ReleaseSlider = new JSlider(0, 1000, 500);
-		SustainSlider = new JSlider(0, 1000, 500);
-		DecaySlider = new JSlider(0, 1000, 500);
-		EqHighSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
-		EqHighGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
-		EqLowSlider = new JSlider(MIN_OSC_FREQ, MAX_OSC_FREQ, NOTE_A_FREQ);
-		EqLowGainSlider = new JSlider(MIN_VOLUME, MAX_VOLUME, START_VOLUME);
+		LfoFrequencySlider = new JSlider(settings.MIN_LFO_FREQ, settings.MAX_LFO_FREQ, settings.START_LFO_FREQ);
+		LfoAmplitudeSlider = new JSlider(settings.MIN_LFO_AMPL, settings.MAX_LFO_AMPL, settings.START_LFO_AMPL);
+		PanningSlider = new JSlider(settings.LEFT_PAN, settings.RIGHT_PAN, settings.START_PANNER_POSITION);
+		FilterMixSlider = new JSlider(settings.MIN_VOLUME_MASTER, settings.MAX_VOLUME_MASTER, settings.START_VOLUME_MASTER);
+		OscMixSlider = new JSlider(settings.MIN_VOLUME_MASTER, settings.MAX_VOLUME_MASTER, settings.START_VOLUME_MASTER);
+		OscGainSlider = new JSlider(settings.MIN_VOLUME_MASTER, settings.MAX_VOLUME_MASTER, settings.START_VOLUME_MASTER);
+		MasterVolumeSlider = new JSlider(settings.MIN_VOLUME_MASTER, settings.MAX_VOLUME_MASTER, settings.START_VOLUME_MASTER);
+		FilterGainSlider = new JSlider(settings.MIN_VOLUME_MASTER, settings.MAX_VOLUME_MASTER, settings.START_VOLUME_MASTER);
+		AttackSlider = new JSlider(settings.MIN_ADSR_TIME, settings.MAX_ADSR_TIME, settings.ADSR_START_TIME);
+		ReleaseSlider = new JSlider(settings.MIN_ADSR_TIME, settings.MAX_ADSR_TIME, settings.ADSR_START_TIME);
+		SustainSlider = new JSlider(settings.MIN_ADSR_TIME, settings.MAX_ADSR_TIME, settings.ADSR_START_TIME);
+		DecaySlider = new JSlider(settings.MIN_ADSR_TIME, settings.MAX_ADSR_TIME, settings.ADSR_START_TIME);
+		EqHighSlider = new JSlider(settings.MIN_EQ_FREQ,settings.MAX_EQ_FREQ, settings.EQ_START_FREQ);
+		EqHighGainSlider = new JSlider(settings.MIN_EQ_GAIN, settings.MAX_EQ_GAIN,settings.EQ_START_GAIN);
+		EqLowSlider = new JSlider(settings.MIN_EQ_FREQ,settings.MAX_EQ_FREQ, settings.EQ_START_FREQ);
+		EqLowGainSlider = new JSlider(settings.MIN_EQ_GAIN, settings.MAX_EQ_GAIN,settings.EQ_START_GAIN);
 		Osc1FreqSlider.setOpaque(false);
 		Osc1FreqSlider.setMajorTickSpacing(50000);
 		Osc1FreqSlider.setMinorTickSpacing(50);
@@ -360,7 +450,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				oscSettings.setOsc2Freq((float) source.getValue() / 100);
+				oscSettings.setOsc2Freq((float) source.getValue() / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -402,7 +492,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				oscSettings.setOsc1Freq((float) source.getValue() / 100);
+				oscSettings.setOsc1Freq((float) source.getValue() / settings.HUNDRED_FACTOR);
 
 			}
 		});
@@ -426,7 +516,7 @@ public class GUI extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				// set filter frequency
-				filSettings.setFilter1Freq((float) source.getValue() / 100);
+				filSettings.setFilter1Freq((float) source.getValue() / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -449,7 +539,7 @@ public class GUI extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				// set filter gain
-				filSettings.setFilter2Freq((float) source.getValue() / 100);
+				filSettings.setFilter2Freq((float) source.getValue() / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -507,7 +597,7 @@ public class GUI extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
 				// set lfo frequency
-				lfo.setLfoFreq((float) (source.getValue()) / 100);
+				lfo.setLfoFreq((float) (source.getValue()) / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -527,7 +617,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				master.setPannerPosition(source.getValue() / 10.0f);
+				master.setPannerPosition(source.getValue() / settings.TEN_FACTOR);
 			}
 		});
 
@@ -538,7 +628,7 @@ public class GUI extends JFrame {
 				JSlider source = (JSlider) e.getSource();
 				float value = source.getValue();
 				master.setFil1Gain(value / 100.0f);
-				master.setFil2Gain((MAX_VOLUME - value) / 100.0f);
+				master.setFil2Gain((settings.MAX_VOLUME_MASTER - value) / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -549,7 +639,7 @@ public class GUI extends JFrame {
 				JSlider source = (JSlider) e.getSource();
 				float value = source.getValue();
 				master.setOsc1Gain(value / 100.0f);
-				master.setOsc2Gain((MAX_VOLUME - value) / 100.0f);
+				master.setOsc2Gain((settings.MAX_VOLUME_MASTER - value) / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -560,7 +650,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				master.setOscMix(source.getValue() / 100.0f);
+				master.setOscMix(source.getValue() / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -572,7 +662,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				master.setMasterVolume(source.getValue() / 100.0f);
+				master.setMasterVolume(source.getValue() / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -581,7 +671,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				master.setFilMix(source.getValue() / 100.0f);
+				master.setFilMix(source.getValue() / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -675,7 +765,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				eq.setHighFreq((float) source.getValue() / 100);
+				eq.setHighFreq((float) source.getValue() / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -688,7 +778,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				eq.setHighGain((float) source.getValue() / 10);
+				eq.setHighGain((float) source.getValue() / settings.TEN_FACTOR);
 			}
 		});
 
@@ -705,7 +795,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				eq.setLowFreq((float) source.getValue() / 100);
+				eq.setLowFreq((float) source.getValue() / settings.HUNDRED_FACTOR);
 			}
 		});
 
@@ -714,7 +804,7 @@ public class GUI extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				eq.setLowGain((float) source.getValue() / 10);
+				eq.setLowGain((float) source.getValue() / settings.TEN_FACTOR);
 			}
 		});
 
@@ -1166,25 +1256,25 @@ public class GUI extends JFrame {
 		ReverbPanel.setBounds(688, 417, 225, 161);
 		SynthPane.add(ReverbPanel);
 		
-		JSlider DampSlider = new JSlider(0,10,5);
+		JSlider DampSlider = new JSlider(settings.MIN_DAMP,settings.MAX_DAMP,settings.START_DAMP);
 		DampSlider.setOpaque(false);
 		DampSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				rev.setDamping(source.getValue()/10);
+				rev.setDamping(source.getValue()/settings.TEN_FACTOR);
 			}
 		});
 		
-		JSlider RoomSlider = new JSlider(0,10,5);
+		JSlider RoomSlider = new JSlider(settings.MIN_SIZE,settings.MAX_SIZE, settings.START_SIZE);
 		RoomSlider.setOpaque(false);
 		RoomSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				rev.setSize(source.getValue()/10);
+				rev.setSize(source.getValue()/settings.TEN_FACTOR);
 			}
 		});
 		
-		JSlider EarlySlider = new JSlider(0,10,10);
+		JSlider EarlySlider = new JSlider(settings.MIN_EARLY,settings.MAX_EARLY,settings.START_EARLY);
 		EarlySlider.setOpaque(false);
 		EarlySlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -1193,7 +1283,7 @@ public class GUI extends JFrame {
 			}
 		});
 		
-		JSlider LateSlider = new JSlider(0,10,10);
+		JSlider LateSlider = new JSlider(settings.MIN_LATE,settings.MAX_LATE,settings.START_LATE);
 		LateSlider.setOpaque(false);
 		LateSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -1287,16 +1377,16 @@ public class GUI extends JFrame {
 		CompressorPanel.setBounds(923, 417, 224, 161);
 		SynthPane.add(CompressorPanel);
 		
-		JSlider ThresholdSlider = new JSlider(0, 10, 5);
+		JSlider ThresholdSlider = new JSlider(settings.MIN_THRESHOLD,settings.MAX_THRESHOLD,settings.START_THRESHOLD);
 		ThresholdSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				compressor.setThreshold(source.getValue()/10);
+				compressor.setThreshold(source.getValue()/settings.TEN_FACTOR);
 			}
 		});
 		ThresholdSlider.setOpaque(false);
 		
-		JSlider RatioSlider = new JSlider(2, 10, 4);
+		JSlider RatioSlider = new JSlider(settings.MIN_RATIO,settings.MAX_RATIO,settings.START_RATIO);
 		RatioSlider.setMajorTickSpacing(2);
 		RatioSlider.setSnapToTicks(true);
 		RatioSlider.setMinorTickSpacing(1);
@@ -1320,7 +1410,7 @@ public class GUI extends JFrame {
 		JLabel lblDecayComp = new JLabel("Decay");
 		lblDecayComp.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JSlider CompAttackSlider = new JSlider(0, 1000, 500);
+		JSlider CompAttackSlider = new JSlider(settings.MIN_ATTACK, settings.MAX_ATTACK,settings.START_ATTACK);
 		CompAttackSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
@@ -1329,7 +1419,7 @@ public class GUI extends JFrame {
 		});
 		CompAttackSlider.setOpaque(false);
 		
-		JSlider CompDecaySlider = new JSlider(0, 1000, 500);
+		JSlider CompDecaySlider = new JSlider(settings.MIN_DECAY, settings.MAX_DECAY, settings.START_DECAY);
 		CompDecaySlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
@@ -1420,6 +1510,12 @@ public class GUI extends JFrame {
 
 	}
 
+	/**
+	 * Volume bars.
+	 *
+	 * @param v the v
+	 * @param pan the pan
+	 */
 	public void volumeBars(float v, float pan) {
 
 		float volume = v * 100.0f;
@@ -1441,9 +1537,12 @@ public class GUI extends JFrame {
 		}
 	}
 
+	/**
+	 * Volume bars reset.
+	 */
 	public void volumeBarsReset() {
-		VolumeLeftBar.setValue(MIN_VOLUME);
-		VolumeRightBar.setValue(MIN_VOLUME);
+		VolumeLeftBar.setValue(settings.MIN_VOLUME_MASTER);
+		VolumeRightBar.setValue(settings.MIN_VOLUME_MASTER);
 	}
 }
 

@@ -1,3 +1,7 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 package views;
 
 import java.awt.BorderLayout;
@@ -26,21 +30,38 @@ import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VirtualKeyboard.
+ */
 public class VirtualKeyboard extends JFrame {
 	
+	/** The keyboard. */
 	Keyboard keyboard = new Keyboard();
+	
+	/** The settings. */
 	Settings settings = Settings.getSettings();
+	
+	/** The osc settings. */
 	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
 	
+	/** The content pane. */
 	private JPanel contentPane;
 	
 	
+	/** The rdbtn octaves. */
 	JRadioButton rdbtnOctaves;
+	
+	/** The rdbtn octaves 1. */
 	JRadioButton rdbtnOctaves_1;
+	
+	/** The rdbtn octaves 2. */
 	JRadioButton rdbtnOctaves_2;
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -655,6 +676,11 @@ public class VirtualKeyboard extends JFrame {
 		OctavesGroup.add(rdbtnOctaves_2);
 	}
 	
+	/**
+	 * Select right octave.
+	 *
+	 * @return the int
+	 */
 	public int selectRightOctave(){
 		int factor = 0;
 		if(rdbtnOctaves.isSelected()){

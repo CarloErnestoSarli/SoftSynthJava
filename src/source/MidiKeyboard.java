@@ -1,3 +1,7 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 package source;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +20,7 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Transmitter;
 
+// TODO: Auto-generated Javadoc
 /**
  * 
  * MidiKeyboard.
@@ -36,22 +41,38 @@ import javax.sound.midi.Transmitter;
  */
 public class MidiKeyboard
 {
+	
+	/** The device name. */
 	private String deviceName = "nanoKEY 1 KEYBOARD";
 
+	/** The nk device. */
 	private MidiDevice nkDevice;
+	
+	/** The nk transmitter. */
 	private Transmitter nkTransmitter;
 	
+	/** The listeners. */
 	private ArrayList<ActionListener> listeners;
 	
+	/** The midi queue. */
 	private Queue<ShortMessage> midiQueue;
+	
+	/** The most recent midi event. */
 	public ShortMessage mostRecentMidiEvent;
 	
+	/** The configured. */
 	private boolean configured = false;
 	
+	/** The Constant NOTE_ON. */
 	// some constants that define NOTE_ON and NOTE_OFF events
 	public static final int NOTE_ON = 0x90;
+	
+	/** The Constant NOTE_OFF. */
 	public static final int NOTE_OFF = 0x80;
 	
+	/**
+	 * Instantiates a new midi keyboard.
+	 */
 	public MidiKeyboard()
 	{
 		listeners = new ArrayList<ActionListener>();
@@ -86,6 +107,9 @@ public class MidiKeyboard
 		}
 	}
 	
+	/**
+	 * Open device.
+	 */
 	private void openDevice()
 	{
 		// Obtain information about all the installed synthesizers.
@@ -123,6 +147,11 @@ public class MidiKeyboard
 		}
 	}
 	
+	/**
+	 * Adds the action listener.
+	 *
+	 * @param a the a
+	 */
 	public void addActionListener(ActionListener a)
 	{
 		if( a != null ) listeners.add(a);
@@ -173,14 +202,24 @@ public class MidiKeyboard
 	 */
 	class MidiInputReceiver implements Receiver
 	{
-	    public String name;
 	    
-	    public MidiInputReceiver(String name)
+    	/** The name. */
+    	public String name;
+	    
+	    /**
+    	 * Instantiates a new midi input receiver.
+    	 *
+    	 * @param name the name
+    	 */
+    	public MidiInputReceiver(String name)
 	    {
 	        this.name = name;
 	    }
 	    
-	    public void send(MidiMessage message, long timeStamp)
+	    /* (non-Javadoc)
+    	 * @see javax.sound.midi.Receiver#send(javax.sound.midi.MidiMessage, long)
+    	 */
+    	public void send(MidiMessage message, long timeStamp)
 	    {
 	    	try
 	    	{
@@ -202,10 +241,17 @@ public class MidiKeyboard
 	    		ex.printStackTrace();
 	    	}
 	    }
-	    public void close() {}
+	    
+    	/* (non-Javadoc)
+    	 * @see javax.sound.midi.Receiver#close()
+    	 */
+    	public void close() {}
 	}
 	
 	// This utility learns controller numbers for each 
+	/**
+	 * Configure.
+	 */
 	// knob/slider and save the mappings to a file in the user's directory.
 	public void configure()
 	{
@@ -275,8 +321,13 @@ public class MidiKeyboard
 	 */
 	class ConfigureReceiver implements Receiver
 	{
+		
+		/** The last controller. */
 		public int lastController = -1;
 		
+		/* (non-Javadoc)
+		 * @see javax.sound.midi.Receiver#send(javax.sound.midi.MidiMessage, long)
+		 */
 		@Override
 	    public void send(MidiMessage message, long timeStamp)
 	    {
@@ -290,7 +341,11 @@ public class MidiKeyboard
 	    		ex.printStackTrace();
 	    	}
 	    }
-	    public void close() {}
+	    
+    	/* (non-Javadoc)
+    	 * @see javax.sound.midi.Receiver#close()
+    	 */
+    	public void close() {}
 	}
 	
 	/**
@@ -306,10 +361,21 @@ public class MidiKeyboard
 	 */
 	public class MidiInputEvent
 	{
+		
+		/** The type. */
 		public String type;
+		
+		/** The index. */
 		public int index;
+		
+		/** The value. */
 		public int value;
 		
+		/**
+		 * Instantiates a new midi input event.
+		 *
+		 * @param sm the sm
+		 */
 		public MidiInputEvent(ShortMessage sm)
 		{
 			// set the defaults
@@ -318,6 +384,9 @@ public class MidiKeyboard
 			value = sm.getData2();
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		@Override
 		public String toString()
 		{

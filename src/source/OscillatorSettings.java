@@ -1,5 +1,13 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 package source;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OscillatorSettings.
+ */
 public class OscillatorSettings {
 	
 	/** The settings. */
@@ -15,10 +23,15 @@ public class OscillatorSettings {
 	/** The m wave 2 sel. */
 	private String m_Wave1Sel, m_Wave2Sel;
 	
+	/** The m wave 2 phase. */
 	private float m_Wave1Phase, m_Wave2Phase;
 		
+	/** The m delay out time. */
 	private float m_delayIn1Time ,m_delayIn2Time, m_delayOutTime;
 	
+	/**
+	 * Instantiates a new oscillator settings.
+	 */
 	protected OscillatorSettings() {
 		m_Wave1Sel = "sine";
 		m_Wave2Sel = "sine";
@@ -74,22 +87,47 @@ public class OscillatorSettings {
 	}
 	
 
+	/**
+	 * Sets the wave 1 phase.
+	 *
+	 * @param phase the new wave 1 phase
+	 */
 	public void setWave1Phase(float phase) {
 		m_Wave1Phase = phase;
 	}
 
+	/**
+	 * Sets the wave 2 phase.
+	 *
+	 * @param phase the new wave 2 phase
+	 */
 	public void setWave2Phase(float phase) {
 		m_Wave2Phase = phase;
 	}
 	
+	/**
+	 * Sets the delay in 1 time.
+	 *
+	 * @param time the new delay in 1 time
+	 */
 	public void setDelayIn1Time(float time){
 		m_delayIn1Time = time;
 	}
 	
+	/**
+	 * Sets the delay in 2 time.
+	 *
+	 * @param time the new delay in 2 time
+	 */
 	public void setDelayIn2Time(float time){
 		m_delayIn2Time = time;
 	}
 	
+	/**
+	 * Sets the delay out time.
+	 *
+	 * @param time the new delay out time
+	 */
 	public void setDelayOutTime(float time){
 		m_delayOutTime = time;
 	}
@@ -115,14 +153,29 @@ public class OscillatorSettings {
 		return m_Osc2Freq;
 	}
 	
+	/**
+	 * Gets the delay in 1 time.
+	 *
+	 * @return the delay in 1 time
+	 */
 	public float getDelayIn1Time(){
 		return m_delayIn1Time;
 	}
 	
+	/**
+	 * Gets the delay in 2 time.
+	 *
+	 * @return the delay in 2 time
+	 */
 	public float getDelayIn2Time(){
 		return m_delayIn2Time;
 	}
 	
+	/**
+	 * Gets the delay out time.
+	 *
+	 * @return the delay out time
+	 */
 	public float getDelayOutTime(){
 		return m_delayOutTime;
 	}
@@ -151,11 +204,21 @@ public class OscillatorSettings {
 
 	
 
+	/**
+	 * Gets the wave 1 phase.
+	 *
+	 * @return the wave 1 phase
+	 */
 	public float getWave1Phase() {
 		
 		return m_Wave1Phase;
 	}
 
+	/**
+	 * Gets the wave 2 phase.
+	 *
+	 * @return the wave 2 phase
+	 */
 	public float getWave2Phase() {
 		
 		return m_Wave2Phase;

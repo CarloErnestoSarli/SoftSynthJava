@@ -1,7 +1,17 @@
+/**
+ * @file FilterSettings.java
+ * @author Carlo Sarli 
+ * 
+ */
 package source;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FilterSettings.
+ */
 public class FilterSettings {
 	
+	/** The filter settings. */
 	private static FilterSettings filterSettings = null;
 	
 	/** The m filter sel. */
@@ -25,6 +35,9 @@ public class FilterSettings {
 	/** The m filter gain. */
 	private float m_FilterGain;
 	
+	/**
+	 * Instantiates a new filter settings.
+	 */
 	protected FilterSettings() {
 		
 		m_Filter1Sel = "lpf";

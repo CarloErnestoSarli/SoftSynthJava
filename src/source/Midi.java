@@ -1,3 +1,7 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 package source;
 
 import java.awt.event.ActionEvent;
@@ -11,20 +15,38 @@ import net.beadsproject.beads.ugens.WavePlayer;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Midi.
+ */
 public class Midi {
 
+	/** The sine. */
 	WavePlayer sine;
+	
+	/** The sine gain. */
 	Gain sineGain;
+	
+	/** The gain glide. */
 	Glide gainGlide;
 
+	/** The last key pressed. */
 	int lastKeyPressed = -1;
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args)
 	{
 		Midi synth = new Midi();
 		synth.setup();
 	}
 
+	/**
+	 * Setup.
+	 */
 	// construct the synthesizer
 	public void setup()
 	{
@@ -71,6 +93,12 @@ public class Midi {
 		ac.start();
 	}
 
+	/**
+	 * Pitch to frequency.
+	 *
+	 * @param midiPitch the midi pitch
+	 * @return the float
+	 */
 	private float pitchToFrequency(int midiPitch)
 	{
 		/*
@@ -81,6 +109,11 @@ public class Midi {
 		return (float)(Math.pow(2, exponent) * 440.0f);
 	}
 
+	/**
+	 * Key down.
+	 *
+	 * @param midiPitch the midi pitch
+	 */
 	public void keyDown(int midiPitch)
 	{
 		if( sine != null && gainGlide != null )
@@ -91,6 +124,11 @@ public class Midi {
 		}
 	}
 
+	/**
+	 * Key up.
+	 *
+	 * @param midiPitch the midi pitch
+	 */
 	public void keyUp(int midiPitch)
 	{
 		if( gainGlide != null && midiPitch == lastKeyPressed )

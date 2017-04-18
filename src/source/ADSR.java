@@ -1,50 +1,57 @@
-/*
+/**
+ * @file ADSR.java
  * @author Carlo Sarli 
  * 
+ * This class holds the paramaters for the ADSR envelope of the synth.
+ * ADSR stands for ATTACK DECAY SUSTAIN and RELEASE, they all indicate a correlation between time and volume
+ * Attack indicates the time to reach peak volume
+ * Decay indicates the time to go from peak volume to sustain volume
+ * Sustain is the time for which a stable volume is maintained
+ * Release is the time to go from sustain to a volume = to 0
+ * All values go from 0ms to 1000ms (1s) and are all floats
  */
-
 package source;
 
 import net.beadsproject.beads.ugens.Envelope;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ADSR.
- */
-public class ADSR {
 
-	/** The adsr. */
+/**
+ * The Class ADSR is a singleton class
+ */
+public class ADSR extends Settings{
+
+	
+	
+	/** The adsr object initialised to null as for the singleton pattern. */
 	private static ADSR adsr = null;
 	
-	/** The Constant START_TIME. */
-	public static final float START_TIME = 500.0f;
 	
-	/** The m attack time. */
+	/** The attack time. */
 	private float m_AttackTime;
 	
-	/** The m decay time. */
+	/** The decay time. */
 	private float m_DecayTime;
 	
-	/** The m sustain time. */
+	/** The sustain time. */
 	private float m_SustainTime;
 	
-	/** The m release time. */
+	/** The release time. */
 	private float m_ReleaseTime;
 
 	/**
 	 * Instantiates a new adsr.
 	 */
 	protected ADSR() {
-		m_AttackTime = 100.0f;
-		m_DecayTime = 100.0f;
-		m_SustainTime = 100.0f;
-		m_ReleaseTime = 100.0f;
+		m_AttackTime = ADSR_START_TIME;
+		m_DecayTime = ADSR_START_TIME;
+		m_SustainTime = ADSR_START_TIME;
+		m_ReleaseTime = ADSR_START_TIME;
 	}
 
 	/**
 	 * Gets the adsr.
-	 *
-	 * @return the adsr
+	 * creates a new instance only if it hasn't been created before
+	 * @return the adsr 
 	 */
 	public static ADSR getADSR() {
 		if (adsr == null) {

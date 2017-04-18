@@ -1,61 +1,144 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 package source;
 
 import java.util.prefs.Preferences;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSettings.
+ */
 public class UserSettings {
 
+	/** The user settings. */
 	Preferences userSettings;
-	Settings settings = Settings.getSettings();
+	
+	
+	/** The master. */
 	Master master = Master.getMaster();
+	
+	/** The adsr. */
 	ADSR adsr = ADSR.getADSR();
+	
+	/** The lfo. */
 	LFO lfo = LFO.getLfo();
+	
+	/** The eq. */
 	EQ eq = EQ.getEQ();
+	
+	/** The osc settings. */
 	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
+	
+	/** The fil settings. */
 	FilterSettings filSettings = FilterSettings.getFilterSettings();
 
+	/** The osc 1 wave. */
 	// ---------OSC
 	private final String OSC_1_WAVE = "OSC_1_WAVE";
+	
+	/** The osc 2 wave. */
 	private final String OSC_2_WAVE = "OSC_2_WAVE";
+	
+	/** The osc 1 phase. */
 	private final String OSC_1_PHASE = "OSC_1_PHASE";
+	
+	/** The osc 2 phase. */
 	private final String OSC_2_PHASE = "OSC_2_PHASE";
+	
+	/** The add filter 1. */
 	// ---------FILTER
 	private final String ADD_FILTER_1 = "ADD_FILTER_1";
+	
+	/** The add filter 2. */
 	private final String ADD_FILTER_2 = "ADD_FILTER_2";
+	
+	/** The filter 1 freq. */
 	private final String FILTER_1_FREQ = "FILTER_1_FREQ";
+	
+	/** The filter 2 freq. */
 	private final String FILTER_2_FREQ = "FILTER_2_FREQ";
+	
+	/** The filter 1 type. */
 	private final String FILTER_1_TYPE = "FILTER_1_TYPE";
+	
+	/** The filter 2 type. */
 	private final String FILTER_2_TYPE = "FILTER_2_TYPE";
+	
+	/** The lfo freq. */
 	// ---------LFO
 	private final String LFO_FREQ = "LFO_FREQ";
+	
+	/** The lfo ampl. */
 	private final String LFO_AMPL = "LFO_AMPL";
+	
+	/** The lfo wave. */
 	private final String LFO_WAVE = "LFO_WAVE";
 	// private final String LFO_ACTION;
+	/** The a time. */
 	// ---------ADSR
 	private final String A_TIME = "A_TIME";
+	
+	/** The d time. */
 	private final String D_TIME = "D_TIME";
+	
+	/** The s time. */
 	private final String S_TIME = "S_TIME";
+	
+	/** The r time. */
 	private final String R_TIME = "R_TIME";
+	
+	/** The high freq. */
 	// ---------EQ
 	private final String HIGH_FREQ = "HIGH_FREQ";
+	
+	/** The high gain. */
 	private final String HIGH_GAIN = "HIGH_GAIN";
+	
+	/** The low freq. */
 	private final String LOW_FREQ = "LOW_FREQ";
+	
+	/** The low gain. */
 	private final String LOW_GAIN = "LOW_GAIN";
+	
+	/** The osc mix volume. */
 	// ---------MASTER
 	private final String OSC_MIX_VOLUME = "OSC_MIX_VOLUME";
+	
+	/** The osc 1 volume. */
 	private final String OSC_1_VOLUME = "OSC_1_VOLUME";
+	
+	/** The osc 2 volume. */
 	private final String OSC_2_VOLUME = "OSC_2_VOLUME";
+	
+	/** The filter mix volume. */
 	private final String FILTER_MIX_VOLUME = "FILTER_MIX_VOLUME";
+	
+	/** The filter 1 volume. */
 	private final String FILTER_1_VOLUME = "FILTER_1_VOLUME";
+	
+	/** The filter 2 volume. */
 	private final String FILTER_2_VOLUME = "FILTER_2_VOLUME";
+	
+	/** The master volume. */
 	private final String MASTER_VOLUME = "MASTER_VOLUME";
+	
+	/** The panner pos. */
 	// ---------PANNER
 	private final String PANNER_POS = "";
 	
+	/**
+	 * Instantiates a new user settings.
+	 */
 	public UserSettings(){
 		userSettings = Preferences.userRoot();
 
 	}
 	
+	/**
+	 * Save settings.
+	 */
 	public void saveSettings() {
 
 		// ---------OSC
@@ -97,6 +180,9 @@ public class UserSettings {
 
 	}
 
+	/**
+	 * Load settings.
+	 */
 	public void loadSettings() {
 
 		// ---------OSC

@@ -1,7 +1,10 @@
-/*
+/**
+ * @file Main.java
  * @author Carlo Sarli 
  * 
- */
+ * This class is used to create the Synthesiser and start the synthesis process
+ * It creates the GUI, sets its theme, creates and instance of the synthesizer class, initialises it and starts the program
+ **/
 import javax.swing.UIManager;
 
 import net.beadsproject.beads.*;
@@ -18,7 +21,7 @@ import views.*;
 import source.*;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Main.
  */
@@ -30,17 +33,17 @@ public class Main {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		
+		// sets the UI look and feel
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		
+		//Creates an instance of the synthesizer
 		Synthesizer synth = new Synthesizer();
-		
+		//initialises the synth
 		synth.initSynth();
-		
+		//starts the synthesis process
 		synth.Synthesize();
 				
 	}

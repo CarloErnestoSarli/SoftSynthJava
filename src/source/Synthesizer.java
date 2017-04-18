@@ -1,3 +1,7 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 package source;
 
 
@@ -16,59 +20,136 @@ import net.beadsproject.beads.ugens.WavePlayer;
 import views.GUI;
 import views.VirtualKeyboard;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Synthesizer.
+ */
 public class Synthesizer {
 	
+	/** The gui. */
 	GUI gui;
 	
+	/** The audio. */
 	Audio audio;
+	
+	/** The settings. */
 	Settings settings;
+	
+	/** The master. */
 	Master master;
+	
+	/** The filter. */
 	Filter filter;
+	
+	/** The adsr. */
 	ADSR adsr;
+	
+	/** The lfo. */
 	LFO lfo;
+	
+	/** The eq. */
 	EQ eq;
+	
+	/** The rev. */
 	ReverbComponent rev;
+	
+	/** The comp. */
 	CompressorComponent comp;
+	
+	/** The osc. */
 	Oscillator osc;
+	
+	/** The reverb. */
 	Reverb reverb;
+	
+	/** The compressor. */
 	Compressor compressor;
+	
+	/** The osc settings. */
 	OscillatorSettings oscSettings;
+	
+	/** The fil settings. */
 	FilterSettings filSettings;
 	
+	/** The Osc 1 glide. */
 	Glide Osc1Glide;
+	
+	/** The Osc 2 glide. */
 	Glide Osc2Glide;
+	
+	/** The lfo glide. */
 	Glide lfoGlide;
 		
+	/** The Osc 1 wave. */
 	WavePlayer Osc1Wave;
+	
+	/** The Osc 2 wave. */
 	WavePlayer Osc2Wave;
+	
+	/** The lfo wave. */
 	WavePlayer lfoWave;
 	
+	/** The filter 1. */
 	BiquadFilter filter1;
+	
+	/** The filter 2. */
 	BiquadFilter filter2;
 
+	/** The low. */
 	BiquadFilter low;
+	
+	/** The high. */
 	BiquadFilter high;
 	
+	/** The gain envelope. */
 	Envelope gainEnvelope;
 	
+	/** The modulator. */
 	WavePlayer modulator;
 	
- 	TapIn delayIn1, delayIn2;
+ 	/** The delay in 2. */
+	 TapIn delayIn1, delayIn2;
+    
+    /** The delay out 2. */
     TapOut delayOut1, delayOut2;
 
+	/** The master gain. */
 	Gain masterGain;
+	
+	/** The osc mix. */
 	Gain oscMix;
+	
+	/** The osc 1 gain. */
 	Gain osc1Gain;
+	
+	/** The osc 2 gain. */
 	Gain osc2Gain;
+	
+	/** The fil mix. */
 	Gain filMix;
+	
+	/** The fil 1 gain. */
 	Gain fil1Gain;
+	
+	/** The fil 2 gain. */
 	Gain fil2Gain;
+	
+	/** The delay gain 1. */
 	Gain delayGain1;
+	
+	/** The delay gain 2. */
 	Gain delayGain2;
+	
+	/** The eq gain. */
 	Gain eqGain;
+	
+	/** The panner. */
 	Panner panner;
 	
 	
+	/**
+	 * Inits the synth.
+	 */
 	public void initSynth(){
 		
 		gui = new GUI();
@@ -106,7 +187,7 @@ public class Synthesizer {
 		low = new BiquadFilter(audio.getAudioContext(), 2);
 		high = new BiquadFilter(audio.getAudioContext(), 2);
 		
-		gainEnvelope = new Envelope(audio.getAudioContext(),adsr.START_TIME );
+		gainEnvelope = new Envelope(audio.getAudioContext(),settings.ADSR_START_TIME );
 				
 	    
 		//--------------------------------------------LFO-------------------------------------
@@ -180,6 +261,9 @@ public class Synthesizer {
 		
 	}
 	
+	/**
+	 * Synthesize.
+	 */
 	public void Synthesize(){
 		
 		while(true){

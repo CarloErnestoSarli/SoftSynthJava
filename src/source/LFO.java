@@ -1,3 +1,7 @@
+/*
+ * @author Carlo Sarli 
+ * 
+ */
 package source;
 
 import net.beadsproject.beads.core.UGen;
@@ -10,27 +14,46 @@ import net.beadsproject.beads.ugens.Panner;
 import net.beadsproject.beads.ugens.WavePlayer;
 import java.util.HashMap;
 
-public class LFO {
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LFO.
+ */
+public class LFO extends Settings {
 
+	/** The audio. */
 	Audio audio = Audio.getAudio();
+	
 
+	/** The lfo. */
 	private static LFO lfo = null;
 
-	public static final float MIN_FREQ = 0.02f;
-	private final float MAX_FREQ = 20.0f;
-
+	/** The lfo saw. */
 	private Buffer lfoSine, lfoSquare, lfoTriangle, lfoSaw;
+	
+	/** The m lfo frequency. */
 	private float m_lfoFrequency;
+	
+	/** The m lfo amplitude. */
 	private float m_lfoAmplitude;
+	
+	/** The m lfo wave sel. */
 	private String m_lfoWaveSel;
+	
+	/** The is busy. */
 	private boolean isBusy;
 	
+	/** The lfo controlled. */
 	HashMap<UGen, Boolean> lfoControlled = new HashMap<UGen, Boolean>();
 
+	/** The lfo glide. */
 	Glide lfoGlide;
 
+	/** The lfo wave. */
 	WavePlayer lfoWave; // = new WavePlayer(audio.getAudioContext(), MIN_FREQ, lfoSine);;
 
+	/**
+	 * Instantiates a new lfo.
+	 */
 	protected LFO() {
 		
 		lfoSine = Buffer.SINE;
@@ -39,7 +62,7 @@ public class LFO {
 		lfoTriangle = Buffer.TRIANGLE;
 
 		m_lfoWaveSel = "sine";
-		m_lfoFrequency = MIN_FREQ;
+		m_lfoFrequency = START_LFO_FREQ/HUNDRED_FACTOR;
 
 		lfoGlide = new Glide(audio.getAudioContext(), m_lfoFrequency);
 		// lfoWave = new WavePlayer(audio.getAudioContext(), MIN_FREQ, lfoSine);
@@ -48,6 +71,11 @@ public class LFO {
 
 	}
 
+	/**
+	 * Gets the lfo.
+	 *
+	 * @return the lfo
+	 */
 	public static LFO getLfo() {
 		if (lfo == null) {
 			lfo = new LFO();
@@ -55,6 +83,12 @@ public class LFO {
 		return lfo;
 	}
 
+	/**
+	 * Select lfo wave.
+	 *
+	 * @param wave the wave
+	 * @return the buffer
+	 */
 	public Buffer SelectLfoWave(String wave) {
 
 		if (wave.equals("Sine")) {
@@ -69,6 +103,12 @@ public class LFO {
 			return lfoSine;
 		}
 	}
+	
+	/**
+	 * Control element.
+	 *
+	 * @param gen the gen
+	 */
 	/*
 	Function oscFrequencyLfo = new Function(lfoWave) { 
 		
@@ -115,43 +155,95 @@ public class LFO {
 		//lfoControlled.put(gen, isBusy);
 	}
 
+	/**
+	 * Removes the element.
+	 *
+	 * @param gen the gen
+	 * @param lfo the lfo
+	 */
 	public void removeElement(UGen gen, WavePlayer lfo) {
 		gen.removeAllConnections(lfo);
 		isBusy = false;
 		lfoControlled.put(gen, isBusy);
 	}
 
+	/**
+	 * Gets the lfo wave.
+	 *
+	 * @return the lfo wave
+	 */
 	public WavePlayer getLfoWave() {
 		return lfoWave;
 	}
 
+	/**
+	 * Gets the lfo glide.
+	 *
+	 * @return the lfo glide
+	 */
 	public Glide getLfoGlide() {
 		return lfoGlide;
 	}
 
+	/**
+	 * Sets the lfo freq.
+	 *
+	 * @param freq the new lfo freq
+	 */
 	public void setLfoFreq(float freq) {
 		m_lfoFrequency = freq;
 	}
 
+	/**
+	 * Sets the lfo wave sel.
+	 *
+	 * @param wave the new lfo wave sel
+	 */
 	public void setLfoWaveSel(String wave) {
 		m_lfoWaveSel = wave;
 	}
+	
+	/**
+	 * Sets the lfo amplitude.
+	 *
+	 * @param ampl the new lfo amplitude
+	 */
 	public void setLfoAmplitude(float ampl){
 		m_lfoAmplitude = ampl;
 	}
 
+	/**
+	 * Gets the lfo frq.
+	 *
+	 * @return the lfo frq
+	 */
 	public float getLfoFrq() {
 		return m_lfoFrequency;
 	}
 
+	/**
+	 * Gets the lfo wave sel.
+	 *
+	 * @return the lfo wave sel
+	 */
 	public String getLfoWaveSel() {
 		return m_lfoWaveSel;
 	}
 
+	/**
+	 * Gets the lfo sine.
+	 *
+	 * @return the lfo sine
+	 */
 	public Buffer getLfoSine() {
 		return lfoSine;
 	}
 
+	/**
+	 * Gets the checks if is busy.
+	 *
+	 * @return the checks if is busy
+	 */
 	public boolean getIsBusy() {
 		return isBusy;
 	}
@@ -166,6 +258,11 @@ public class LFO {
 	};
 	*/
 
+	/**
+	 * Gets the lfo amplitude.
+	 *
+	 * @return the lfo amplitude
+	 */
 	public float getLfoAmplitude() {
 		// TODO Auto-generated method stub
 		return m_lfoAmplitude;
