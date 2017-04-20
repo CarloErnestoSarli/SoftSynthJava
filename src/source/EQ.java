@@ -4,7 +4,7 @@
  * 
  * The EQ class sets up a simple parametric EQ using two filters the HighShelf and the LowShelf both built from a biquad filter
  * They both have two parameters: frequency and gain
- * The frequency indicates where the filter starts acting and the gain going from float 0 to 1 indicates the volume of the specified frequency range
+ * The frequency indicates where the filter starts acting and the gain going from float 0 to 1 indicates the volume of the specified frequency range.
  */
 package source;
 

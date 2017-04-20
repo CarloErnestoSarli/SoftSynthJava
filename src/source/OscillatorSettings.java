@@ -29,6 +29,11 @@ public class OscillatorSettings {
 	/** The m delay out time. */
 	private float m_delayIn1Time ,m_delayIn2Time, m_delayOutTime;
 	
+	private int m_transpose1;
+	private int m_fineTuning1;
+	private int m_transpose2;
+	private int m_fineTuning2;
+	
 	/**
 	 * Instantiates a new oscillator settings.
 	 */
@@ -222,6 +227,38 @@ public class OscillatorSettings {
 	public float getWave2Phase() {
 		
 		return m_Wave2Phase;
+	}
+
+	public int getTranspose1() {
+		return m_transpose1;
+	}
+
+	public void setTranspose1(int m_transpose) {
+		this.m_transpose1 = m_transpose;
+	}
+
+	public int getFineTuning1() {
+		return m_fineTuning1;
+	}
+
+	public void setFineTuning1(int m_fineTuning) {
+		this.m_fineTuning1 = m_fineTuning;
+	}
+
+	public int getTranspose2() {
+		return m_transpose2;
+	}
+
+	public void setTranspose2(int m_transpose2) {
+		this.m_transpose2 = m_transpose2;
+	}
+
+	public int getFineTuning2() {
+		return m_fineTuning2;
+	}
+
+	public void setFineTuning2(int m_fineTuning2) {
+		this.m_fineTuning2 = m_fineTuning2;
 	}
 
 }

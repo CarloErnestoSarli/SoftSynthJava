@@ -1,8 +1,9 @@
 /**
  * @file Audio.java
+
  * @author Carlo Sarli 
  * 
- * Class to get the unique audioContext for the project
+ * @brief Class to get the unique audioContext for the project.
  * @see http://www.beadsproject.net/ for documentation and resources
  */
 package source;
