@@ -1,6 +1,20 @@
-/*
- * @author Carlo Sarli 
+/**
  * 
+ * MidiKeyboard.
+ * 
+ * This class encapsulates a MIDI device that is used for 
+ * piano key type input.
+ * 
+ * I make no guarantees about this code, except that it
+ * works well for using my nanoKey to control
+ * Java synthesizers.
+ * 
+ * Run the MidiKeyboardConfigure program to configure
+ * your MIDI controller, or just call the configure
+ * method on an instance of this class.
+ * 
+ * @author Evan X. Merz
+ *
  */
 package source;
 import java.awt.event.ActionEvent;

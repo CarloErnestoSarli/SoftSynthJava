@@ -1,6 +1,7 @@
-/*
+/**
+ * @file Master.java
  * @author Carlo Sarli 
- * 
+ * @brief the master class initialises the master controls and handles the parameters
  */
 package source;
 

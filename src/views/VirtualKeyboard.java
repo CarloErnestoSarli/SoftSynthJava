@@ -1,6 +1,7 @@
-/*
+/**
+ * @file VirtualKeyboard.java
  * @author Carlo Sarli 
- * 
+ * @brief THe virtual keyboard class generates a gui for the virtual keyboard with all the necessary actions listeners
  */
 package views;
 

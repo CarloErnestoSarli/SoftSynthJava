@@ -1,6 +1,7 @@
-/*
+/**
+ * @file Keyboard.java
  * @author Carlo Sarli 
- * 
+ * @brief the keyboard class maps together the name of the notes to their MIDI number and contains a method to convert a midi number to a frequency
  */
 package source;
 

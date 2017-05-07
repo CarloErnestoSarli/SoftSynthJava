@@ -1,5 +1,7 @@
-/*
+/**
+ * @file Components.java
  * @author Carlo Sarli 
+ * @brief A class containing the majority of the GUI components, initialises them and updates them when loading from user settings 
  * 
  */
 package views;

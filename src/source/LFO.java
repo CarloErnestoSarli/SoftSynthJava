@@ -1,6 +1,7 @@
-/*
+/**
+ * @file LFO.java
  * @author Carlo Sarli 
- * 
+ * @brief The lfo class initialises the LFO and handles which module it controls and contains functions that adapt the LFO frequency to the appropriate range
  */
 package source;
 

@@ -1,6 +1,7 @@
-/*
+/**
+ * @file Settings.java
  * @author Carlo Sarli 
- * 
+ * @brief The settings class acts as super class for a lot of this project containing constant to initialise the various components
  */
 package source;
 

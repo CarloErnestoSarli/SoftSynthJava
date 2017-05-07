@@ -1,6 +1,7 @@
-/*
+/**
+ * @file OscillatorSettings.java
  * @author Carlo Sarli 
- * 
+ * @brief Handles the settings and parameters of the oscillator
  */
 package source;
 

@@ -1,5 +1,7 @@
-/*
+/**
+ * @file GUI.java
  * @author Carlo Sarli 
+ * @brief The GUI of marbles
  * 
  */
 package views;
@@ -1574,9 +1576,9 @@ public class GUI extends JFrame {
 	 * Volume bars.
 	 *
 	 * @param v
-	 *            the v
+	 *            the volume
 	 * @param pan
-	 *            the pan
+	 *            the panner position
 	 */
 	public void volumeBars(float v, float pan) {
 

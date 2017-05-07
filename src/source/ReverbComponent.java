@@ -1,5 +1,7 @@
-/*
+/**
+ * @file ReverComponent.java
  * @author Carlo Sarli 
+ * @brief Initialises and handles the parameters of the reverb component 
  * 
  */
 package source;

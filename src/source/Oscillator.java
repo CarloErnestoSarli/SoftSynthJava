@@ -1,6 +1,7 @@
-/*
+/**
+ * @file Oscillator.java
  * @author Carlo Sarli 
- * 
+ * @brief Initialises the oscillator and the glides controlling the frequency. Also contains a method to select the right waveform
  */
 package source;
 

@@ -1,5 +1,6 @@
-/*
- * @author Carlo Sarli 
+/**
+ * @author Evan X. Merz
+ * 
  * 
  */
 package source;
