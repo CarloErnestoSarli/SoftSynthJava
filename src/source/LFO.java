@@ -137,7 +137,7 @@ public class LFO extends Settings {
 			 return (x[0] * 1.0f) + (-1.0f);
 		 }
 	};
-	*/
+	
 	public void controlElement(UGen gen) {
 		//if (lfoControlled.get(gen)) {
 			//removeElement(gen, lfoWave);
@@ -154,7 +154,7 @@ public class LFO extends Settings {
 		//isBusy = true;
 		//lfoControlled.put(gen, isBusy);
 	}
-
+	*/
 	/**
 	 * Removes the element.
 	 *

@@ -13,11 +13,13 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
 import source.ADSR;
+import source.CompressorComponent;
 import source.EQ;
 import source.FilterSettings;
 import source.LFO;
 import source.Master;
 import source.OscillatorSettings;
+import source.ReverbComponent;
 import source.Settings;
 
 // TODO: Auto-generated Javadoc
@@ -28,132 +30,146 @@ public class Components extends Settings {
 
 	// private static Components comp = null;
 
-	
 	/** The lfo. */
 	LFO lfo = LFO.getLfo();
-	
+
 	/** The adsr. */
 	ADSR adsr = ADSR.getADSR();
-	
+
 	/** The master. */
 	Master master = Master.getMaster();
-	
+
 	/** The eq. */
 	EQ eq = EQ.getEQ();
-	
-	/** The osc  */
+
+	/** The osc */
 	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
-	
-	/** The fil  */
+
+	/** The fil */
 	FilterSettings filSettings = FilterSettings.getFilterSettings();
-
-
+	
+	CompressorComponent compressor = CompressorComponent.getCompressorComponent();
+	
+	ReverbComponent rev = ReverbComponent.getReverbComponent();
 
 	/** The Add osc 1 to filter. */
 	private JRadioButton AddOsc1ToFilter;
-	
+
 	/** The Add osc 2 to filter. */
 	private JRadioButton AddOsc2ToFilter;
-	
+
 	/** The Osc 1 wv sel. */
 	private JComboBox Osc1WvSel;
-	
+
 	/** The Osc 2 wv sel. */
 	private JComboBox Osc2WvSel;
-	
+
 	/** The Filter 2 combo. */
 	private JComboBox Filter2Combo;
-	
+
 	/** The Lfo wave combo. */
 	private JComboBox LfoWaveCombo;
-	
+
 	/** The Apply lfo combo. */
 	private JComboBox ApplyLfoCombo;
-	
+
 	/** The Filter 1 combo. */
 	private JComboBox Filter1Combo;
-	
+
 	/** The Volume left bar. */
 	private JProgressBar VolumeLeftBar;
-	
+
 	/** The Volume right bar. */
 	private JProgressBar VolumeRightBar;
-	
+
 	/** The Osc 1 freq slider. */
-	private JSlider Osc1FreqSlider;
-	
+	private JSlider Osc1TransposeSlider;
+
 	/** The Osc 1 phase slider. */
 	private JSlider Osc1PhaseSlider;
-	
+
 	/** The Osc 2 freq slider. */
-	private JSlider Osc2FreqSlider;
-	
+	private JSlider Osc2TransposeSlider;
+
 	/** The Osc 2 phase slider. */
 	private JSlider Osc2PhaseSlider;
-	
+
 	/** The Filter 1 freq slider. */
 	private JSlider Filter1FreqSlider;
-	
+
 	/** The Filter 2 freq slider. */
 	private JSlider Filter2FreqSlider;
-	
+
 	/** The Lfo frequency slider. */
 	private JSlider LfoFrequencySlider;
-	
+
 	/** The Lfo amplitude slider. */
 	private JSlider LfoAmplitudeSlider;
-	
+
 	/** The Panning slider. */
 	private JSlider PanningSlider;
-	
+
 	/** The Filter mix slider. */
 	private JSlider FilterMixSlider;
-	
+
 	/** The Osc mix slider. */
 	private JSlider OscMixSlider;
-	
+
 	/** The Osc gain slider. */
 	private JSlider OscGainSlider;
-	
+
 	/** The Master volume slider. */
 	private JSlider MasterVolumeSlider;
-	
+
 	/** The Filter gain slider. */
 	private JSlider FilterGainSlider;
-	
+
 	/** The Attack slider. */
 	private JSlider AttackSlider;
-	
+
 	/** The Release slider. */
 	private JSlider ReleaseSlider;
-	
+
 	/** The Sustain slider. */
 	private JSlider SustainSlider;
-	
+
 	/** The Decay slider. */
 	private JSlider DecaySlider;
-	
+
 	/** The Eq high slider. */
 	private JSlider EqHighSlider;
-	
+
 	/** The Eq high gain slider. */
 	private JSlider EqHighGainSlider;
-	
+
 	/** The Eq low slider. */
 	private JSlider EqLowSlider;
-	
+
 	/** The Eq low gain slider. */
 	private JSlider EqLowGainSlider;
+
+	private JSlider LateSlider;
+	private JSlider EarlySlider;
+	private JSlider RoomSlider;
+	private JSlider DampSlider;
+	private JRadioButton rdbtnReverbOn;
+	private JSlider RatioSlider;
+	private JSlider ThresholdSlider;
+	private JSlider CompDecaySlider;
+	private JSlider CompAttackSlider;
+	private JRadioButton radioCompressorOn;
+	private JSlider FineTuning2Slider;
+	private JSlider FineTuning1Slider;
 
 	/**
 	 * Instantiates a new components.
 	 */
 	public Components() {
 
-		Osc1FreqSlider = new JSlider(SwingConstants.HORIZONTAL, MIN_TRANSPOSE, MAX_TRANSPOSE, TRANSPOSE_START);
-		Osc1PhaseSlider = new JSlider(MIN_PHASE_SHIFT,MAX_PHASE_SHIFT,PHASE_START_SHIFT);
-		Osc2FreqSlider = new JSlider(SwingConstants.HORIZONTAL, MIN_TRANSPOSE, MAX_TRANSPOSE, TRANSPOSE_START);
-		Osc2PhaseSlider = new JSlider(MIN_PHASE_SHIFT,MAX_PHASE_SHIFT,PHASE_START_SHIFT);
+		Osc1TransposeSlider = new JSlider(SwingConstants.HORIZONTAL, MIN_TRANSPOSE, MAX_TRANSPOSE, TRANSPOSE_START);
+		Osc1PhaseSlider = new JSlider(MIN_PHASE_SHIFT, MAX_PHASE_SHIFT, PHASE_START_SHIFT);
+		Osc2TransposeSlider = new JSlider(SwingConstants.HORIZONTAL, MIN_TRANSPOSE, MAX_TRANSPOSE, TRANSPOSE_START);
+		Osc2PhaseSlider = new JSlider(MIN_PHASE_SHIFT, MAX_PHASE_SHIFT, PHASE_START_SHIFT);
 		Osc1WvSel = new JComboBox();
 		Osc2WvSel = new JComboBox();
 		Filter1FreqSlider = new JSlider(MIN_FIL_FREQ, MAX_FIL_FREQ, FIL_START_FREQ);
@@ -178,10 +194,22 @@ public class Components extends Settings {
 		ReleaseSlider = new JSlider(MIN_ADSR_TIME, MAX_ADSR_TIME, ADSR_START_TIME);
 		SustainSlider = new JSlider(MIN_ADSR_TIME, MAX_ADSR_TIME, ADSR_START_TIME);
 		DecaySlider = new JSlider(MIN_ADSR_TIME, MAX_ADSR_TIME, ADSR_START_TIME);
-		EqHighSlider = new JSlider(MIN_EQ_FREQ,MAX_EQ_FREQ, EQ_START_FREQ);
-		EqHighGainSlider = new JSlider(MIN_EQ_GAIN, MAX_EQ_GAIN,EQ_START_GAIN);
-		EqLowSlider = new JSlider(MIN_EQ_FREQ,MAX_EQ_FREQ, EQ_START_FREQ);
-		EqLowGainSlider = new JSlider(MIN_EQ_GAIN, MAX_EQ_GAIN,EQ_START_GAIN);
+		EqHighSlider = new JSlider(MIN_EQ_FREQ, MAX_EQ_FREQ, EQ_START_FREQ);
+		EqHighGainSlider = new JSlider(MIN_EQ_GAIN, MAX_EQ_GAIN, EQ_START_GAIN);
+		EqLowSlider = new JSlider(MIN_EQ_FREQ, MAX_EQ_FREQ, EQ_START_FREQ);
+		EqLowGainSlider = new JSlider(MIN_EQ_GAIN, MAX_EQ_GAIN, EQ_START_GAIN);
+		setLateSlider(new JSlider(MIN_LATE, MAX_LATE, START_LATE));
+		setEarlySlider(new JSlider(MIN_EARLY, MAX_EARLY, START_EARLY));
+		setRoomSlider(new JSlider(MIN_SIZE, MAX_SIZE, START_SIZE));
+		setDampSlider(new JSlider(MIN_DAMP, MAX_DAMP, START_DAMP));
+		setRdbtnReverbOn(new JRadioButton("ON"));
+		setRatioSlider(new JSlider(MIN_RATIO, MAX_RATIO, START_RATIO));
+		setThresholdSlider(new JSlider(MIN_THRESHOLD, MAX_THRESHOLD, START_THRESHOLD));
+		setCompDecaySlider(new JSlider(MIN_DECAY, MAX_DECAY, START_DECAY));
+		setCompAttackSlider(new JSlider(MIN_ATTACK, MAX_ATTACK, START_ATTACK));
+		setRadioCompressorOn(new JRadioButton("ON"));
+		setFineTuning2Slider(new JSlider(SwingConstants.HORIZONTAL, MIN_FINE_TUNING, MAX_FINE_TUNING, FINE_TUNE_START));
+		setFineTuning1Slider(new JSlider(SwingConstants.HORIZONTAL, MIN_FINE_TUNING, MAX_FINE_TUNING, FINE_TUNE_START));
 	}
 
 	/**
@@ -199,24 +227,37 @@ public class Components extends Settings {
 		Filter2Combo.setSelectedItem(filSettings.getFilter2Sel());
 		LfoWaveCombo.setSelectedItem(lfo.getLfoWaveSel());
 		// ApplyLfoCombo.setSelectedItem(lfo.get);;
-		Filter1FreqSlider.setValue((int) filSettings.getFilter1Freq());
-		Filter2FreqSlider.setValue((int) filSettings.getFilter2Freq());
+		Filter1FreqSlider.setValue((int) (filSettings.getFilter1Freq()* HUNDRED_FACTOR));
+		Filter2FreqSlider.setValue((int) (filSettings.getFilter2Freq()* HUNDRED_FACTOR));
 		LfoFrequencySlider.setValue((int) lfo.getLfoFrq());
 		LfoAmplitudeSlider.setValue((int) lfo.getLfoAmplitude());
-		PanningSlider.setValue((int) master.getPannerPosition());
-		FilterMixSlider.setValue((int) master.getFil1Gain());
-		OscMixSlider.setValue((int) master.getOsc1Gain());
-		OscGainSlider.setValue((int) master.getOscMix());
-		MasterVolumeSlider.setValue((int) master.getMasterVolume());
-		FilterGainSlider.setValue((int) master.getFilMix());
+		PanningSlider.setValue((int) (master.getPannerPosition()* TEN_FACTOR));
+		FilterMixSlider.setValue((int) (master.getFil1Gain()* HUNDRED_FACTOR));
+		OscMixSlider.setValue((int) (master.getOsc1Gain()* HUNDRED_FACTOR));
+		OscGainSlider.setValue((int) (master.getOscMix()* HUNDRED_FACTOR));
+		MasterVolumeSlider.setValue((int) (master.getMasterVolume()* HUNDRED_FACTOR));
+		FilterGainSlider.setValue((int) (master.getFilMix()* HUNDRED_FACTOR));
 		AttackSlider.setValue((int) adsr.getAttackTime());
 		ReleaseSlider.setValue((int) adsr.getReleaseTime());
 		SustainSlider.setValue((int) adsr.getSustainTime());
 		DecaySlider.setValue((int) adsr.getDecayTime());
-		EqHighSlider.setValue((int) eq.getHighFreq());
-		EqHighGainSlider.setValue((int) eq.getHighGain());
-		EqLowSlider.setValue((int) eq.getLowFreq());
-		EqLowGainSlider.setValue((int) eq.getLowGain());
+		EqHighSlider.setValue((int) (eq.getHighFreq()* HUNDRED_FACTOR));
+		EqHighGainSlider.setValue((int) (eq.getHighGain()* TEN_FACTOR));
+		EqLowSlider.setValue((int) (eq.getLowFreq()* HUNDRED_FACTOR));
+		EqLowGainSlider.setValue((int) (eq.getLowGain()* TEN_FACTOR));
+		LateSlider.setValue((int) (rev.getLateReflection()* TEN_FACTOR));
+		EarlySlider.setValue((int) (rev.getEarlyReflection()* TEN_FACTOR));
+		RoomSlider.setValue((int) (rev.getSize()* TEN_FACTOR));
+		DampSlider.setValue((int) (rev.getDamping()* TEN_FACTOR));
+		rdbtnReverbOn.setSelected(super.isReverbOn());
+		System.out.println("RVERB ON " + super.isReverbOn());
+		RatioSlider.setValue((int) compressor.getRatio());
+		ThresholdSlider.setValue((int) (compressor.getThreshold()* TEN_FACTOR));
+		CompDecaySlider.setValue((int) compressor.getDecay());
+		CompAttackSlider.setValue((int) compressor.getAttack());
+		radioCompressorOn.setSelected(super.isCompressorOn());
+		FineTuning2Slider.setValue((int) oscSettings.getFineTuning2());
+		FineTuning1Slider.setValue((int) oscSettings.getFineTuning1());
 
 	}
 
@@ -236,7 +277,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the adds the osc 1 to filter.
 	 *
-	 * @param addOsc1ToFilter the new adds the osc 1 to filter
+	 * @param addOsc1ToFilter
+	 *            the new adds the osc 1 to filter
 	 */
 	public void setAddOsc1ToFilter(JRadioButton addOsc1ToFilter) {
 		AddOsc1ToFilter = addOsc1ToFilter;
@@ -254,7 +296,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the adds the osc 2 to filter.
 	 *
-	 * @param addOsc2ToFilter the new adds the osc 2 to filter
+	 * @param addOsc2ToFilter
+	 *            the new adds the osc 2 to filter
 	 */
 	public void setAddOsc2ToFilter(JRadioButton addOsc2ToFilter) {
 		AddOsc2ToFilter = addOsc2ToFilter;
@@ -272,7 +315,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the osc 1 wv sel.
 	 *
-	 * @param osc1WvSel the new osc 1 wv sel
+	 * @param osc1WvSel
+	 *            the new osc 1 wv sel
 	 */
 	public void setOsc1WvSel(JComboBox osc1WvSel) {
 		Osc1WvSel = osc1WvSel;
@@ -290,7 +334,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the osc 2 wv sel.
 	 *
-	 * @param osc2WvSel the new osc 2 wv sel
+	 * @param osc2WvSel
+	 *            the new osc 2 wv sel
 	 */
 	public void setOsc2WvSel(JComboBox osc2WvSel) {
 		Osc2WvSel = osc2WvSel;
@@ -308,7 +353,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the filter 2 combo.
 	 *
-	 * @param filter2Combo the new filter 2 combo
+	 * @param filter2Combo
+	 *            the new filter 2 combo
 	 */
 	public void setFilter2Combo(JComboBox filter2Combo) {
 		Filter2Combo = filter2Combo;
@@ -326,7 +372,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the lfo wave combo.
 	 *
-	 * @param lfoWaveCombo the new lfo wave combo
+	 * @param lfoWaveCombo
+	 *            the new lfo wave combo
 	 */
 	public void setLfoWaveCombo(JComboBox lfoWaveCombo) {
 		LfoWaveCombo = lfoWaveCombo;
@@ -344,7 +391,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the apply lfo combo.
 	 *
-	 * @param applyLfoCombo the new apply lfo combo
+	 * @param applyLfoCombo
+	 *            the new apply lfo combo
 	 */
 	public void setApplyLfoCombo(JComboBox applyLfoCombo) {
 		ApplyLfoCombo = applyLfoCombo;
@@ -362,7 +410,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the filter 1 combo.
 	 *
-	 * @param filter1Combo the new filter 1 combo
+	 * @param filter1Combo
+	 *            the new filter 1 combo
 	 */
 	public void setFilter1Combo(JComboBox filter1Combo) {
 		Filter1Combo = filter1Combo;
@@ -380,7 +429,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the volume left bar.
 	 *
-	 * @param volumeLeftBar the new volume left bar
+	 * @param volumeLeftBar
+	 *            the new volume left bar
 	 */
 	public void setVolumeLeftBar(JProgressBar volumeLeftBar) {
 		VolumeLeftBar = volumeLeftBar;
@@ -398,7 +448,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the volume right bar.
 	 *
-	 * @param volumeRightBar the new volume right bar
+	 * @param volumeRightBar
+	 *            the new volume right bar
 	 */
 	public void setVolumeRightBar(JProgressBar volumeRightBar) {
 		VolumeRightBar = volumeRightBar;
@@ -409,17 +460,18 @@ public class Components extends Settings {
 	 *
 	 * @return the osc 1 freq slider
 	 */
-	public JSlider getOsc1FreqSlider() {
-		return Osc1FreqSlider;
+	public JSlider getOsc1TransposeSlider() {
+		return Osc1TransposeSlider;
 	}
 
 	/**
 	 * Sets the osc 1 freq slider.
 	 *
-	 * @param osc1FreqSlider the new osc 1 freq slider
+	 * @param osc1FreqSlider
+	 *            the new osc 1 freq slider
 	 */
-	public void setOsc1FreqSlider(JSlider osc1FreqSlider) {
-		Osc1FreqSlider = osc1FreqSlider;
+	public void setOsc1FreqSlider(JSlider osc1TransposeSlider) {
+		Osc1TransposeSlider = osc1TransposeSlider;
 	}
 
 	/**
@@ -434,7 +486,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the osc 1 phase slider.
 	 *
-	 * @param osc1PhaseSlider the new osc 1 phase slider
+	 * @param osc1PhaseSlider
+	 *            the new osc 1 phase slider
 	 */
 	public void setOsc1PhaseSlider(JSlider osc1PhaseSlider) {
 		Osc1PhaseSlider = osc1PhaseSlider;
@@ -445,17 +498,18 @@ public class Components extends Settings {
 	 *
 	 * @return the osc 2 freq slider
 	 */
-	public JSlider getOsc2FreqSlider() {
-		return Osc2FreqSlider;
+	public JSlider getOsc2TransposeSlider() {
+		return Osc2TransposeSlider;
 	}
 
 	/**
 	 * Sets the osc 2 freq slider.
 	 *
-	 * @param osc2FreqSlider the new osc 2 freq slider
+	 * @param osc2FreqSlider
+	 *            the new osc 2 freq slider
 	 */
-	public void setOsc2FreqSlider(JSlider osc2FreqSlider) {
-		Osc2FreqSlider = osc2FreqSlider;
+	public void setOsc2TransposeSlider(JSlider osc2TransposeSlider) {
+		Osc2TransposeSlider = osc2TransposeSlider;
 	}
 
 	/**
@@ -470,7 +524,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the osc 2 phase slider.
 	 *
-	 * @param osc2PhaseSlider the new osc 2 phase slider
+	 * @param osc2PhaseSlider
+	 *            the new osc 2 phase slider
 	 */
 	public void setOsc2PhaseSlider(JSlider osc2PhaseSlider) {
 		Osc2PhaseSlider = osc2PhaseSlider;
@@ -488,7 +543,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the filter 1 freq slider.
 	 *
-	 * @param filter1FreqSlider the new filter 1 freq slider
+	 * @param filter1FreqSlider
+	 *            the new filter 1 freq slider
 	 */
 	public void setFilter1FreqSlider(JSlider filter1FreqSlider) {
 		Filter1FreqSlider = filter1FreqSlider;
@@ -506,7 +562,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the filter 2 freq slider.
 	 *
-	 * @param filter2FreqSlider the new filter 2 freq slider
+	 * @param filter2FreqSlider
+	 *            the new filter 2 freq slider
 	 */
 	public void setFilter2FreqSlider(JSlider filter2FreqSlider) {
 		Filter2FreqSlider = filter2FreqSlider;
@@ -524,7 +581,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the lfo frequency slider.
 	 *
-	 * @param lfoFrequencySlider the new lfo frequency slider
+	 * @param lfoFrequencySlider
+	 *            the new lfo frequency slider
 	 */
 	public void setLfoFrequencySlider(JSlider lfoFrequencySlider) {
 		LfoFrequencySlider = lfoFrequencySlider;
@@ -542,7 +600,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the lfo amplitude slider.
 	 *
-	 * @param lfoAmplitudeSlider the new lfo amplitude slider
+	 * @param lfoAmplitudeSlider
+	 *            the new lfo amplitude slider
 	 */
 	public void setLfoAmplitudeSlider(JSlider lfoAmplitudeSlider) {
 		LfoAmplitudeSlider = lfoAmplitudeSlider;
@@ -560,7 +619,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the panning slider.
 	 *
-	 * @param panningSlider the new panning slider
+	 * @param panningSlider
+	 *            the new panning slider
 	 */
 	public void setPanningSlider(JSlider panningSlider) {
 		PanningSlider = panningSlider;
@@ -578,7 +638,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the filter mix slider.
 	 *
-	 * @param filterMixSlider the new filter mix slider
+	 * @param filterMixSlider
+	 *            the new filter mix slider
 	 */
 	public void setFilterMixSlider(JSlider filterMixSlider) {
 		FilterMixSlider = filterMixSlider;
@@ -596,7 +657,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the osc mix slider.
 	 *
-	 * @param oscMixSlider the new osc mix slider
+	 * @param oscMixSlider
+	 *            the new osc mix slider
 	 */
 	public void setOscMixSlider(JSlider oscMixSlider) {
 		OscMixSlider = oscMixSlider;
@@ -614,7 +676,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the osc gain slider.
 	 *
-	 * @param oscGainSlider the new osc gain slider
+	 * @param oscGainSlider
+	 *            the new osc gain slider
 	 */
 	public void setOscGainSlider(JSlider oscGainSlider) {
 		OscGainSlider = oscGainSlider;
@@ -632,7 +695,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the master volume slider.
 	 *
-	 * @param masterVolumeSlider the new master volume slider
+	 * @param masterVolumeSlider
+	 *            the new master volume slider
 	 */
 	public void setMasterVolumeSlider(JSlider masterVolumeSlider) {
 		MasterVolumeSlider = masterVolumeSlider;
@@ -650,7 +714,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the filter gain slider.
 	 *
-	 * @param filterGainSlider the new filter gain slider
+	 * @param filterGainSlider
+	 *            the new filter gain slider
 	 */
 	public void setFilterGainSlider(JSlider filterGainSlider) {
 		FilterGainSlider = filterGainSlider;
@@ -668,7 +733,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the attack slider.
 	 *
-	 * @param attackSlider the new attack slider
+	 * @param attackSlider
+	 *            the new attack slider
 	 */
 	public void setAttackSlider(JSlider attackSlider) {
 		AttackSlider = attackSlider;
@@ -686,7 +752,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the release slider.
 	 *
-	 * @param releaseSlider the new release slider
+	 * @param releaseSlider
+	 *            the new release slider
 	 */
 	public void setReleaseSlider(JSlider releaseSlider) {
 		ReleaseSlider = releaseSlider;
@@ -704,7 +771,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the sustain slider.
 	 *
-	 * @param sustainSlider the new sustain slider
+	 * @param sustainSlider
+	 *            the new sustain slider
 	 */
 	public void setSustainSlider(JSlider sustainSlider) {
 		SustainSlider = sustainSlider;
@@ -722,7 +790,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the decay slider.
 	 *
-	 * @param decaySlider the new decay slider
+	 * @param decaySlider
+	 *            the new decay slider
 	 */
 	public void setDecaySlider(JSlider decaySlider) {
 		DecaySlider = decaySlider;
@@ -740,7 +809,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the eq high slider.
 	 *
-	 * @param eqHighSlider the new eq high slider
+	 * @param eqHighSlider
+	 *            the new eq high slider
 	 */
 	public void setEqHighSlider(JSlider eqHighSlider) {
 		EqHighSlider = eqHighSlider;
@@ -758,7 +828,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the eq high gain slider.
 	 *
-	 * @param eqHighGainSlider the new eq high gain slider
+	 * @param eqHighGainSlider
+	 *            the new eq high gain slider
 	 */
 	public void setEqHighGainSlider(JSlider eqHighGainSlider) {
 		EqHighGainSlider = eqHighGainSlider;
@@ -776,7 +847,8 @@ public class Components extends Settings {
 	/**
 	 * Sets the eq low slider.
 	 *
-	 * @param eqLowSlider the new eq low slider
+	 * @param eqLowSlider
+	 *            the new eq low slider
 	 */
 	public void setEqLowSlider(JSlider eqLowSlider) {
 		EqLowSlider = eqLowSlider;
@@ -794,9 +866,106 @@ public class Components extends Settings {
 	/**
 	 * Sets the eq low gain slider.
 	 *
-	 * @param eqLowGainSlider the new eq low gain slider
+	 * @param eqLowGainSlider
+	 *            the new eq low gain slider
 	 */
 	public void setEqLowGainSlider(JSlider eqLowGainSlider) {
 		EqLowGainSlider = eqLowGainSlider;
+	}
+
+	public JSlider getLateSlider() {
+		return LateSlider;
+	}
+
+	public void setLateSlider(JSlider lateSlider) {
+		LateSlider = lateSlider;
+	}
+
+	public JSlider getEarlySlider() {
+		return EarlySlider;
+	}
+
+	public void setEarlySlider(JSlider earlySlider) {
+		EarlySlider = earlySlider;
+	}
+
+	public JSlider getRoomSlider() {
+		return RoomSlider;
+	}
+
+	public void setRoomSlider(JSlider roomSlider) {
+		RoomSlider = roomSlider;
+	}
+
+	public JSlider getDampSlider() {
+		return DampSlider;
+	}
+
+	public void setDampSlider(JSlider dampSlider) {
+		DampSlider = dampSlider;
+	}
+
+	public JRadioButton getRdbtnReverbOn() {
+		return rdbtnReverbOn;
+	}
+
+	public void setRdbtnReverbOn(JRadioButton rdbtnReverbOn) {
+		this.rdbtnReverbOn = rdbtnReverbOn;
+	}
+
+	public JSlider getRatioSlider() {
+		return RatioSlider;
+	}
+
+	public void setRatioSlider(JSlider ratioSlider) {
+		RatioSlider = ratioSlider;
+	}
+
+	public JSlider getThresholdSlider() {
+		return ThresholdSlider;
+	}
+
+	public void setThresholdSlider(JSlider thresholdSlider) {
+		ThresholdSlider = thresholdSlider;
+	}
+
+	public JSlider getCompAttackSlider() {
+		return CompAttackSlider;
+	}
+
+	public void setCompAttackSlider(JSlider compAttackSlider) {
+		CompAttackSlider = compAttackSlider;
+	}
+
+	public JRadioButton getRadioCompressorOn() {
+		return radioCompressorOn;
+	}
+
+	public void setRadioCompressorOn(JRadioButton radioCompressorOn) {
+		this.radioCompressorOn = radioCompressorOn;
+	}
+
+	public JSlider getFineTuning2Slider() {
+		return FineTuning2Slider;
+	}
+
+	public void setFineTuning2Slider(JSlider fineTuning2Slider) {
+		FineTuning2Slider = fineTuning2Slider;
+	}
+
+	public JSlider getFineTuning1Slider() {
+		return FineTuning1Slider;
+	}
+
+	public void setFineTuning1Slider(JSlider fineTuning1Slider) {
+		FineTuning1Slider = fineTuning1Slider;
+	}
+
+	public JSlider getCompDecaySlider() {
+		return CompDecaySlider;
+	}
+
+	public void setCompDecaySlider(JSlider compDecaySlider) {
+		CompDecaySlider = compDecaySlider;
 	}
 }

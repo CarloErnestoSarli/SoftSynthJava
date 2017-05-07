@@ -4,8 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class SettingsTest {
+import source.Settings;
 
+public class SettingsTest {
+	
+	Settings settings = Settings.getSettings();
 	@Test
 	public void testSettings() {
 		fail("Not yet implemented");
@@ -18,7 +21,7 @@ public class SettingsTest {
 
 	@Test
 	public void testSwitchReverbOn() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
@@ -58,12 +61,13 @@ public class SettingsTest {
 
 	@Test
 	public void testIsCompressorOn() {
-		fail("Not yet implemented");
+		assertEquals(settings.isCompressorOn(), true);
 	}
 
 	@Test
 	public void testSetCompressorOn() {
-		fail("Not yet implemented");
+		boolean on = true;
+		settings.setCompressorOn(on);
 	}
 
 }

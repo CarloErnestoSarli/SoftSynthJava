@@ -7,12 +7,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import source.Keyboard;
+
 /**
  * @author carlo
  *
  */
 public class KeyboardTest {
-
+	Keyboard k = new Keyboard();
 	/**
 	 * Test method for {@link source.Keyboard#Keyboard()}.
 	 */
@@ -50,7 +52,8 @@ public class KeyboardTest {
 	 */
 	@Test
 	public final void testPitchToFrequency() {
-		fail("Not yet implemented"); // TODO
+		float pitch = 138.59131f;
+		assertEquals(k.pitchToFrequency(49),pitch);
 	}
 
 }

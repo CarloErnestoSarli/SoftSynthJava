@@ -43,6 +43,8 @@ public class Main {
 		Synthesizer synth = new Synthesizer();
 		//initialises the synth
 		synth.initSynth();
+		//initialises objects
+		synth.initComponents();
 		//starts the synthesis process
 		synth.Synthesize();
 				

@@ -1,5 +1,7 @@
-/*
+/**
+ * @file UserSettings.java
  * @author Carlo Sarli 
+ *	@brief this class is responsible for saving and loadin user settings or preset into the synth.
  * 
  */
 package source;
@@ -14,134 +16,157 @@ public class UserSettings {
 
 	/** The user settings. */
 	Preferences userSettings;
-	
-	
+
 	/** The master. */
 	Master master = Master.getMaster();
-	
+
 	/** The adsr. */
 	ADSR adsr = ADSR.getADSR();
-	
+
 	/** The lfo. */
 	LFO lfo = LFO.getLfo();
-	
+
 	/** The eq. */
 	EQ eq = EQ.getEQ();
-	
+
 	/** The osc settings. */
 	OscillatorSettings oscSettings = OscillatorSettings.getOscillatorSettings();
-	
+
 	/** The fil settings. */
 	FilterSettings filSettings = FilterSettings.getFilterSettings();
 
+	CompressorComponent comp = CompressorComponent.getCompressorComponent();
+
+	ReverbComponent rev = ReverbComponent.getReverbComponent();
+
+	Settings settings = Settings.getSettings();
 	/** The osc 1 wave. */
 	// ---------OSC
 	private final String OSC_1_WAVE = "OSC_1_WAVE";
-	
+
 	/** The osc 2 wave. */
 	private final String OSC_2_WAVE = "OSC_2_WAVE";
-	
+
 	/** The osc 1 phase. */
 	private final String OSC_1_PHASE = "OSC_1_PHASE";
-	
+
 	/** The osc 2 phase. */
 	private final String OSC_2_PHASE = "OSC_2_PHASE";
-	
+
 	/** The add filter 1. */
 	// ---------FILTER
 	private final String ADD_FILTER_1 = "ADD_FILTER_1";
-	
+
 	/** The add filter 2. */
 	private final String ADD_FILTER_2 = "ADD_FILTER_2";
-	
+
 	/** The filter 1 freq. */
 	private final String FILTER_1_FREQ = "FILTER_1_FREQ";
-	
+
 	/** The filter 2 freq. */
 	private final String FILTER_2_FREQ = "FILTER_2_FREQ";
-	
+
 	/** The filter 1 type. */
 	private final String FILTER_1_TYPE = "FILTER_1_TYPE";
-	
+
 	/** The filter 2 type. */
 	private final String FILTER_2_TYPE = "FILTER_2_TYPE";
-	
+
 	/** The lfo freq. */
 	// ---------LFO
 	private final String LFO_FREQ = "LFO_FREQ";
-	
+
 	/** The lfo ampl. */
 	private final String LFO_AMPL = "LFO_AMPL";
-	
+
 	/** The lfo wave. */
 	private final String LFO_WAVE = "LFO_WAVE";
 	// private final String LFO_ACTION;
 	/** The a time. */
 	// ---------ADSR
 	private final String A_TIME = "A_TIME";
-	
+
 	/** The d time. */
 	private final String D_TIME = "D_TIME";
-	
+
 	/** The s time. */
 	private final String S_TIME = "S_TIME";
-	
+
 	/** The r time. */
 	private final String R_TIME = "R_TIME";
-	
+
 	/** The high freq. */
 	// ---------EQ
 	private final String HIGH_FREQ = "HIGH_FREQ";
-	
+
 	/** The high gain. */
 	private final String HIGH_GAIN = "HIGH_GAIN";
-	
+
 	/** The low freq. */
 	private final String LOW_FREQ = "LOW_FREQ";
-	
+
 	/** The low gain. */
 	private final String LOW_GAIN = "LOW_GAIN";
-	
+
 	/** The osc mix volume. */
 	// ---------MASTER
 	private final String OSC_MIX_VOLUME = "OSC_MIX_VOLUME";
-	
+
 	/** The osc 1 volume. */
 	private final String OSC_1_VOLUME = "OSC_1_VOLUME";
-	
+
 	/** The osc 2 volume. */
 	private final String OSC_2_VOLUME = "OSC_2_VOLUME";
-	
+
 	/** The filter mix volume. */
 	private final String FILTER_MIX_VOLUME = "FILTER_MIX_VOLUME";
-	
+
 	/** The filter 1 volume. */
 	private final String FILTER_1_VOLUME = "FILTER_1_VOLUME";
-	
+
 	/** The filter 2 volume. */
 	private final String FILTER_2_VOLUME = "FILTER_2_VOLUME";
-	
+
 	/** The master volume. */
 	private final String MASTER_VOLUME = "MASTER_VOLUME";
-	
+
 	/** The panner pos. */
 	// ---------PANNER
-	private final String PANNER_POS = "";
-	
+	private final String PANNER_POS = "PANNER_POS";
+
+	private final String LATE = "LATE";
+	private final String EARLY = "EARLY";
+	private final String ROOM = "ROOM";
+	private final String DAMP = "DAMP";
+	private final String REVERB_ON = "REVERB_ON";
+	private final String RATIO = "RATIO";
+	private final String THRESHOLD = "THRESHOLD";
+	private final String COMP_DECAY = "COMP_DECAY";
+	private final String COMP_ATTACK = "COMP_ATTACK";
+	private final String COMP_ON = "COMP_ON";
+	private final String FINE_TUNING1 = "FINE_TUNING1";
+	private final String FINE_TUNING2 = "FINE_TUNING2";
+	private final String TRANSPOSE1 = "TRANSPOSE1";
+	private final String TRANSPOSE2 = "TRANSPOSE2";
+
 	/**
 	 * Instantiates a new user settings.
 	 */
-	public UserSettings(){
+	public UserSettings() {
 		userSettings = Preferences.userRoot();
 
 	}
-	
+
 	/**
 	 * Save settings.
 	 */
 	public void saveSettings() {
 
 		// ---------OSC
+		userSettings.putInt(TRANSPOSE1, oscSettings.getTranspose1());
+		userSettings.putInt(TRANSPOSE2, oscSettings.getTranspose2());
+		userSettings.putInt(FINE_TUNING1, oscSettings.getFineTuning1());
+		userSettings.putInt(FINE_TUNING2, oscSettings.getFineTuning2());
 		userSettings.put(OSC_1_WAVE, oscSettings.getWave1Sel());
 		userSettings.put(OSC_2_WAVE, oscSettings.getWave2Sel());
 		userSettings.putFloat(OSC_1_PHASE, oscSettings.getDelayIn1Time());
@@ -177,7 +202,18 @@ public class UserSettings {
 		userSettings.putFloat(MASTER_VOLUME, master.getMasterVolume());
 		// ---------PANNER
 		userSettings.putFloat(PANNER_POS, master.getPannerPosition());
-
+		// ----------COMPRESSOR
+		userSettings.putFloat(RATIO, comp.getRatio());
+		userSettings.putFloat(THRESHOLD, comp.getThreshold());
+		userSettings.putFloat(COMP_DECAY, comp.getDecay());
+		userSettings.putFloat(COMP_ATTACK, comp.getAttack());
+		userSettings.putBoolean(COMP_ON, settings.isCompressorOn());
+		// ----------REVERB
+		userSettings.putFloat(LATE, rev.getLateReflection());
+		userSettings.putFloat(EARLY, rev.getEarlyReflection());
+		userSettings.putFloat(ROOM, rev.getSize());
+		userSettings.putFloat(DAMP, rev.getDamping());
+		userSettings.putBoolean(REVERB_ON, settings.isReverbOn());
 	}
 
 	/**
@@ -186,6 +222,10 @@ public class UserSettings {
 	public void loadSettings() {
 
 		// ---------OSC
+		oscSettings.setTranspose1(userSettings.getInt(TRANSPOSE1, oscSettings.getTranspose1()));
+		oscSettings.setTranspose2(userSettings.getInt(TRANSPOSE2, oscSettings.getTranspose2()));
+		oscSettings.setFineTuning1(userSettings.getInt(FINE_TUNING1, oscSettings.getFineTuning1()));
+		oscSettings.setFineTuning2(userSettings.getInt(FINE_TUNING2, oscSettings.getFineTuning2()));
 		oscSettings.setWave1Sel(userSettings.get(OSC_1_WAVE, oscSettings.getWave1Sel()));
 		oscSettings.setWave2Sel(userSettings.get(OSC_2_WAVE, oscSettings.getWave2Sel()));
 		oscSettings.setDelayIn1Time(userSettings.getFloat(OSC_1_PHASE, oscSettings.getDelayIn1Time()));
@@ -221,5 +261,17 @@ public class UserSettings {
 		master.setMasterVolume(userSettings.getFloat(MASTER_VOLUME, master.getMasterVolume()));
 		// ---------PANNER
 		master.setPannerPosition(userSettings.getFloat(PANNER_POS, master.getPannerPosition()));
+		// ----------COMPRESSOR
+		comp.setRatio(userSettings.getFloat(RATIO, comp.getRatio()));
+		comp.setThreshold(userSettings.getFloat(THRESHOLD, comp.getThreshold()));
+		comp.setDecay(userSettings.getFloat(COMP_DECAY, comp.getDecay()));
+		comp.setAttack(userSettings.getFloat(COMP_ATTACK, comp.getAttack()));
+		settings.setCompressorOn(userSettings.getBoolean(COMP_ON, settings.isCompressorOn()));
+		// ----------REVERB
+		rev.setLateReflection(userSettings.getFloat(LATE, rev.getLateReflection()));
+		rev.setEarlyReflection(userSettings.getFloat(EARLY, rev.getEarlyReflection()));
+		rev.setSize(userSettings.getFloat(ROOM, rev.getSize()));
+		rev.setDamping(userSettings.getFloat(DAMP, rev.getDamping()));
+		settings.setReverbOn(userSettings.getBoolean(REVERB_ON, settings.isReverbOn()));
 	}
 }

@@ -4,18 +4,10 @@
  */
 package source;
 
-import net.beadsproject.beads.*;
-
-import net.beadsproject.beads.core.AudioContext;
-import net.beadsproject.beads.core.UGen;
-import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.Compressor;
 import net.beadsproject.beads.ugens.Gain;
 import net.beadsproject.beads.ugens.Panner;
 import net.beadsproject.beads.ugens.Reverb;
-import net.beadsproject.beads.ugens.WavePlayer;
-import views.Components;
-import views.GUI;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -147,7 +139,9 @@ public class Settings {
 	 * Instantiates a new settings.
 	 */
 	protected Settings() {
-
+		m_play = true;
+		m_ReverbOn = false;
+		m_CompressorOn = false;
 	}
 
 	/**

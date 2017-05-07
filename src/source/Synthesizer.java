@@ -1,6 +1,7 @@
-/*
+/**
+ * @file Synthesizer.java
  * @author Carlo Sarli 
- * 
+ * @brief  The synthesiser class collects and initialises all components and starts outputting the sound
  */
 package source;
 
@@ -165,6 +166,8 @@ public class Synthesizer {
 		adsr = ADSR.getADSR();
 		oscSettings = OscillatorSettings.getOscillatorSettings();
 		filSettings = FilterSettings.getFilterSettings();
+	}
+	public void initComponents(){
 
 		// --------------------------------------------OSC-------------------------------------
 		Osc1Glide = osc.getOsc1Glide();
@@ -179,10 +182,10 @@ public class Synthesizer {
 		Osc2Wave.setFrequency(Osc2Glide);
 
 		// --------------------------------------------FIL-------------------------------------
-		filter1 = new BiquadFilter(audio.getAudioContext(), 2);
-		filter2 = new BiquadFilter(audio.getAudioContext(), 2);
-		low = new BiquadFilter(audio.getAudioContext(), BiquadFilter.BP_SKIRT, oscSettings.getOsc1Freq(), 0.5f);
-		high = new BiquadFilter(audio.getAudioContext(), BiquadFilter.BP_SKIRT, oscSettings.getOsc1Freq(), 0.5f);
+		filter1 = new BiquadFilter(audio.getAudioContext(), 1);
+		filter2 = new BiquadFilter(audio.getAudioContext(), 1);
+		low = new BiquadFilter(audio.getAudioContext(), 1);
+		high = new BiquadFilter(audio.getAudioContext(), 1);
 
 		gainEnvelope = new Envelope(audio.getAudioContext(), settings.ADSR_START_TIME);
 
@@ -292,9 +295,10 @@ public class Synthesizer {
 
 			filter1.setFrequency(filSettings.getFilter1Freq());
 			filter2.setFrequency(filSettings.getFilter2Freq());
-
+			
+			high.setType(eq.getHigh());
+			low.setType(eq.getLow());
 			high.setFrequency(eq.getHighFreq());
-			System.out.println("HIFH FREQ : " + high.getFrequency());
 			low.setFrequency(eq.getLowFreq());
 			high.setQ(eq.getHighGain() * 100);
 			low.setQ(eq.getLowGain() * 100);
@@ -339,29 +343,36 @@ public class Synthesizer {
 			settings.switchReverbOn(reverb, eqGain);
 			settings.switchCompressorOn(compressor, eqGain, panner);
 			// lfo.controlElement(panner);
-
+			
+			//reset();
 		}
 
 	}
 
 	public void reset() {
-		Osc1Wave.kill();
-		Osc2Wave.kill();
-		Osc1Glide.kill();
-		Osc2Glide.kill();
-		delayIn1.kill();
-		delayIn2.kill();
-		delayOut1.kill();
-		delayOut2.kill();
-		filter1.kill();
-		filter2.kill();
-		low.kill();
-		high.kill();
-		gainEnvelope.kill();
-		lfoGlide.kill();
-		lfoWave.kill();
-		reverb.kill();
-		compressor.kill();
+		if(!settings.getPlay()){
+			Osc1Wave.kill();
+			Osc2Wave.kill();
+			Osc1Glide.kill();
+			Osc2Glide.kill();
+			delayIn1.kill();
+			delayIn2.kill();
+			delayOut1.kill();
+			delayOut2.kill();
+			filter1.kill();
+			filter2.kill();
+			low.kill();
+			high.kill();
+			gainEnvelope.kill();
+			lfoGlide.kill();
+			lfoWave.kill();
+			reverb.kill();
+			compressor.kill();
+		}else{
+			//initComponents();
+			Synthesize();
+		}
+		
 	}
 
 }
